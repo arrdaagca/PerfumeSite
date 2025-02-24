@@ -1,0 +1,35 @@
+﻿@using PerfumeSite.UserViewModels
+@model UserLoginViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Theme</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="~/LoginTheme/dist/style.css">
+</head>
+<form asp-controller="User" asp-action="Login" method="post">
+    <body>
+        <div class="login-container">
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required asp-for="Email">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required asp-for="Password">
+            </div>
+            <button class="login-button">Login</button>
+            <div class="footer">
+                <a asp-controller="User" asp-action="ForgotPassword" class="forgot-password">Forgot Password?</a>
+                <a  class="register" asp-controller="User" asp-action="SignUp">Sign Up</a>
+            </div>
+        </div>
+    </body>
+</form>
+
+</html>
+

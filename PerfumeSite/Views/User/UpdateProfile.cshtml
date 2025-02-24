@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilgilerimi Güncelle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        /* SAYFA ORTALAMA */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+
+        /* FORM KUTUSU */
+        .update-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+            .update-form.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* BAŞLIK */
+            .update-form h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #333;
+                font-weight: bold;
+            }
+
+        /* INPUT ALANLARI */
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+            .form-control:focus {
+                border-color: #ff758c;
+                box-shadow: 0 0 8px rgba(255, 117, 140, 0.5);
+            }
+
+        /* BUTON */
+        .btn-update {
+            width: 100%;
+            background: #ff758c;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 10px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+            .btn-update:hover {
+                background: #e44a5f;
+                transform: scale(1.05);
+            }
+
+        /* FORM ALANLARI İKİ SÜTUNLU YAPILANDIRMA */
+        .form-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-left, .form-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+       
+    </style>
+</head>
+
+<body>
+
+    <div id="updateForm" class="update-form">
+        <h2>Bilgilerimi Güncelle</h2>
+
+        <form onsubmit="return validatePasswords()">
+            <div class="form-container">
+                <!-- SOL TARAF -->
+                <div class="form-left">
+                    <div class="form-group">
+                        <label class="form-label">E-posta</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ad</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Soyad</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Telefon Numarası</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- SAĞ TARAF -->
+                <div class="form-right">
+                    <div class="form-group">
+                        <label class="form-label">Mevcut Şifre</label>
+                        <input type="password" class="form-control" id="currentPassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Yeni Şifre</label>
+                        <input type="password" class="form-control" id="newPassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Yeni Şifre (Tekrar)</label>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-update mt-3">Güncelle</button>
+        </form>
+    </div>
+
+    <script>
+        // Sayfa yüklendiğinde animasyonu başlat
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("updateForm").classList.add("show");
+        });
+
+        // Şifre doğrulama fonksiyonu
+        function validatePasswords() {
+            let newPassword = document.getElementById("newPassword").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (newPassword !== confirmPassword) {
+                alert("Yeni şifreler uyuşmuyor!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+</body>
+</html>
