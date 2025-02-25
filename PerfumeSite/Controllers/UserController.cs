@@ -82,6 +82,10 @@ namespace PerfumeSite.Controllers
         {
             return View();
         }
+
+
+
+
         [HttpPost]
         public IActionResult ResetPassword(string email)
         {
@@ -178,12 +182,23 @@ namespace PerfumeSite.Controllers
 
             return View();  
         }
-       
+
+        
 
 
-      
+        [HttpGet]
+        public IActionResult AccountSettings()
+        {
+            return View();
+        }
 
-      
+
+
+
+
+
+
+
 
     }
 }

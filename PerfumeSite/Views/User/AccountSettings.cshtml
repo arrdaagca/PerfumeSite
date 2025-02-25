@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesap Ayarlarım</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            width: 400px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+            .tab-buttons button {
+                flex: 1;
+                padding: 12px;
+                border: none;
+                cursor: pointer;
+                background: #007bff;
+                color: white;
+                border-radius: 6px;
+                font-size: 14px;
+                transition: background 0.3s;
+            }
+
+                .tab-buttons button:hover {
+                    background: #0056b3;
+                }
+
+            .tab-buttons .logout-btn {
+                background: #dc3545;
+            }
+
+                .tab-buttons .logout-btn:hover {
+                    background: #b02a37;
+                }
+
+        .tab {
+            display: none;
+            padding: 15px;
+            margin-top: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+            .tab.active {
+                display: block;
+            }
+
+        .input-group {
+            margin-top: 10px;
+        }
+
+            .input-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #495057;
+            }
+
+            .input-group input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ced4da;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+
+        .update-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            background: #28a745;
+            color: white;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+            .update-btn:hover {
+                background: #218838;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hesap Ayarlarım</h2>
+        <div class="tab-buttons">
+            <button onclick="showTab('address')">Adres Bilgilerim</button>
+            <button onclick="showTab('cards')">Kayıtlı Kartlarım</button>
+            <button onclick="showTab('emailChange')">E-Posta Değişikliği</button>
+            <button onclick="showTab('passwordChange')">Şifre Değişikliği</button>
+            <button class="logout-btn" onclick="showTab('logout')">Çıkış</button>
+        </div>
+
+        <div id="address" class="tab active">
+            <h3>Adres Bilgilerim</h3>
+            <p>Adres: İstanbul, Türkiye</p>
+        </div>
+
+        <div id="cards" class="tab">
+            <h3>Kayıtlı Kartlarım</h3>
+            <p>Kayıtlı Kart: **** **** **** 1234</p>
+        </div>
+
+        <div id="emailChange" class="tab">
+            <h3>E-Posta Değişikliği</h3>
+            <div class="input-group">
+                <label>Yeni E-posta</label>
+                <input type="email" placeholder="Yeni E-posta">
+            </div>
+            <button class="update-btn">Güncelle</button>
+        </div>
+
+        <div id="passwordChange" class="tab">
+            <h3>Şifre Değişikliği</h3>
+            <div class="input-group">
+                <label>Yeni Şifre</label>
+                <input type="password" placeholder="Yeni Şifre">
+            </div>
+            <button class="update-btn">Güncelle</button>
+        </div>
+
+        <div id="logout" class="tab">
+            <h3>Çıkış</h3>
+            <button class="logout-btn" style="width: 100%">Çıkış Yap</button>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
