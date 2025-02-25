@@ -33,10 +33,27 @@ namespace PerfumeSite.Controllers
 
 
             HttpContext.Session.SetInt32("Id", loggedInUser.Id);
+
             HttpContext.Session.SetString("Password", loggedInUser.Password);
 
+            HttpContext.Session.SetString("IsAdmin", loggedInUser.IsAdmin.ToString());
 
-            return RedirectToAction("Index","Home");
+            if (loggedInUser.IsAdmin)
+            {
+                
+                return RedirectToAction("AdminHomePage", "Admin");
+
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+
+
+           
 
         }
 
