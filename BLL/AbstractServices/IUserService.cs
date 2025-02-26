@@ -20,6 +20,8 @@ namespace BLL.AbstractServices
         UserDto GetLoggedInUser(int? userId);
         void UpdatePassword(UserDto userDto);
 
+        
+
 
     }
 }

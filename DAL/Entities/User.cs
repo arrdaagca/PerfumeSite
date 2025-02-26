@@ -16,6 +16,7 @@ namespace DAL.Entities
         public string Surname { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public bool IsAdmin { get; set; }
+        public List<Address> Addresses { get; set; }
 
 
 

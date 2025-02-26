@@ -58,6 +58,7 @@ namespace BLL.ConcreteServices
 
             return _mapper.Map<UserDto>(user);
         }
-      
+
+       
     }
 }
