@@ -42,30 +42,27 @@ namespace PerfumeSite.Controllers
 
         [HttpPost]
         public IActionResult AddAddress(AddressViewModel addressViewModel)
-{
-    if (addressViewModel == null)
-    {
-        return BadRequest("Adres bilgileri eksik!");
-    }
+        {
+         if (addressViewModel == null)
+         {
+          return BadRequest("Adres bilgileri eksik!");
+         }
 
-    // Kullanıcı oturumdan alınıyor
-    var userId = HttpContext.Session.GetInt32("UserId");
-    if (userId == null)
-    {
-        return RedirectToAction("Login", "User"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
-    }
+         // Kullanıcı oturumdan alınıyor
+          var userId = HttpContext.Session.GetInt32("UserId");
+   
 
-    // Kullanıcı ID'yi modele ekle
-    addressViewModel.UserId = userId.Value;
+           // Kullanıcı ID'yi modele ekle
+          addressViewModel.UserId = userId.Value;
 
-    // Modeli AddressDto'ya çevir
-    var addressDto = _mapper.Map<AddressDto>(addressViewModel);
+          // Modeli AddressDto'ya çevir
+          var addressDto = _mapper.Map<AddressDto>(addressViewModel);
 
-    // Adres ekleme işlemi
-    _addressService.AddAddress(addressDto);
+          // Adres ekleme işlemi
+          _addressService.AddAddress(addressDto);
 
-    return RedirectToAction("Address"); // Başarılı ekleme sonrası yönlendirme
-}
+          return RedirectToAction("Address"); // Başarılı ekleme sonrası yönlendirme
+        }
 
 
     }

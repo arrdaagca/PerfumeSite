@@ -2,7 +2,6 @@
     var userId = Context.Session.GetInt32("Id");
 }
 
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -17,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* Genel Buton Hover Efekti */
         .nav-link-custom {
             transition: color 0.3s ease;
             display: flex;
@@ -34,7 +32,6 @@
                 font-size: 20px;
             }
 
-            /* Üzerine Gelince Efektler */
             .nav-link-custom:hover {
                 color: red !important;
             }
@@ -44,6 +41,30 @@
                     transform: scale(1.1);
                     font-weight: 900;
                 }
+
+        .search-bar {
+            width: 400px;
+        }
+
+        .category-dropdown .dropdown-toggle {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+            .category-dropdown .dropdown-toggle:hover {
+                background-color: #c82333;
+            }
+
+        .category-dropdown .dropdown-menu {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -51,15 +72,14 @@
 
     <!-- Navbar Başlangıç -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container d-flex align-items-start">
+        <div class="container d-flex align-items-center justify-content-between">
 
             <!-- Sol Üst: Site Adı ve Kategoriler -->
             <div class="d-flex flex-column">
                 <a class="navbar-brand fw-bold mb-2" href="/">Perfume</a>
 
-                <!-- Tüm Kategoriler Dropdown -->
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown">
+                <div class="dropdown category-dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown">
                         Tüm Kategoriler
                     </button>
                     <ul class="dropdown-menu">
@@ -70,34 +90,33 @@
                 </div>
             </div>
 
-            <!-- Sağ Üst: Menü -->
-            <div class="ms-auto d-flex align-items-center">
+            <!-- Orta: Arama Çubuğu -->
+            <form class="d-flex search-bar">
+                <input class="form-control me-2" type="search" placeholder="Ürün Ara..." aria-label="Search">
+                <button class="btn btn-outline-danger" type="submit"><i class="fa fa-search"></i></button>
+            </form>
 
+            <!-- Sağ Üst: Menü -->
+            <div class="d-flex align-items-center">
                 @if (userId == null)
                 {
                     <a class="nav-link-custom me-3" asp-controller="User" asp-action="Login">
                         <i class="fa-regular fa-user"></i> Giriş Yap
                     </a>
                 }
-
                 else
                 {
                     <a class="nav-link-custom" asp-controller="User" asp-action="MyAccount">
                         <i class="fa-regular fa-circle-user"></i> Hesabım
                     </a>
                 }
-
-
                 <a class="nav-link-custom me-3" asp-controller="Favorites" asp-action="Index">
                     <i class="fa-regular fa-heart"></i> Favorilerim
                 </a>
-
                 <a class="nav-link-custom me-3" asp-controller="Cart" asp-action="Index">
                     <i class="fa-solid fa-cart-shopping"></i> Sepetim
                 </a>
-
             </div>
-
         </div>
     </nav>
     <!-- Navbar Bitiş -->
