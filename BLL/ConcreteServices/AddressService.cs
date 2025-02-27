@@ -3,7 +3,6 @@ using BLL.AbstractServices;
 using BLL.AllDtos;
 using DAL.AbstractRepositories;
 using DAL.Entities;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,21 +22,16 @@ namespace BLL.ConcreteServices
             _mapper = mapper;
         }
 
-
-        public void AddAddress(AddressDto addressDto)
+        public void AddAddress(AddAddressDto addAddressDto)
         {
-
-         
-
-            _genericRepository.Add(_mapper.Map<Address>(addressDto));
+             _genericRepository.Add(_mapper.Map<Address>(addAddressDto));
+          
         }
 
-        public Address GetUserAddress(int userId)
+        public List<AddressDto> GetAddressByUserId(int? userId)
         {
-            var userAddress =  _genericRepository.GetAll().FirstOrDefault(a => a.UserId == userId);
-
-
-            return _mapper.Map<Address>(userAddress);   
+            var addresses = _genericRepository.GetAll().Where(x => x.UserId == userId).ToList();
+            return _mapper.Map<List<AddressDto>>(addresses);    
         }
     }
 }

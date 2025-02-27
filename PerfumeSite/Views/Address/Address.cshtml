@@ -1,39 +1,30 @@
-﻿@using PerfumeSite.AddressViewModels
-@model AddressViewModel
+﻿@model List<PerfumeSite.AddressViewModels.AddressViewModel>
 
+@{
+    ViewData["Title"] = "Adreslerim";
+}
 
+<h2>Adreslerim</h2>
 
-
-
-<div class="container mt-5">
-    <h2 class="mb-4">Adres Bilgilerim</h2>
-
-    @if (Model == null)
-    {
-        <div class="alert alert-warning" role="alert">
-            <p><strong>Adres bilginiz bulunmamaktadır.</strong></p>
-        </div>
-
-        <a asp-controller="Address" asp-action="AddAddress" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Adres Ekle
-        </a>
-    }
-    else
-    {
-        <div class="card shadow-sm p-4">
-            <h4 class="text-primary">Adres Detayları</h4>
-            <hr />
-            <p><strong>Ülke:</strong> @Model.Country</p>
-            <p><strong>Şehir:</strong> @Model.City</p>
-            <p><strong>İlçe:</strong> @Model.District</p>
-            <p><strong>Mahalle:</strong> @Model.Neighbourhood</p>
-            <p><strong>Sokak:</strong> @Model.Street</p>
-            <p><strong>Bina No:</strong> @Model.BuildingNumber</p>
-            <p><strong>Daire No:</strong> @Model.DoorNumber</p>
-
-            <a href="@Url.Action("EditAddress", "Address")" class="btn btn-warning">
-                <i class="fa-solid fa-pen"></i> Adresi Düzenle
-            </a>
-        </div>
-    }
-</div>
+@if (Model != null && Model.Any())
+{
+    <ul class="list-group">
+        @foreach (var address in Model)
+        {
+            <li class="list-group-item">
+                <strong>Ülke:</strong> @address.Country <br>
+                <strong>Şehir:</strong> @address.City <br>
+                <strong>İlçe:</strong> @address.District <br>
+                <strong>Mahalle:</strong> @address.Neighbourhood <br>
+                <strong>Sokak:</strong> @address.Street <br>
+                <strong>Bina No:</strong> @address.BuildingNumber <br>
+                <strong>Daire No:</strong> @address.DoorNumber
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Adres bilginiz bulunmamaktadır.</p>
+    <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary">Adres Ekle</a>
+}

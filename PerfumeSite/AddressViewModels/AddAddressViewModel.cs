@@ -1,9 +1,8 @@
-﻿using BLL.AllDtos;
-using PerfumeSite.UserViewModels;
+﻿using PerfumeSite.UserViewModels;
 
 namespace PerfumeSite.AddressViewModels
 {
-    public class AddressViewModel : BaseViewModel
+    public class AddAddressViewModel : BaseViewModel
     {
         public string Country { get; set; }
         public string City { get; set; }
@@ -15,6 +14,5 @@ namespace PerfumeSite.AddressViewModels
 
 
         public int UserId { get; set; }
-        public UserViewModel User { get; set; }
     }
 }

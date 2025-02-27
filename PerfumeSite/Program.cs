@@ -23,6 +23,8 @@ builder.Services.AddScoped<IAddressService, AddressService>();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+
 builder.Services.AddAutoMapper(typeof(MappingForServices), typeof(MappingForMvc));
 builder.Services.AddSession();
 

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using BLL.AbstractServices;
-using BLL.AllDtos;
-using DAL.Entities;
+using BLL.ConcreteServices;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PerfumeSite.AddressViewModels;
 
 namespace PerfumeSite.Controllers
@@ -19,51 +17,28 @@ namespace PerfumeSite.Controllers
             _mapper = mapper;
         }
 
+      
 
-        
+    [HttpGet]
+    public IActionResult Address()
+    {
+        var userId = HttpContext.Session.GetInt32("Id");
 
-        [HttpGet]
-        public IActionResult Address()
+        if (!userId.HasValue) // Kullanıcı giriş yapmamışsa
         {
-
-           
-
-
-
-            return View();
+            return RedirectToAction("Login", "User");
         }
 
+        var addresses = _addressService.GetAddressByUserId(userId.Value);
 
-        [HttpGet]
-        public IActionResult AddAddress()
-        {
-            return View();
-        }
+        // AutoMapper kullanarak DTO'dan ViewModel'e çevirme
+        var addressViewModels = _mapper.Map<List<AddressViewModel>>(addresses);
 
-        [HttpPost]
-        public IActionResult AddAddress(AddressViewModel addressViewModel)
-        {
-         if (addressViewModel == null)
-         {
-          return BadRequest("Adres bilgileri eksik!");
-         }
-
-         // Kullanıcı oturumdan alınıyor
-          var userId = HttpContext.Session.GetInt32("UserId");
-   
-
-           // Kullanıcı ID'yi modele ekle
-          addressViewModel.UserId = userId.Value;
-
-          // Modeli AddressDto'ya çevir
-          var addressDto = _mapper.Map<AddressDto>(addressViewModel);
-
-          // Adres ekleme işlemi
-          _addressService.AddAddress(addressDto);
-
-          return RedirectToAction("Address"); // Başarılı ekleme sonrası yönlendirme
-        }
-
-
+        return View(addressViewModels);
     }
+
+
+
+
+}
 }

@@ -16,7 +16,10 @@ namespace BLL.MappingForServices
         {
             CreateMap<User , UserDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
+            CreateMap<Address, AddAddressDto>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
+
+
 
 
         }

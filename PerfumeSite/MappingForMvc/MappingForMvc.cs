@@ -12,7 +12,10 @@ namespace PerfumeSite.MappingForMvc
         {
             CreateMap<UserLoginDto, UserLoginViewModel>().ReverseMap();
             CreateMap<UserDto, UserViewModel>().ReverseMap();
+            CreateMap<AddAddressDto, AddAddressViewModel>().ReverseMap();
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
+
+
 
 
 

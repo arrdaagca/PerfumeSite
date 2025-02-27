@@ -1,5 +1,4 @@
 ﻿using BLL.AllDtos;
-using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +10,8 @@ namespace BLL.AbstractServices
     public interface IAddressService
     {
 
-        void AddAddress(AddressDto addressDto);
-
-
-       Address GetUserAddress(int userId);
-
+        void AddAddress(AddAddressDto addAddressDto); 
+        List<AddressDto> GetAddressByUserId(int? userId);    
 
 
     }
