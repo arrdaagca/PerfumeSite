@@ -1,0 +1,73 @@
+﻿@using PerfumeSite.AddressViewModels
+@model AddAddressViewModel
+
+@{
+    var userId = Context.Session.GetInt32("Id");
+}
+
+
+@{
+    ViewData["Title"] = "Adres Ekle";
+}
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h2 class="fw-bold text-uppercase text-primary">📍 Yeni Adres Ekle</h2>
+        <p class="text-muted">Lütfen adres bilgilerinizi eksiksiz doldurun.</p>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form method="post" asp-controller="Address" asp-action="AddAddress" method="post">
+                        <div class="mb-3">
+                            <label for="Country" class="form-label">Ülke</label>
+                            <input type="text" class="form-control" asp-for="Country" required placeholder="Türkiye">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="City" class="form-label">Şehir</label>
+                            <input type="text" class="form-control" asp-for="City" required placeholder="İstanbul">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="District" class="form-label">İlçe</label>
+                            <input type="text" class="form-control" asp-for="District" required placeholder="Beşiktaş">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Neighbourhood" class="form-label">Mahalle</label>
+                            <input type="text" class="form-control" asp-for="Neighbourhood" required placeholder="Levent Mah.">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Street" class="form-label">Sokak</label>
+                            <input type="text" class="form-control" asp-for="Street" required placeholder="4. Cadde">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="BuildingNumber" class="form-label">Bina Numarası</label>
+                            <input type="number" class="form-control" asp-for="BuildingNumber" required placeholder="12">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="DoorNumber" class="form-label">Daire Numarası</label>
+                            <input type="number" class="form-control" asp-for="DoorNumber" required placeholder="5">
+                        </div>
+
+                        <input hidden value="@userId" name="UserId" />
+
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Index", "Address")" class="btn btn-secondary">⬅️ Geri Dön</a>
+                            <button  type="submit" class="btn btn-success">💾 Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL.AbstractServices;
+using BLL.AllDtos;
 using BLL.ConcreteServices;
 using Microsoft.AspNetCore.Mvc;
 using PerfumeSite.AddressViewModels;
@@ -19,26 +20,32 @@ namespace PerfumeSite.Controllers
 
       
 
-    [HttpGet]
-    public IActionResult Address()
-    {
-        var userId = HttpContext.Session.GetInt32("Id");
-
-        if (!userId.HasValue) // Kullanıcı giriş yapmamışsa
+        [HttpGet]
+        public IActionResult Address()
         {
-            return RedirectToAction("Login", "User");
+            var userId = HttpContext.Session.GetInt32("Id");
+    
+           
+    
+            var addresses = _addressService.GetAddressByUserId(userId.Value);
+    
+            
+            var addressViewModels = _mapper.Map<List<AddressViewModel>>(addresses);
+    
+            return View(addressViewModels);
         }
 
-        var addresses = _addressService.GetAddressByUserId(userId.Value);
+        [HttpGet]
+        public IActionResult AddAddress()
+        {
+            return View();
+        }
 
-        // AutoMapper kullanarak DTO'dan ViewModel'e çevirme
-        var addressViewModels = _mapper.Map<List<AddressViewModel>>(addresses);
-
-        return View(addressViewModels);
+        [HttpPost]
+        public IActionResult AddAddress(AddAddressViewModel addAddressViewModel)
+        {
+            _addressService.AddAddress(_mapper.Map<AddAddressDto>(addAddressViewModel));
+            return RedirectToAction("Address");
+        }
     }
-
-
-
-
-}
 }

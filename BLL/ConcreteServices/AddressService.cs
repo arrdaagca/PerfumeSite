@@ -15,11 +15,13 @@ namespace BLL.ConcreteServices
     {
         private readonly IGenericRepository<Address> _genericRepository;
         private readonly IMapper _mapper;
+        private readonly IAddressRepository _addressRepository;
 
-        public AddressService(IGenericRepository<Address> genericRepository,IMapper mapper)
+        public AddressService(IGenericRepository<Address> genericRepository,IMapper mapper,IAddressRepository addressRepository)
         {
             _genericRepository = genericRepository;
             _mapper = mapper;
+            _addressRepository = addressRepository;
         }
 
         public void AddAddress(AddAddressDto addAddressDto)
@@ -30,7 +32,7 @@ namespace BLL.ConcreteServices
 
         public List<AddressDto> GetAddressByUserId(int? userId)
         {
-            var addresses = _genericRepository.GetAll().Where(x => x.UserId == userId).ToList();
+            var addresses = _addressRepository.GetAddressByUserId(userId);  
             return _mapper.Map<List<AddressDto>>(addresses);    
         }
     }

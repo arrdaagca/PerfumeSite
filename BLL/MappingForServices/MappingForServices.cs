@@ -18,6 +18,10 @@ namespace BLL.MappingForServices
             CreateMap<User, UserLoginDto>().ReverseMap();
             CreateMap<Address, AddAddressDto>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<CreditCard, CreditCardDto>().ReverseMap();
+            CreateMap<CreditCard, AddCreditCardDto>().ReverseMap();
+
+
 
 
 

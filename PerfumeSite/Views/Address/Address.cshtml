@@ -1,30 +1,59 @@
-﻿@model List<PerfumeSite.AddressViewModels.AddressViewModel>
+﻿@using PerfumeSite.AddressViewModels
+@model List<AddressViewModel>
 
 @{
     ViewData["Title"] = "Adreslerim";
 }
 
-<h2>Adreslerim</h2>
+<div class="container mt-5">
+    <div class="text-center">
+        <h2 class="fw-bold text-uppercase text-primary">📍 Adreslerim</h2>
+        <p class="text-muted">Kayıtlı adreslerinizi burada yönetebilirsiniz.</p>
+    </div>
 
-@if (Model != null && Model.Any())
-{
-    <ul class="list-group">
-        @foreach (var address in Model)
-        {
-            <li class="list-group-item">
-                <strong>Ülke:</strong> @address.Country <br>
-                <strong>Şehir:</strong> @address.City <br>
-                <strong>İlçe:</strong> @address.District <br>
-                <strong>Mahalle:</strong> @address.Neighbourhood <br>
-                <strong>Sokak:</strong> @address.Street <br>
-                <strong>Bina No:</strong> @address.BuildingNumber <br>
-                <strong>Daire No:</strong> @address.DoorNumber
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>Adres bilginiz bulunmamaktadır.</p>
-    <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary">Adres Ekle</a>
-}
+    @if (Model != null && Model.Any())
+    {
+        <!-- Kayıtlı adresler varsa listele -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">📌 Kayıtlı Adresler</h5>
+                        @foreach (var address in Model)
+                        {
+                            <div class="mb-3 border p-3 rounded bg-light">
+                                <ul class="list-unstyled mb-0">
+                                    <li><strong>Ülke:</strong> @address.Country</li>
+                                    <li><strong>Şehir:</strong> @address.City</li>
+                                    <li><strong>İlçe:</strong> @address.District</li>
+                                    <li><strong>Mahalle:</strong> @address.Neighbourhood</li>
+                                    <li><strong>Sokak:</strong> @address.Street</li>
+                                    <li><strong>Bina No:</strong> @address.BuildingNumber</li>
+                                    <li><strong>Daire No:</strong> @address.DoorNumber</li>
+                                </ul>
+                            </div>
+                        }
+                        <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary mt-3">📍 Yeni Adres Ekle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Kayıtlı adres yoksa mesaj göster ve ekleme butonu -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="alert alert-warning text-center">
+                    <p class="mb-0">⚠️ Kayıtlı adresiniz bulunmamaktadır.</p>
+                </div>
+                <div class="text-center">
+                    <a asp-controller="Address" asp-action="AddAddress" class="btn btn-success btn-lg">📍 Yeni Adres Ekle</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">

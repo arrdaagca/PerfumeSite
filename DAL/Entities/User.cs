@@ -17,7 +17,7 @@ namespace DAL.Entities
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public bool IsAdmin { get; set; }
         public List<Address> Addresses { get; set; }
-
+        public List<CreditCard> CreditCards { get; set; }
 
 
 
