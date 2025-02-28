@@ -14,7 +14,7 @@ namespace BLL.AbstractServices
 
         UserDto Login(UserLoginDto userLoginDto);
         
-
+        List<UserListDto> GetUsers();
         UserDto GetByEmail(string email);
         UserDto GetById(int id);
         UserDto GetLoggedInUser(int? userId);

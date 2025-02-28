@@ -1,16 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using BLL.AbstractServices;
+using Microsoft.AspNetCore.Mvc;
+using PerfumeSite.UserViewModels;
 
 namespace PerfumeSite.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-
-
-
+        public AdminController(IUserService userService,IMapper mapper )
+        {
+            _userService = userService;
+            _mapper = mapper;
+        }
+        [HttpGet]
         public IActionResult AdminHomePage()
         {
+
             return View();
+
         }
+
+
+        [HttpGet]
+        public IActionResult Users()
+        {
+            var users = _userService.GetUsers();
+            return View(_mapper.Map<List<UserListViewModel>>(users));
+        }
+
+
+
+
     }
 }

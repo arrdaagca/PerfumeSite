@@ -59,6 +59,10 @@ namespace BLL.ConcreteServices
             return _mapper.Map<UserDto>(user);
         }
 
-       
+        public List<UserListDto> GetUsers()
+        {
+           var users = _genericRepository.GetAll().Where(x=>x.IsAdmin==false);
+            return _mapper.Map<List<UserListDto>>(users);
+        }
     }
 }
