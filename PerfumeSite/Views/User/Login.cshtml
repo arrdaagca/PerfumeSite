@@ -8,10 +8,94 @@
     <title>Login Theme</title>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="~/LoginTheme/dist/style.css">
+
+    <style>
+        /* Genel Sayfa Stilleri */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Login Formu Konteyneri */
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        /* Başlık Stili */
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Input Grupları */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Login Butonu */
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Alanı */
+        .footer {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #007bff;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<form asp-controller="User" asp-action="Login" method="post">
-    <body>
+<body>
+    <form asp-controller="User" asp-action="Login" method="post">
         <div class="login-container">
             <h2>Login</h2>
             <div class="input-group">
@@ -25,11 +109,9 @@
             <button class="login-button">Login</button>
             <div class="footer">
                 <a asp-controller="User" asp-action="ForgotPassword" class="forgot-password">Forgot Password?</a>
-                <a  class="register" asp-controller="User" asp-action="SignUp">Sign Up</a>
+                <a asp-controller="User" asp-action="SignUp" class="register">Sign Up</a>
             </div>
         </div>
-    </body>
-</form>
-
+    </form>
+</body>
 </html>
-

@@ -22,52 +22,57 @@
 
         .container {
             background: white;
-            width: 400px;
-            padding: 20px;
+            width: 420px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         h2 {
-            text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #343a40;
         }
 
         .tab-buttons {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 10px;
+            margin-bottom: 15px;
         }
 
-            .tab-buttons button {
-                flex: 1;
+            .tab-buttons a {
+                display: block;
+                text-decoration: none;
+                text-align: center;
                 padding: 12px;
-                border: none;
-                cursor: pointer;
-                background: #007bff;
+                font-size: 14px;
+                font-weight: bold;
                 color: white;
                 border-radius: 6px;
-                font-size: 14px;
                 transition: background 0.3s;
             }
 
-                .tab-buttons button:hover {
-                    background: #0056b3;
-                }
-
-            .tab-buttons .logout-btn {
-                background: #dc3545;
+            .tab-buttons .active-tab {
+                background: #0056b3 !important;
             }
 
-                .tab-buttons .logout-btn:hover {
-                    background: #b02a37;
-                }
+            .tab-buttons a:hover {
+                opacity: 0.8;
+            }
+
+        .btn-blue {
+            background: #007bff;
+        }
+
+        .btn-red {
+            background: #dc3545;
+        }
 
         .tab {
             display: none;
             padding: 15px;
-            margin-top: 15px;
+            margin-top: 10px;
             background: #f8f9fa;
             border-radius: 8px;
         }
@@ -78,6 +83,7 @@
 
         .input-group {
             margin-top: 10px;
+            text-align: left;
         }
 
             .input-group label {
@@ -117,52 +123,24 @@
     <div class="container">
         <h2>Hesap Ayarlarım</h2>
         <div class="tab-buttons">
-            <a class="btn btn-primary" asp-controller="Address" asp-action="Address">Adres Bilgilerim</a>
-            <a class="btn btn-primary" asp-controller="CreditCard" asp-action="CreditCard">Kayıtlı Kartlarım</a>
-
-            <button onclick="showTab('emailChange')">E-Posta Değişikliği</button>
-            <button onclick="showTab('passwordChange')">Şifre Değişikliği</button>
-			<a btn btn-primary asp-controller="User" asp-action="Login">Çıkış</a>
+            <a asp-controller="Address" asp-action="Address" class="btn-blue active-tab" onclick="showTab('address')">Adres Bilgilerim</a>
+            <a asp-controller="CreditCard" asp-action="CreditCard" class="btn-blue" onclick="showTab('cards')">Kayıtlı Kartlarım</a>
+            <a href="#" class="btn-blue" onclick="showTab('emailChange')">E-Posta Değişikliği</a>
+            <a href="#" class="btn-blue" onclick="showTab('passwordChange')">Şifre Değişikliği</a>
+            <a href="/User/Login" class="btn-red">Çıkış Yap</a>
         </div>
 
-        <div id="address" class="tab active">
-            <h3>Adres Bilgilerim</h3>
-            <p>Adres: İstanbul, Türkiye</p>
-        </div>
 
-        <div id="cards" class="tab">
-            <h3>Kayıtlı Kartlarım</h3>
-            <p>Kayıtlı Kart: **** **** **** 1234</p>
-        </div>
-
-        <div id="emailChange" class="tab">
-            <h3>E-Posta Değişikliği</h3>
-            <div class="input-group">
-                <label>Yeni E-posta</label>
-                <input type="email" placeholder="Yeni E-posta">
-            </div>
-            <button class="update-btn">Güncelle</button>
-        </div>
-
-        <div id="passwordChange" class="tab">
-            <h3>Şifre Değişikliği</h3>
-            <div class="input-group">
-                <label>Yeni Şifre</label>
-                <input type="password" placeholder="Yeni Şifre">
-            </div>
-            <button class="update-btn">Güncelle</button>
-        </div>
-
-        <div id="logout" class="tab">
-            <h3>Çıkış</h3>
-            <button class="logout-btn" style="width: 100%">Çıkış Yap</button>
-        </div>
+        
     </div>
 
     <script>
         function showTab(tabId) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
+
+            document.querySelectorAll('.tab-buttons a').forEach(btn => btn.classList.remove('active-tab'));
+            event.target.classList.add('active-tab');
         }
     </script>
 </body>

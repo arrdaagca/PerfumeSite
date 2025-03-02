@@ -78,11 +78,7 @@ namespace PerfumeSite.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult Address()
-        {
-            return View();
-        }   
+       
 
 
 

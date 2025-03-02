@@ -97,26 +97,31 @@
             </form>
 
             <!-- Sağ Üst: Menü -->
-            <div class="d-flex align-items-center">
+            <!-- Sağ Üst: Menü -->
+            <!-- Sağ Üst: Menü -->
+            <div class="d-flex align-items-center gap-3">
+                <!-- gap-3 ile mesafe biraz kısaltıldı -->
                 @if (userId == null)
                 {
-                    <a class="nav-link-custom me-3" asp-controller="User" asp-action="Login">
+                    <a class="nav-link-custom me-2" asp-controller="User" asp-action="Login">
                         <i class="fa-regular fa-user"></i> Giriş Yap
                     </a>
                 }
                 else
                 {
-                    <a class="nav-link-custom" asp-controller="User" asp-action="MyAccount">
+                    <a class="nav-link-custom me-3" asp-controller="User" asp-action="MyAccount">
                         <i class="fa-regular fa-circle-user"></i> Hesabım
                     </a>
                 }
-                <a class="nav-link-custom me-3" asp-controller="Favorites" asp-action="Index">
+                <a class="nav-link-custom me-2" asp-controller="Favorites" asp-action="Index">
                     <i class="fa-regular fa-heart"></i> Favorilerim
                 </a>
-                <a class="nav-link-custom me-3" asp-controller="Cart" asp-action="Index">
+                <a class="nav-link-custom me-2" asp-controller="Cart" asp-action="Index">
                     <i class="fa-solid fa-cart-shopping"></i> Sepetim
                 </a>
             </div>
+
+
         </div>
     </nav>
     <!-- Navbar Bitiş -->
