@@ -85,7 +85,7 @@ namespace PerfumeSite.Controllers
 
 
 
-        [HttpGet]
+       
         public IActionResult ForgotPassword()
         {
             return View();
