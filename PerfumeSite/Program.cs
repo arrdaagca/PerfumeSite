@@ -35,7 +35,17 @@ builder.Services.AddScoped<ICreditCardRepository, CreditCardRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
 builder.Services.AddAutoMapper(typeof(MappingForServices), typeof(MappingForMvc));
-builder.Services.AddSession();
+
+
+
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(20);
+    options.Cookie.HttpOnly = true; 
+    options.Cookie.IsEssential = true; 
+});
+
 
 
 var app = builder.Build();
@@ -47,6 +57,20 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

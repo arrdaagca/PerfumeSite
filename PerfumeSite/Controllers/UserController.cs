@@ -32,11 +32,14 @@ namespace PerfumeSite.Controllers
         public IActionResult Login(UserLoginViewModel userLoginViewModel)
         {
             var loggedInUser = _userService.Login(_mapper.Map<UserLoginDto>(userLoginViewModel));
+            if (loggedInUser == null)
+            {
+                ModelState.AddModelError(string.Empty, "Yanlış email veya şifre.");
+                return View("Login"); // Kullanıcıyı aynı görünüme geri döndürün
+            }
 
-       
             HttpContext.Session.SetInt32("Id", loggedInUser.Id);
 
-            HttpContext.Session.SetString("Password", loggedInUser.Password);
 
             HttpContext.Session.SetString("IsAdmin", loggedInUser.IsAdmin.ToString());
 
@@ -69,6 +72,25 @@ namespace PerfumeSite.Controllers
         [HttpPost]
         public IActionResult SignUp(UserViewModel userViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(userViewModel);
+            }
+
+            var getByEmail = _userService.GetByEmail(userViewModel.Email);
+            var getByPhoneNumber = _userService.GetByPhoneNumber(userViewModel.PhoneNumber);
+            if (getByEmail != null)
+            {
+                ModelState.AddModelError("Email", "Bu email adresi ile kayıtlı bir kullanıcı var.");
+                return View(userViewModel);
+            }
+            else if (getByPhoneNumber != null)
+            {
+                ModelState.AddModelError("PhoneNumber", "Bu telefon numarası ile kayıtlı bir kullanıcı var.");
+                return View(userViewModel);
+            }
+
+
             var userDto = _mapper.Map<UserDto>(userViewModel);
 
            
@@ -80,7 +102,11 @@ namespace PerfumeSite.Controllers
         }
 
 
-
+        [HttpGet]
+        public IActionResult UserInformation()
+        {
+            return View();
+        }
        
 
 

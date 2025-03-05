@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "_Layout";
+}
+
+
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -16,8 +21,7 @@
         <div class="tab-buttons">
             <a asp-controller="Address" asp-action="Address" class="btn-blue active-tab" onclick="showTab('address')">Adres Bilgilerim</a>
             <a asp-controller="CreditCard" asp-action="CreditCard" class="btn-blue" onclick="showTab('cards')">Kayıtlı Kartlarım</a>
-            <a href="#" class="btn-blue" onclick="showTab('emailChange')">E-Posta Değişikliği</a>
-            <a href="#" class="btn-blue" onclick="showTab('passwordChange')">Şifre Değişikliği</a>
+            <a asp-controller="User" asp-action="UserInformations" class="btn-blue" onclick="showTab('emailChange')">Kullanıcı Bilgilerim</a>
             <a href="/User/Login" class="btn-red">Çıkış Yap</a>
         </div>    
     </div>

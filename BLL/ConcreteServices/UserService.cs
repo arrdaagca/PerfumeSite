@@ -76,5 +76,11 @@ namespace BLL.ConcreteServices
            var users = _genericRepository.GetAll().Where(x=>x.IsAdmin==false);
             return _mapper.Map<List<UserListDto>>(users);
         }
+
+        public UserDto GetByPhoneNumber(string phoneNumber)
+        {
+            var user = _genericRepository.GetAll().FirstOrDefault(x => x.PhoneNumber == phoneNumber);
+            return _mapper.Map<UserDto>(user);
+        }
     }
 }
