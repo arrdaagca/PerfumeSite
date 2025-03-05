@@ -1,0 +1,31 @@
+﻿body {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+    background: #343a40;
+    color: white;
+}
+
+.btn-custom {
+    background-color: #ff758c;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+    .btn-custom:hover {
+        background-color: #ff5e78;
+    }

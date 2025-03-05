@@ -1,0 +1,18 @@
+﻿.account-container {
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+.account-card {
+    transition: all 0.3s ease;
+}
+
+    .account-card:hover {
+        background-color: #f8f9fa;
+        transform: scale(1.02);
+    }
+
+    .account-card i {
+        font-size: 22px;
+        margin-right: 10px;
+    }

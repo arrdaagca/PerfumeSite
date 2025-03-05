@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PerfumeSite.UserViewModels;
 using System.Net.Mail;
 using System.Net;
+using BLL.ConcreteServices;
 
 namespace PerfumeSite.Controllers
 {
@@ -12,11 +13,13 @@ namespace PerfumeSite.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
-        public UserController(IUserService userService,IMapper mapper)
+        public UserController(IUserService userService,IMapper mapper,IEmailService emailService)
         {
             _userService = userService;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -30,8 +33,7 @@ namespace PerfumeSite.Controllers
         {
             var loggedInUser = _userService.Login(_mapper.Map<UserLoginDto>(userLoginViewModel));
 
-
-
+       
             HttpContext.Session.SetInt32("Id", loggedInUser.Id);
 
             HttpContext.Session.SetString("Password", loggedInUser.Password);
@@ -69,6 +71,7 @@ namespace PerfumeSite.Controllers
         {
             var userDto = _mapper.Map<UserDto>(userViewModel);
 
+           
 
             _userService.SignUp(userDto);
             return RedirectToAction("Login");
@@ -98,51 +101,16 @@ namespace PerfumeSite.Controllers
         public IActionResult ResetPassword(string email)
         {
             var user = _userService.GetByEmail(email);
-
-
-            // Gönderen e-posta bilgileri
-            string fromEmail = "arrdaagca@gmail.com";
-            string password = "dqbd gdmn iadm ejkl";
-
-            // Alıcı e-posta bilgileri
-            string toEmail = user.Email;
-            string subject = "Şifre Sıfırlama";
-            string body = $"<a href=\"https://localhost:7292/User/ResetPassword?id={user.Id}\" style=\"color: blue; text-decoration: underline;\">Şifre sıfırlamak için tıklayınız.</a>";
-
-
-
-
-
-            try
+            if (user == null)
             {
-                // SMTP istemcisi oluşturuluyor
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com")
-                {
-                    Port = 587,
-                    Credentials = new NetworkCredential(fromEmail, password),
-                    EnableSsl = true
-                };
-
-                // MailMessage nesnesi oluşturuluyor
-                MailMessage mailMessage = new MailMessage
-                {
-                    From = new MailAddress(fromEmail),
-                    Subject = subject,
-                    Body = body,
-                    IsBodyHtml = true
-                };
-                mailMessage.To.Add(toEmail);
-
-                // E-posta gönderimi
-                smtpClient.Send(mailMessage);
-                Console.WriteLine("E-posta başarıyla gönderildi!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Bir hata oluştu: " + ex.Message);
+                // Kullanıcı bulunamadı durumu
+                return NotFound("Kullanıcı bulunamadı.");
             }
 
-            return View();
+            _emailService.SendResetPasswordEmail(user.Email, user.Id);
+
+            return View(); 
+
         }
 
 
@@ -154,7 +122,7 @@ namespace PerfumeSite.Controllers
 
             ViewBag.id = id;
 
-
+  
 
 
 
@@ -167,7 +135,8 @@ namespace PerfumeSite.Controllers
         {
 
             var user = _userService.GetById(id);
-            user.Password = userViewModel.Password;
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userViewModel.Password);
+
             _userService.UpdatePassword(user);
             return RedirectToAction("Login");
         }

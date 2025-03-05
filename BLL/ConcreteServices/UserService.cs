@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
+using BLL.Helpers;
 
 namespace BLL.ConcreteServices
 {
@@ -36,15 +39,24 @@ namespace BLL.ConcreteServices
 
         public UserDto Login(UserLoginDto userLoginDto)
         {
-            var loggedInUser = _genericRepository.GetAll().FirstOrDefault(x => x.Email == userLoginDto.Email && x.Password == userLoginDto.Password);
+            var loggedInUser = _genericRepository.GetAll().FirstOrDefault(x => x.Email == userLoginDto.Email);
 
-            return _mapper.Map<UserDto>(loggedInUser);  
+            if (loggedInUser == null || !SecurityHelper.VerifyPassword(userLoginDto.Password, loggedInUser.Password))
+            {
+                return null; 
+            }
+
+            return _mapper.Map<UserDto>(loggedInUser);
         }
+
 
         public void SignUp(UserDto userDto)
         {
+            userDto.Password = SecurityHelper.HashPassword(userDto.Password);
+
             _genericRepository.Add(_mapper.Map<User>(userDto));
         }
+
 
         public void UpdatePassword(UserDto userDto)
         {

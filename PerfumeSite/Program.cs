@@ -24,6 +24,7 @@ builder.Services.AddScoped<ICreditCardService, CreditCardService>();
 
 
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAddressService, AddressService>();
