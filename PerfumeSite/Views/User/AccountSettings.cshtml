@@ -1,32 +1,89 @@
 ﻿@{
-    Layout = "_Layout";
+    ViewData["Title"] = "Hesap Ayarlarım";
+    Layout = "_Layout"; // Ana layout dosyanızı belirtin
 }
 
+<link rel="stylesheet" href="~/MyAccount/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome Kütüphanesi -->
 
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/AccountSettings/style.css">
-    <link rel="stylesheet" href="~/AccountSettings/style.js">
+<style>
+    body {
+        margin: 0; /* Varsayılan margin'i sıfırla */
+        background-color: gray !important; /* Sayfa arka planı gri */
+        height: 100vh;
+    }
 
-    <title>Hesap Ayarlarım</title>
+    .settings-btn {
+        display: block;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Buton arka plan rengi */
+        color: gold; /* Yazı rengi sarı */
+        border: none;
+        padding: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: 0.3s;
+        text-align: center;
+        margin-left: 120px; /* Butonları sağa kaydır */
+    }
 
-</head>
-<body>
+        .settings-btn:hover {
+            background-color: gray; /* Hover efekti */
+            color: white;
+        }
 
-    <div class="container">
-        <h2>Hesap Ayarlarım</h2>
-        <div class="tab-buttons">
-            <a asp-controller="Address" asp-action="Address" class="btn-blue active-tab" onclick="showTab('address')">Adres Bilgilerim</a>
-            <a asp-controller="CreditCard" asp-action="CreditCard" class="btn-blue" onclick="showTab('cards')">Kayıtlı Kartlarım</a>
-            <a asp-controller="User" asp-action="UserInformations" class="btn-blue" onclick="showTab('emailChange')">Kullanıcı Bilgilerim</a>
-            <a href="/User/Login" class="btn-red">Çıkış Yap</a>
-        </div>    
+    .sidebar {
+        width: 250px; /* Sidebar genişliği */
+        background-color: rgba(0, 0, 0, 0.8); /* Koyu arka plan rengi */
+        padding: 20px;
+        height: calc(100vh - 0px); /* Yükseklik tam sayfa boyu, navbar hariç */
+        position: absolute; /* Sabit konumda */
+        top: 60px; /* Üstten navbar yüksekliği kadar boşluk bırak */
+        left: 0; /* Soldan sabitle */
+        overflow-y: auto; /* Taşma durumunda kaydırma çubuğu */
+        z-index: 1000; /* Diğer içeriklerin üstünde görünmesi için */
+    }
+</style>
+
+<div class="sidebar">
+    <h2 class="text-warning">Hesabım</h2>
+    <a asp-controller="Order" asp-action="Index" class="account-btn">
+        <i class="fas fa-box"></i> Tüm Siparişlerim
+    </a>
+    <a asp-controller="Favorites" asp-action="Index" class="account-btn">
+        <i class="fas fa-heart"></i> Favorilerim
+    </a>
+    <a asp-controller="Cart" asp-action="Index" class="account-btn">
+        <i class="fas fa-shopping-cart"></i> Sepetim
+    </a>
+    <a asp-controller="User" asp-action="AccountSettings" class="account-btn">
+        <i class="fas fa-user-cog"></i> Hesap Ayarlarım
+    </a>
+</div>
+
+<div class="content">
+    <div class="row justify-content-center">
+        <!-- Adres Bilgileri -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <a asp-controller="Address" asp-action="Address" class="settings-btn">
+                <i class="fas fa-map-marker-alt"></i> Adres Bilgileri
+            </a>
+        </div>
+
+        <!-- Kullanıcı Bilgileri (Ortada) -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <a asp-controller="Account" asp-action="EditProfile" class="settings-btn">
+                <i class="fas fa-user"></i> Kullanıcı Bilgileri
+            </a>
+        </div>
+
+        <!-- Kredi Kartı Bilgileri -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <a asp-controller="Account" asp-action="EditCard" class="settings-btn">
+                <i class="fas fa-credit-card"></i> Kredi Kartı Bilgileri
+            </a>
+        </div>
     </div>
-
-   
-
-</body>
-</html>
+</div>

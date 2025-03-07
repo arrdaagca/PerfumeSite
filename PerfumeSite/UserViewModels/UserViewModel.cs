@@ -16,8 +16,7 @@ namespace PerfumeSite.UserViewModels
         [RegularExpression(@"(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}",
         ErrorMessage = "Şifre en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir.")]
         public string Password { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Telefon numarası gereklidir.")]
         [RegularExpression(@"^\d{10,10}$", ErrorMessage = "Telefon numarası sadece rakamlardan oluşmalı ve 10 haneli olmalıdır.")]

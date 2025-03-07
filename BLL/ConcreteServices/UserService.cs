@@ -61,7 +61,9 @@ namespace BLL.ConcreteServices
         public void UpdatePassword(UserDto userDto)
         {
            var user = _genericRepository.GetById(userDto.Id);
-            user.Password = userDto.Password;
+            
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+
             _genericRepository.Update(user);
         }
         public UserDto GetLoggedInUser(int? userId)
@@ -82,5 +84,7 @@ namespace BLL.ConcreteServices
             var user = _genericRepository.GetAll().FirstOrDefault(x => x.PhoneNumber == phoneNumber);
             return _mapper.Map<UserDto>(user);
         }
+
+       
     }
 }

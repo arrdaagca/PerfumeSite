@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using BLL.AbstractServices;
 using BLL.AllDtos;
 using Microsoft.AspNetCore.Mvc;
@@ -102,14 +102,7 @@ namespace PerfumeSite.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult UserInformation()
-        {
-            return View();
-        }
-       
-
-
+   
 
 
 
@@ -131,6 +124,7 @@ namespace PerfumeSite.Controllers
             {
                 // Kullanıcı bulunamadı durumu
                 return NotFound("Kullanıcı bulunamadı.");
+                
             }
 
             _emailService.SendResetPasswordEmail(user.Email, user.Id);
@@ -161,7 +155,7 @@ namespace PerfumeSite.Controllers
         {
 
             var user = _userService.GetById(id);
-            user.Password = BCrypt.Net.BCrypt.HashPassword(userViewModel.Password);
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userViewModel.Password); 
 
             _userService.UpdatePassword(user);
             return RedirectToAction("Login");
@@ -196,8 +190,7 @@ namespace PerfumeSite.Controllers
         }
 
 
-
-
+       
 
 
 

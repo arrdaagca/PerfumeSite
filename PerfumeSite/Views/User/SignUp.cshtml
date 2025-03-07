@@ -1,65 +1,45 @@
 ﻿@using PerfumeSite.UserViewModels
 @model UserViewModel
+
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
+<link rel="stylesheet" href="~/SignUpTheme/dist/style.css">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
-    <link rel="stylesheet" href="~/SignUpTheme/dist/style.css">
-</head>
-<body>
 
-    <div class="container">
-        <div class="signup-container">
-            <h2>Signup</h2>
-            <form asp-asp-controller="User" asp-action="SignUp" method="post">
-                <div class="input-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required asp-for="Name">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="input-group">
-                    <label for="surname">Surname</label>
-                    <input type="text" id="surname" name="surname" required asp-for="Surname">
-                    <span asp-validation-for="Surname" class="text-danger"></span>
 
-                </div>
-                <div class="input-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="PhoneNumber" required asp-for="PhoneNumber">
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
 
-                </div>
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required asp-for="Email">
-                    <span asp-validation-for="Email" class="text-danger"></span>
 
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required asp-for="Password">
-                    <span asp-validation-for="Password" class="text-danger"></span>
-
-                </div>
-                <button class="signup-button" type="submit">Sign Up</button>
-            </form>
-            <div class="footer">
-                <a  asp-controller="User" asp-action="Login"  >Already have an account? Login</a>
+<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="signup-container">
+        <h2>Üye Ol</h2>
+        <form asp-controller="User" asp-action="SignUp" method="post">
+            <div class="input-group">
+                <label for="name">İsim</label>
+                <input type="text" id="name" name="name" required asp-for="UserName">
+                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
+
+            <div class="input-group">
+                <label for="phone">Telefon Numarası</label>
+                <input type="tel" id="phone" name="PhoneNumber" required asp-for="PhoneNumber">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="input-group">
+                <label for="email">Email Adresi</label>
+                <input type="email" id="email" name="email" required asp-for="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="input-group">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" name="password" required asp-for="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <button class="signup-button" type="submit">Üye Ol</button>
+        </form>
+        <div class="footer">
+            <a asp-controller="User" asp-action="Login">Zaten bir hesabınız var mı? Giriş Yap</a>
         </div>
     </div>
-
-</body>
-</html>
-@section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
+</div>

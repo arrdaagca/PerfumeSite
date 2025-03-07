@@ -1,73 +1,75 @@
 ﻿@using PerfumeSite.AddressViewModels
-@model AddAddressViewModel
-
+@model AddressViewModel // Modelinizi uygun şekilde ayarlayın
 @{
-    var userId = Context.Session.GetInt32("Id");
+    Layout = "_Layout"; // Layout sayfasını belirtin
 }
 
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: rgba(0, 0, 0, 0.6); /* Arka plan rengi layout ile aynı */
+        color: white; /* Yazı rengi beyaz */
+    }
 
-@{
-    ViewData["Title"] = "Adres Ekle";
-}
+    .container {
+        margin-top: 50px; /* Üstten boşluk */
+    }
 
-<div class="container mt-5">
-    <div class="text-center">
-        <h2 class="fw-bold text-uppercase text-primary">📍 Yeni Adres Ekle</h2>
-        <p class="text-muted">Lütfen adres bilgilerinizi eksiksiz doldurun.</p>
-    </div>
+    h2 {
+        text-align: center; /* Başlığı ortaya al */
+        color: gold; /* Başlık rengi */
+    }
 
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-6">
-            <div class="card shadow-lg">
-                <div class="card-body">
-                    <form method="post" asp-controller="Address" asp-action="AddAddress" method="post">
-                        <div class="mb-3">
-                            <label for="Country" class="form-label">Ülke</label>
-                            <input type="text" class="form-control" asp-for="Country" required placeholder="Türkiye">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="City" class="form-label">Şehir</label>
-                            <input type="text" class="form-control" asp-for="City" required placeholder="İstanbul">
-                        </div>
+    .form-control {
+        background-color: rgba(0, 0, 0, 0.6); /* Form elemanları arka plan rengi */
+        color: black; /* Form elemanları yazı rengi */
+    }
 
-                        <div class="mb-3">
-                            <label for="District" class="form-label">İlçe</label>
-                            <input type="text" class="form-control" asp-for="District" required placeholder="Beşiktaş">
-                        </div>
+    .form-label {
+        color: black; /* Etiket rengi */
+    }
 
-                        <div class="mb-3">
-                            <label for="Neighbourhood" class="form-label">Mahalle</label>
-                            <input type="text" class="form-control" asp-for="Neighbourhood" required placeholder="Levent Mah.">
-                        </div>
+    .btn-primary {
+        background-color: gold; /* Buton arka plan rengi */
+        border: none; /* Kenarlık yok */
+    }
 
-                        <div class="mb-3">
-                            <label for="Street" class="form-label">Sokak</label>
-                            <input type="text" class="form-control" asp-for="Street" required placeholder="4. Cadde">
-                        </div>
+        .btn-primary:hover {
+            background-color: darkgoldenrod; /* Hover durumu için buton rengi */
+        }
+</style>
 
-                        <div class="mb-3">
-                            <label for="BuildingNumber" class="form-label">Bina Numarası</label>
-                            <input type="number" class="form-control" asp-for="BuildingNumber" required placeholder="12">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="DoorNumber" class="form-label">Daire Numarası</label>
-                            <input type="number" class="form-control" asp-for="DoorNumber" required placeholder="5">
-                        </div>
-
-                        <input hidden value="@userId" name="UserId" />
-
-                        <div class="d-flex justify-content-between">
-                            <a href="@Url.Action("Index", "Address")" class="btn btn-secondary">⬅️ Geri Dön</a>
-                            <button  type="submit" class="btn btn-success">💾 Kaydet</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<div class="container">
+    <h2>Adres Ekle</h2>
+    <form asp-controller="User" asp-action="AddAddress" method="post" class="bg-light p-4 rounded">
+        <div class="mb-3">
+            <label for="Country" class="form-label">Ülke</label>
+            <input type="text" id="Country" name="Country" class="form-control" required />
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="City" class="form-label">Şehir</label>
+            <input type="text" id="City" name="City" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="District" class="form-label">İlçe</label>
+            <input type="text" id="District" name="District" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="Neighbourhood" class="form-label">Mahalle</label>
+            <input type="text" id="Neighbourhood" name="Neighbourhood" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="Street" class="form-label">Sokak</label>
+            <input type="text" id="Street" name="Street" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="BuildingNumber" class="form-label">Bina No</label>
+            <input type="text" id="BuildingNumber" name="BuildingNumber" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="DoorNumber" class="form-label">Daire No</label>
+            <input type="text" id="DoorNumber" name="DoorNumber" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary mx-auto d-block" style="width: 200px;">Ekle</button>
+    </form>
 </div>
-
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
