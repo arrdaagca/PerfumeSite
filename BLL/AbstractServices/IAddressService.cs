@@ -11,7 +11,13 @@ namespace BLL.AbstractServices
     {
 
         void AddAddress(AddAddressDto addAddressDto); 
-        List<AddressDto> GetAddressByUserId(int? userId);    
+        List<AddressDto> GetAddressByUserId(int? userId);
+        void DeleteAddress(int id);
+
+
+        void EditAddress(AddressDto addressDto);
+
+
 
 
     }

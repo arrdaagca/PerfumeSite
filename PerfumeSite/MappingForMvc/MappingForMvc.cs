@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL.AllDtos;
+using DAL.Entities;
 using PerfumeSite.AddressViewModels;
 using PerfumeSite.CreditCardViewModels;
 using PerfumeSite.UserViewModels;
@@ -13,11 +14,15 @@ namespace PerfumeSite.MappingForMvc
         {
             CreateMap<UserLoginDto, UserLoginViewModel>().ReverseMap();
             CreateMap<UserDto, UserViewModel>().ReverseMap();
+            CreateMap<UserListDto, UserListViewModel>().ReverseMap(); 
+
             CreateMap<AddAddressDto, AddAddressViewModel>().ReverseMap();
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
-            CreateMap<CreditCardDto, CreditCardViewModel>().ReverseMap();
+            CreateMap<Address, AddressViewModel>().ReverseMap();
+
+
             CreateMap<AddCreditCardDto, AddCreditCardViewModel>().ReverseMap();
-            CreateMap<UserListDto, UserListViewModel>().ReverseMap();
+            CreateMap<CreditCardDto, CreditCardViewModel>().ReverseMap();
 
 
 

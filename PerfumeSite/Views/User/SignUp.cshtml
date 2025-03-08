@@ -17,7 +17,7 @@
         <form asp-controller="User" asp-action="SignUp" method="post">
             <div class="input-group">
                 <label for="name">İsim</label>
-                <input type="text" id="name" name="name" required asp-for="UserName">
+                <input type="text" id="name" name="username" required asp-for="UserName">
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 

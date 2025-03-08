@@ -34,7 +34,7 @@ namespace PerfumeSite.Controllers
             var loggedInUser = _userService.Login(_mapper.Map<UserLoginDto>(userLoginViewModel));
             if (loggedInUser == null)
             {
-                ModelState.AddModelError(string.Empty, "Yanlış email veya şifre.");
+                ModelState.AddModelError(string.Empty, "Yanlış email veya şifre. Ama hangisi söylemem");
                 return View("Login"); // Kullanıcıyı aynı görünüme geri döndürün
             }
 

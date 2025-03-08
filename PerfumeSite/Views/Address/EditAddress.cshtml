@@ -143,8 +143,8 @@
     </div>
 
     <div class="address-form-container">
-        <h2>Adres Ekle</h2>
-        <form asp-controller="Address" asp-action="AddAddress" method="post">
+        <h2>Adres Güncelle</h2>
+        <form asp-controller="Address" asp-action="EditAddress" method="post">
             <div class="row">
                 <!-- Sol sütun: Ülke, Şehir, İlçe -->
                 <div class="col-md-6">
@@ -185,9 +185,10 @@
 
                     <!-- Ekle Butonu -->
                     <div class="btn-container">
-                        <button type="submit" id="btn" class="btn btn-primary">Ekle</button>
+                        <button type="submit" id="btn" class="btn btn-primary">Güncelle</button>
                     </div>
                     <input hidden value="@userId" name="userId" />
+                    <input hidden value="@Model.Id" name="id" />
                 </div>
             </div>
         </form>

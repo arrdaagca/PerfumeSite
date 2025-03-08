@@ -47,5 +47,35 @@ namespace PerfumeSite.Controllers
             _addressService.AddAddress(_mapper.Map<AddAddressDto>(addAddressViewModel));
             return RedirectToAction("Address");
         }
+
+        [HttpPost]
+        public IActionResult DeleteAddress(int id)
+        {   HttpContext.Session.GetInt32("Id");
+            _addressService.DeleteAddress(id);
+            return RedirectToAction("Address");
+        }
+        [HttpGet]
+        public IActionResult EditAddress(int id)
+        {
+
+           
+            var address = _addressService.GetAddressByUserId( HttpContext.Session.GetInt32("Id")).FirstOrDefault(x => x.Id == id);
+
+           
+
+            return View(_mapper.Map<AddressViewModel>(address));
+        }
+
+        [HttpPost]
+        public IActionResult EditAddress(AddressViewModel addressViewModel)
+        {
+
+            _addressService.EditAddress(_mapper.Map<AddressDto>(addressViewModel));
+            return RedirectToAction("Address");
+
+
+        }
+
+
     }
 }

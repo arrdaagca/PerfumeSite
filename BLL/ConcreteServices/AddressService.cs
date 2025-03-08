@@ -30,6 +30,20 @@ namespace BLL.ConcreteServices
           
         }
 
+        public void DeleteAddress(int id)
+        {
+            _genericRepository.DeleteById(id);
+
+        }
+
+        public void EditAddress(AddressDto addressDto)
+        {
+            var address = _genericRepository.GetById(addressDto.Id);
+            _mapper.Map(addressDto,address);
+            _genericRepository.Update(address);
+        }
+      
+
         public List<AddressDto> GetAddressByUserId(int? userId)
         {
             var addresses = _addressRepository.GetAddressByUserId(userId);  
