@@ -1,9 +1,9 @@
 ﻿body {
-    background-color: gray; /* Arka plan rengi */
+    background-color: gray; 
 }
 
 .login-container {
-    background: rgba(0, 0, 0, 0.7); /* Koyu arka plan */
+    background: rgba(0, 0, 0, 0.7); 
     border-radius: 15px;
     padding: 40px;
     width: 400px;

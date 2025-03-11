@@ -1,0 +1,101 @@
+﻿@using PerfumeSite.UserViewModels
+@model Tuple<UserProfileViewModel, UserUpdatePasswordViewModel>
+
+@{
+    var userProfile = Model.Item1;
+    var userPasswordUpdate = Model.Item2;
+}
+
+@{
+    var userId = Context.Session.GetInt32("Id");
+}
+
+
+@{
+    Layout = "_Layout"; 
+}
+
+<link rel="stylesheet" href="~/User/GetUserProfile/style.css">
+<link rel="stylesheet" href="~/User/MyAccount/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <a asp-controller="Order" asp-action="Index" class="account-btn">
+                <i class="fas fa-box"></i> Tüm Siparişlerim
+            </a>
+            <a asp-controller="Favorites" asp-action="Index" class="account-btn">
+                <i class="fas fa-heart"></i> Favorilerim
+            </a>
+            <a asp-controller="Cart" asp-action="Index" class="account-btn">
+                <i class="fas fa-shopping-cart"></i> Sepetim
+            </a>
+            <a asp-controller="User" asp-action="AccountSettings" class="account-btn">
+                <i class="fas fa-user-cog"></i> Hesap Ayarlarım
+            </a>
+        </div>
+
+        <div class="col-md-9 offset-md-3">
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h4>Üyelik Bilgileri</h4>
+                        <hr>
+                        
+                        
+                            <form asp-controller="User" asp-action="UpdateUserProfile" method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email"  name="Email" class="form-control" asp-for="@userProfile.Email">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Kullanıcı Adı</label>
+                                    <input type="text"  name="UserName" class="form-control" asp-for="@userProfile.UserName">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Telefon Numarası</label>
+                                    <input type="text"  name="PhoneNumber" class="form-control" asp-for="@userProfile.PhoneNumber">
+                                </div>
+                                <button type="submit" class="guncelle">Güncelle</button>
+                                <input hidden value="@userId" name="id" />
+                            </form>
+                        
+
+                      
+                        
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h4>Şifre Değiştir</h4>
+                        <hr>
+                        <form asp-controller="User" asp-action="UpdatePasswordWithCheck" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Mevcut Şifre</label>
+                                <input type="password" name="Password" class="form-control" asp-for="@userPasswordUpdate.Password" >
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Yeni Şifre</label>
+                                <input type="password" name="NewPassword" class="form-control" asp-for="@userPasswordUpdate.NewPassword">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Yeni Şifre (Tekrar)</label>
+                                <input type="password" name="ConfirmNewPassword" class="form-control" asp-for="@userPasswordUpdate.ConfirmNewPassword">
+                            </div>
+                            <button type="submit" class="guncelle">Şifreyi Güncelle</button>
+                            <input hidden value="@userId" name="id" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

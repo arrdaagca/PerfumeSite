@@ -15,7 +15,7 @@ namespace PerfumeSite.Controllers
         private readonly IMapper _mapper;
         private readonly IEmailService _emailService;
 
-        public UserController(IUserService userService,IMapper mapper,IEmailService emailService)
+        public UserController(IUserService userService, IMapper mapper, IEmailService emailService)
         {
             _userService = userService;
             _mapper = mapper;
@@ -45,7 +45,7 @@ namespace PerfumeSite.Controllers
 
             if (loggedInUser.IsAdmin)
             {
-                
+
                 return RedirectToAction("AdminHomePage", "Admin");
 
 
@@ -58,7 +58,7 @@ namespace PerfumeSite.Controllers
 
 
 
-           
+
 
         }
 
@@ -93,7 +93,7 @@ namespace PerfumeSite.Controllers
 
             var userDto = _mapper.Map<UserDto>(userViewModel);
 
-           
+
 
             _userService.SignUp(userDto);
             return RedirectToAction("Login");
@@ -102,12 +102,12 @@ namespace PerfumeSite.Controllers
         }
 
 
-   
 
 
 
 
-       
+
+
         public IActionResult ForgotPassword()
         {
             return View();
@@ -124,12 +124,12 @@ namespace PerfumeSite.Controllers
             {
                 // Kullanıcı bulunamadı durumu
                 return NotFound("Kullanıcı bulunamadı.");
-                
+
             }
 
             _emailService.SendResetPasswordEmail(user.Email, user.Id);
 
-            return View(); 
+            return View();
 
         }
 
@@ -138,11 +138,11 @@ namespace PerfumeSite.Controllers
         public IActionResult ResetPassword(int id)
         {
 
-            
+
 
             ViewBag.id = id;
 
-  
+
 
 
 
@@ -150,20 +150,18 @@ namespace PerfumeSite.Controllers
         }
 
 
+
+
         [HttpPost]
-        public IActionResult UpdatePassword(int id, UserViewModel userViewModel)
+        public IActionResult UpdatePasswordWithoutCheck(int id, UserViewModel userViewModel)
         {
 
             var user = _userService.GetById(id);
-            user.Password = BCrypt.Net.BCrypt.HashPassword(userViewModel.Password); 
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userViewModel.Password);
 
-            _userService.UpdatePassword(user);
+            _userService.UpdatePasswordWithOutCheck(user);
             return RedirectToAction("Login");
         }
-
-
-
-
         [HttpGet]
         public IActionResult MyAccount()
         {
@@ -177,10 +175,10 @@ namespace PerfumeSite.Controllers
             }
 
 
-            return View();  
+            return View();
         }
 
-        
+
 
 
         [HttpGet]
@@ -190,11 +188,69 @@ namespace PerfumeSite.Controllers
         }
 
 
+
+
+        [HttpGet]
+        public IActionResult GetUserProfile()
+        {
+            var user = _userService.GetLoggedInUser(HttpContext.Session.GetInt32("Id"));
+
+           var userProfile =   _userService.GetUserProfile(user.Id);
+
+
+            var userUpdatePasswordViewModel = new UserUpdatePasswordViewModel();
+          
+
+
+            var tuple = Tuple.Create(_mapper.Map<UserProfileViewModel>(userProfile),userUpdatePasswordViewModel);
+
+
+            return View(tuple);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUserProfile(UserProfileViewModel userProfileViewModel)
+        {
+
+            _userService.UpdateUserProfile(_mapper.Map<UserProfileDto>(userProfileViewModel));
+
+            return RedirectToAction("GetUserProfile");
+
+        }
+
+
+
+        [HttpPost]
+        public IActionResult UpdatePasswordWithCheck(UserUpdatePasswordViewModel userUpdatePasswordViewModel)
+        {
+
+
+
+            var user = _userService.GetLoggedInUser(HttpContext.Session.GetInt32("Id"));
+
+            var updatePasswordDto = new UserUpdatePasswordDto
+            {
+                Id = user.Id,
+                NewPassword = userUpdatePasswordViewModel.NewPassword
+            };
+
+
+           
+
+
+              _userService.UpdatePasswordWithCheck(updatePasswordDto);
+
+            return RedirectToAction("Login");
+           
+            
+
+
+
+
+            
+
+        }
        
-
-
-
-
 
     }
 }

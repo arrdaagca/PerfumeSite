@@ -16,5 +16,12 @@ namespace BLL.AbstractServices
         List<CreditCardDto> GetCreditCardsByUserId(int? userId);
 
 
+        void DeleteCreditCard(int id);
+
+        void EditCreditCard(CreditCardDto creditCardDto);   
+
+
+
+
     }
 }

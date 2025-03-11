@@ -29,6 +29,18 @@ namespace BLL.ConcreteServices
             _genericRepository.Add(_mapper.Map<CreditCard>(addCreditCardDto));
         }
 
+        public void DeleteCreditCard(int id)
+        {
+            _genericRepository.DeleteById(id);
+        }
+
+        public void EditCreditCard(CreditCardDto creditCardDto)
+        {
+            var creditCard = _genericRepository.GetById(creditCardDto.Id);
+            _mapper.Map(creditCardDto, creditCard);
+            _genericRepository.Update(creditCard);
+        }
+
         public List<CreditCardDto> GetCreditCardsByUserId(int? userId)
         {
             var getUsersCreditCards = _creditCardRepository.GetCreditCardByUserId(userId);

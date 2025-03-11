@@ -1,5 +1,4 @@
-﻿/* SAYFA ORTALAMA */
-html, body {
+﻿html, body {
     height: 100%;
     margin: 0;
     display: flex;
@@ -8,7 +7,7 @@ html, body {
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
 }
 
-/* FORM KUTUSU */
+
 .update-form {
     background: white;
     padding: 40px;
@@ -26,7 +25,7 @@ html, body {
         transform: translateY(0);
     }
 
-    /* BAŞLIK */
+ 
     .update-form h2 {
         text-align: center;
         margin-bottom: 20px;
@@ -34,7 +33,7 @@ html, body {
         font-weight: bold;
     }
 
-/* INPUT ALANLARI */
+
 .form-control {
     border-radius: 10px;
     padding: 12px;
@@ -48,7 +47,7 @@ html, body {
         box-shadow: 0 0 8px rgba(255, 117, 140, 0.5);
     }
 
-/* BUTON */
+
 .btn-update {
     width: 100%;
     background: #ff758c;
@@ -65,7 +64,7 @@ html, body {
         transform: scale(1.05);
     }
 
-/* FORM ALANLARI İKİ SÜTUNLU YAPILANDIRMA */
+
 .form-container {
     display: flex;
     gap: 20px;

@@ -1,0 +1,105 @@
+﻿body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.credit-card-sidebar {
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    height: calc(100vh - 60px);
+    position: fixed;
+    top: 60px;
+    left: 0;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.max-credit-card {
+    margin-top: 60px;
+    margin-left: 260px;
+    color: yellow;
+}
+
+.credit-card-btn {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+    .credit-card-btn:hover {
+        background-color: rgba(255, 215, 0, 0.6);
+    }
+
+.credit-card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.credit-card-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1 1 calc(30% - 20px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    color: white;
+    max-width: 300px;
+    margin: 10px;
+}
+
+    .credit-card-card:hover {
+        transform: translateY(-5px);
+    }
+
+.credit-card-title {
+    color: gold;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.credit-card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+    .credit-card-actions .btn {
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s;
+        border: none;
+    }
+
+    .credit-card-actions .btn-danger {
+        background-color: yellow;
+        color: black;
+    }
+
+.add-credit-card-button {
+    display: block;
+    width: 30%;
+    background-color: rgba(255, 215, 0, 0.6); 
+    margin: 20px auto;
+    color: black; 
+    border: none; 
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.credit-card-actions .btn-danger:hover {
+    background-color: white;
+    transform: translateY(-3px);
+}

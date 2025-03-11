@@ -1,0 +1,61 @@
+﻿@using PerfumeSite.CreditCardViewModels
+@model CreditCardViewModel
+
+
+@{
+    Layout = "_Layout";
+}
+@{
+    var userId = Context.Session.GetInt32("Id");
+}
+
+<link rel="stylesheet" href="~/CreditCard/EditCreditCard/style.css">
+<link rel="stylesheet" href="~/MyAccount/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="address-page">
+    <div class="sidebar">
+        <a asp-controller="Order" asp-action="Index" class="account-btn">
+            <i class="fas fa-box"></i> Tüm Siparişlerim
+        </a>
+        <a asp-controller="Favorites" asp-action="Index" class="account-btn">
+            <i class="fas fa-heart"></i> Favorilerim
+        </a>
+        <a asp-controller="Cart" asp-action="Index" class="account-btn">
+            <i class="fas fa-shopping-cart"></i> Sepetim
+        </a>
+        <a asp-controller="User" asp-action="AccountSettings" class="account-btn">
+            <i class="fas fa-user-cog"></i> Hesap Ayarlarım
+        </a>
+    </div>
+
+    <div class="address-form-container">
+        <h2>Kart Bilgilerini Güncelle</h2>
+        <form asp-controller="CreditCard" asp-action="EditCreditCard" method="post">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="Country" class="form-label">Kart Numarası</label>
+                        <input type="text" id="Country" name="CreditCardNumber" class="form-control" asp-for="CreditCardNumber" placeholder="Kart Numarası girin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="City" class="form-label">Geçerlilik Tarihi</label>
+                        <input type="text" id="City" name="CreditCardValidityDate" class="form-control" asp-for="CreditCardValidityDate" placeholder="Geçerlilik Tarihi girin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="District" class="form-label">CVV</label>
+                        <input type="text" id="District" name="CreditCardVerificationCode" class="form-control" asp-for="CreditCardVerificationCode" placeholder="CVV girin">
+                    </div>
+
+
+                    <div class="btn-container">
+                        <button type="submit" id="btn" class="btn btn-primary">Güncelle</button>
+                    </div>
+                    <input hidden value="@userId" name="userId" />
+                    <input hidden value="@Model.Id" name="id" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

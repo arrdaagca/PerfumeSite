@@ -1,13 +1,18 @@
 ﻿@using PerfumeSite.AddressViewModels
 @model List<AddressViewModel>
 @{
-    Layout = "_Layout"; // Layout dosyanızı belirtin
+    Layout = "_Layout"; 
 }
 @{
     var userId = Context.Session.GetInt32("Id");
 }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome Kütüphanesi -->
+<link rel="stylesheet" href="~/Address/Address/style.css">
+<link rel="stylesheet" href="~/Address/Address/style.js">
+<link rel="stylesheet" href="~/MyAccount/style.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 
 <div class="container-fluid">
     <div class="row">
@@ -43,14 +48,14 @@
                                 <li><strong>Daire No:</strong> @address.DoorNumber</li>
                             </ul>
                             <div class="address-actions">
-                                <!-- Düzenle Butonu Formu -->
+                                
                                 <form asp-controller="Address" asp-action="EditAddress" method="get">
                                     <button type="submit" class="btn btn-danger">Güncelle</button>
                                     <input hidden value="@address.Id" name="id" />
                                     <input hidden value="@userId" name="userId" />
                                 </form>
 
-                                <!-- Sil Butonu Formu -->
+                                
                                 <form id="deleteForm" asp-controller="Address" asp-action="DeleteAddress" method="post">
                                     <button type="button" class="btn btn-danger" onclick="confirmDelete()">Sil</button>
                                     <input hidden value="@address.Id" name="id" />
@@ -58,14 +63,7 @@
                                 </form>
                             </div>
 
-                            <script>
-                                function confirmDelete() {
-                                    if (confirm("Bu adresi silmek istediğinizden emin misiniz?")) {
-                                        document.getElementById("deleteForm").submit();
-                                    }
-                                }
-                            </script>
-
+                      
 
 
 
@@ -90,133 +88,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    
-    body {
-        margin: 0;
-        font-family: 'Montserrat', sans-serif; /* Fontu layout ile aynı yapmak için */
-        background-color: rgba(0, 0, 0, 0.6); /* İçerik arka plan rengi */
-    }
-
-    .sidebar {
-        width: 250px; /* Sidebar genişliği */
-        background-color: rgba(0, 0, 0, 0.8); /* Koyu arka plan rengi */
-        padding: 20px;
-        height: calc(100vh - 60px); /* Yükseklik tam sayfa boyu, navbar hariç */
-        position: fixed; /* Sabit konumda */
-        top: 60px; /* Üstten navbar yüksekliği kadar boşluk bırak */
-        left: 0; /* Soldan sabitle */
-        overflow-y: auto; /* Taşma durumunda kaydırma çubuğu */
-        z-index: 1000; /* Diğer içeriklerin üstünde görünmesi için */
-    }
-
-    .maksadres {
-        margin-top:60px;
-        margin-left:260px;
-        color:yellow;
-    }
-        .sidebar h2 {
-            color: gold; /* Başlık rengi */
-            font-size: 1.5rem; /* Başlık boyutu */
-            margin-bottom: 20px; /* Alt boşluk */
-        }
-
-    .account-btn {
-        display: block; /* Butonlar blok seviyesinde olacak */
-        color: white; /* Buton metin rengi */
-        text-decoration: none; /* Alt çizgiyi kaldır */
-        padding: 10px; /* İçerik boşluğu */
-        margin-bottom: 10px; /* Butonlar arasındaki mesafe */
-        border-radius: 5px; /* Kenarları yuvarla */
-        transition: background-color 0.3s; /* Geçiş efekti */
-    }
-
-        .account-btn:hover {
-            background-color: rgba(255, 215, 0, 0.6); /* Hover rengi */
-        }
-
-    .address-container {
-        display: flex; /* Flexbox kullanarak yan yana dizilim */
-        justify-content: center; /* Kartları yatayda ortala */
-        flex-wrap: wrap; /* Taşma durumunda alt satıra geç */
-        margin-top: 20px; /* Üstten boşluk */
-    }
-
-    .address-card {
-        background-color: rgba(0, 0, 0, 0.8); /* Sidebar ile aynı arka plan rengi */
-        border-radius: 10px;
-        padding: 20px;
-        flex: 1 1 calc(30% - 20px); /* Kart genişliğini ayarla (3 tane yan yana) */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Gölgelendirme */
-        transition: transform 0.3s; /* Hover efekti için geçiş */
-        color: white; /* Yazı rengi beyaz */
-        max-width: 300px; /* Kart genişliğini sınırlama */
-        margin: 10px; /* Kartların arasındaki mesafe */
-    }
-
-    /* Tek adres için ortalama ayarı */
-    .address-container:only-child {
-        justify-content: center; /* Tek kart varsa ortala */
-    }
-
-
-        .address-card:hover {
-            transform: translateY(-5px); /* Hover'da yukarı kaydırma efekti */
-        }
-
-    .address-title {
-        color: gold; /* Başlık rengi */
-        font-size: 1.25rem; /* Başlık boyutu */
-        margin-bottom: 10px; /* Başlık ile içerik arasındaki mesafe */
-    }
-
-    .address-actions .btn {
-        margin-right: 10px; /* Butonlar arasındaki boşluk */
-        padding: 5px 10px; /* Buton içi boşluk */
-        border-radius: 5px; /* Kenar yuvarlama */
-        text-decoration: none; /* Alt çizgiyi kaldır */
-        transition: background-color 0.3s, transform 0.3s; /* Geçiş efekti */
-        border: none; /* Buton sınırlarını kaldır */
-    }
-
-    .address-actions .btn-danger {
-        background-color: yellow; /* Sil ve Düzenle butonları için arka plan rengi */
-        color: black; /* Yazı rengi siyah */
-    }
-
-        .address-actions .btn-danger:hover {
-            background-color: white; /* Hover efekti */
-            transform: translateY(-3px); /* Hover'da yukarı kaydırma efekti */
-        }
-
-    .add-address-button {
-        display: block;
-        width: 30%;
-        background-color: rgba(255, 215, 0, 0.6); /* Buton arka plan rengi */
-        margin: 20px auto;
-        color: black; /* Yazı rengi siyah */
-        border: none; /* Buton sınırlarını kaldır */
-        padding: 15px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        text-decoration: none;
-        border-radius: 10px;
-        transition: 0.3s;
-    }
-
-        .add-address-button:hover {
-            background-color: white; /* Hover rengi */
-            transform: translateY(-3px); /* Hover'da yukarı kaydırma efekti */
-        }
-
-    .address-actions {
-        display: flex;
-        gap: 10px; /* Butonlar arasında boşluk bırakır */
-    }
-
-        .address-actions form {
-            margin: 0; /* Butonlar arasında gereksiz boşluğu kaldırır */
-        }
-
-</style>

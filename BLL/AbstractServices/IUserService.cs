@@ -14,17 +14,20 @@ namespace BLL.AbstractServices
 
         UserDto Login(UserLoginDto userLoginDto);
         
-        List<UserListDto> GetUsers();
         UserDto GetByEmail(string email);
         UserDto GetById(int id);
         UserDto GetLoggedInUser(int? userId);
-        void UpdatePassword(UserDto userDto);
+        void UpdatePasswordWithOutCheck(UserDto userDto);
 
-       
+        UserProfileDto GetUserProfile(int id);
+
+        void UpdateUserProfile(UserProfileDto userProfileDto);
+
+
+        void UpdatePasswordWithCheck(UserUpdatePasswordDto userUpdatePasswordDto);
 
 
         UserDto GetByPhoneNumber(string phoneNumber);
-
 
 
 

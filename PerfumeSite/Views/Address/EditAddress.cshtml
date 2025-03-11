@@ -7,124 +7,11 @@
     var userId = Context.Session.GetInt32("Id");
 }
 
+<link rel="stylesheet" href="~/Address/EditAddress/style.css">
 <link rel="stylesheet" href="~/MyAccount/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome Kütüphanesi -->
 
-<style>
-    /* Sayfanın tamamını kapsayan arka plan */
-    .address-page {
-        background-color: gray; /* Koyu gri arka plan */
-        height: calc(100vh - 39px); /* Yükseklik ayarı */
-        display: flex; /* Flex düzeni kullan */
-        margin-left: 132px; /* Sidebar için alan bırak */
-        margin-top: -49px; /* Yukarı doğru uzatmak için negatif marjin */
-        width: calc(100% - 15px); /* Sağdan dolacak şekilde genişlik ayarı */
-        padding: 20px; /* İç boşluk */
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    .sidebar {
-        background-color: rgba(0, 0, 0, 0.9); /* Sidebar arka plan rengi */
-        padding: 20px;
-        width: 250px; /* Sidebar genişliği */
-        box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.6);
-        height: calc(100vh - 40px); /* Sayfa yüksekliği - üst boşluk */
-    }
-
-    .account-btn {
-        color: white; /* Yazı rengi */
-        text-decoration: none; /* Altı çizgi yok */
-        display: flex; /* İkon ve metin yan yana */
-        align-items: center; /* Dikey ortalama */
-        margin: 10px 0; /* Üst ve alt boşluk */
-        padding: 10px; /* İç boşluk */
-        border-radius: 5px; /* Köşe yuvarlama */
-        transition: background-color 0.3s; /* Geçiş efekti */
-    }
-
-        .account-btn i {
-            margin-right: 10px; /* İkon ile yazı arasında boşluk ekle */
-        }
-
-        .account-btn:hover {
-            background-color: darkgoldenrod; /* Hover rengi */
-        }
-
-    .address-form-container {
-        flex: 1; /* Sidebar dışında kalan alanı kapla */
-        background-color: rgba(0, 0, 0, 0.8); /* Form arka planı */
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        margin-left: 250px; /* Sidebar ile arada boşluk */
-        max-width: 600px; /* Formun maksimum genişliği */
-    }
-
-        .address-form-container h2 {
-            text-align: center;
-            color: gold;
-            margin-bottom: 20px;
-        }
-
-        .address-form-container .form-label {
-            color: white;
-            font-weight: 500;
-        }
-
-        .address-form-container .form-control {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: 0.3s;
-            height: 38px; /* Input yüksekliği */
-        }
-
-            .address-form-container .form-control::placeholder {
-                color: rgba(255, 255, 255, 0.7);
-            }
-
-            .address-form-container .form-control:focus {
-                background-color: rgba(255, 255, 255, 0.3);
-                border-color: gold;
-                box-shadow: 0px 0px 10px rgba(218, 165, 32, 0.7);
-            }
-
-        .address-form-container .btn-primary {
-            background-color: gold;
-            border: none;
-            color: black;
-            font-weight: 600;
-            transition: background-color 0.3s, box-shadow 0.3s; /* Geçiş efekti */
-            width: 100%; /* Buton genişliğini tam alanı kaplasın */
-            margin-top: 28px;
-            height: 38px; /* Inputların yüksekliğine eşitleme */
-            border-radius: 5px; /* Kenar yuvarlama */
-        }
-
-            .address-form-container .btn-primary:hover {
-                background-color: darkgoldenrod; /* Hover rengi */
-                color: white; /* Hoverda yazı rengi beyaz */
-                box-shadow: 0px 4px 15px rgba(218, 165, 32, 0.5); /* Hover'da gölge efekti */
-            }
-
-    /* Mahalle ve Butonu hizalamak için */
-    .form-group {
-        display: flex;
-        flex-direction: column; /* Dikey hizalamak için değiştirildi */
-        margin-bottom: 20px; /* Diğer alanlarla arasındaki boşluk */
-    }
-
-        .form-group .form-control {
-            flex: 1; /* Mahalle input alanı genişliği */
-            min-width: 0; /* Taşmayı önle */
-        }
-
-    .btn-container {
-        display: flex;
-        justify-content: flex-start; /* Butonu sola yasla */
-        margin-top: 20px; /* Üstten boşluk artırıldı */
-        width: 100%; /* Butonun genişliği tam alanı kaplasın */
-    }
-</style>
 
 <div class="address-page">
     <div class="sidebar">
@@ -146,7 +33,7 @@
         <h2>Adres Güncelle</h2>
         <form asp-controller="Address" asp-action="EditAddress" method="post">
             <div class="row">
-                <!-- Sol sütun: Ülke, Şehir, İlçe -->
+               
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Country" class="form-label">Ülke</label>
@@ -161,14 +48,14 @@
                         <input type="text" id="District" name="District" class="form-control" required placeholder="İlçenizi girin">
                     </div>
 
-                    <!-- Mahalle alanı -->
+            
                     <div class="mb-3 form-group">
                         <label for="Neighbourhood" class="form-label">Mahalle</label>
                         <input type="text" id="Neighbourhood" name="Neighbourhood" class="form-control" required placeholder="Mahallenizi girin">
                     </div>
                 </div>
 
-                <!-- Sağ sütun: Sokak, Bina No, Daire No -->
+
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Street" class="form-label">Sokak</label>
@@ -183,7 +70,7 @@
                         <input type="text" id="DoorNumber" name="DoorNumber" class="form-control" required placeholder="Daire numaranızı girin">
                     </div>
 
-                    <!-- Ekle Butonu -->
+                   
                     <div class="btn-container">
                         <button type="submit" id="btn" class="btn btn-primary">Güncelle</button>
                     </div>

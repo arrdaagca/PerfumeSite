@@ -55,7 +55,33 @@ namespace PerfumeSite.Controllers
             return RedirectToAction("CreditCard");
         }
 
+        [HttpPost]
+        public IActionResult DeleteCreditCard(int id)
+        {
+            HttpContext.Session.GetInt32("Id");
 
+            _creditCardService.DeleteCreditCard(id);
+
+            return RedirectToAction("CreditCard");
+        }
+
+
+        [HttpGet]
+        public IActionResult EditCreditCard(int id)
+        {
+            var creditCard = _creditCardService.GetCreditCardsByUserId(HttpContext.Session.GetInt32("Id")).FirstOrDefault(x=>x.Id == id);
+
+
+            return View(_mapper.Map<CreditCardViewModel>(creditCard));
+        
+        }
+
+        [HttpPost]
+        public IActionResult EditCreditCard(CreditCardViewModel creditCardViewModel)
+        {
+            _creditCardService.EditCreditCard(_mapper.Map<CreditCardDto>(creditCardViewModel));
+            return RedirectToAction("CreditCard");
+        }
 
     }
 }

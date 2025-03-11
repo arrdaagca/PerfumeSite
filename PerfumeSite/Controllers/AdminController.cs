@@ -24,13 +24,6 @@ namespace PerfumeSite.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Users()
-        {
-            var users = _userService.GetUsers();
-            return View(_mapper.Map<List<UserListViewModel>>(users));
-        }
-
 
 
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
 using BLL.Helpers;
+using System.Threading.Channels;
 
 namespace BLL.ConcreteServices
 {
@@ -39,15 +40,23 @@ namespace BLL.ConcreteServices
 
         public UserDto Login(UserLoginDto userLoginDto)
         {
+            // Kullanıcı adı veya e-posta ile kullanıcıyı bul
             var loggedInUser = _genericRepository.GetAll().FirstOrDefault(x => x.Email == userLoginDto.Email);
 
-            if (loggedInUser == null || !SecurityHelper.VerifyPassword(userLoginDto.Password, loggedInUser.Password))
+
+
+            // Kullanıcı var mı kontrol et
+            if (loggedInUser == null || !BCrypt.Net.BCrypt.Verify(userLoginDto.Password, loggedInUser.Password))
             {
-                return null; 
+                return null; // Kullanıcı yoksa veya şifre yanlışsa null dön
             }
 
             return _mapper.Map<UserDto>(loggedInUser);
         }
+
+
+            
+
 
 
         public void SignUp(UserDto userDto)
@@ -57,15 +66,6 @@ namespace BLL.ConcreteServices
             _genericRepository.Add(_mapper.Map<User>(userDto));
         }
 
-
-        public void UpdatePassword(UserDto userDto)
-        {
-           var user = _genericRepository.GetById(userDto.Id);
-            
-            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-
-            _genericRepository.Update(user);
-        }
         public UserDto GetLoggedInUser(int? userId)
         {
             var user = _genericRepository.GetById((int)userId);
@@ -73,18 +73,51 @@ namespace BLL.ConcreteServices
             return _mapper.Map<UserDto>(user);
         }
 
-        public List<UserListDto> GetUsers()
-        {
-           var users = _genericRepository.GetAll().Where(x=>x.IsAdmin==false);
-            return _mapper.Map<List<UserListDto>>(users);
-        }
-
+       
         public UserDto GetByPhoneNumber(string phoneNumber)
         {
             var user = _genericRepository.GetAll().FirstOrDefault(x => x.PhoneNumber == phoneNumber);
             return _mapper.Map<UserDto>(user);
         }
 
-       
+        public void UpdatePasswordWithOutCheck(UserDto userDto)
+        {
+           var user = _genericRepository.GetById(userDto.Id);
+            
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+
+            _genericRepository.Update(user);
+        }
+
+        public UserProfileDto GetUserProfile(int id)
+        {
+            var findGetUser = _genericRepository.GetById(id);
+
+
+            return _mapper.Map<UserProfileDto>(findGetUser);
+
+        }
+
+        public void UpdateUserProfile(UserProfileDto userProfileDto)
+        {
+            var findUpdateUser = _genericRepository.GetById(userProfileDto.Id);
+
+            var updateUser = _mapper.Map(userProfileDto, findUpdateUser);
+
+            _genericRepository.Update(updateUser);
+
+        }
+
+        public void UpdatePasswordWithCheck(UserUpdatePasswordDto userUpdatePasswordDto)
+        {
+            var findUpdateUser = _genericRepository.GetById(userUpdatePasswordDto.Id);
+
+
+            findUpdateUser.Password = BCrypt.Net.BCrypt.HashPassword(userUpdatePasswordDto.NewPassword);
+
+            _genericRepository.Update(findUpdateUser);
+
+
+        }
     }
 }
