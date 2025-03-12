@@ -33,33 +33,58 @@
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <ul class="navbar-nav">
-
                     @if (userId == null)
                     {
-                    <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Login">Giriş Yap</a></li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="Login">
+                                <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                            </a>
+                        </li>
                     }
                     else
                     {
-                        <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="MyAccount">Hesabım</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="MyAccount">
+                                <i class="fas fa-user"></i> Hesabım
+                            </a>
+                        </li>
+                    }
 
-                    }
                     @if (userId == null)
                     {
-                        <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Login">Favorilerim</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="Login">
+                                <i class="fas fa-heart"></i> Favorilerim
+                            </a>
+                        </li>
                     }
-                    else{
-                        <li class="nav-item"><a class="nav-link" href="#">Favorilerim</a></li>
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-heart"></i> Favorilerim
+                            </a>
+                        </li>
                     }
+
                     @if (userId == null)
                     {
-                        <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Login" >Sepetim</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="Login">
+                                <i class="fas fa-shopping-cart"></i> Sepetim
+                            </a>
+                        </li>
                     }
-                    else{
-                        <li class="nav-item"><a class="nav-link" href="#">Sepetim</a></li>
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-shopping-cart"></i> Sepetim
+                            </a>
+                        </li>
                     }
-                    
                 </ul>
+
             </div>
         </div>
     </nav>

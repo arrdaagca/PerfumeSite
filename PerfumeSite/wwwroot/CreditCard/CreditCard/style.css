@@ -98,6 +98,10 @@
     border-radius: 10px;
     transition: 0.3s;
 }
+    .add-credit-card-button:hover {
+        background-color: white;
+        transform: translateY(-3px);
+    }
 
 .credit-card-actions .btn-danger:hover {
     background-color: white;

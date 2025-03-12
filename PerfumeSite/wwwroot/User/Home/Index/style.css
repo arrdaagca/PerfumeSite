@@ -1,9 +1,7 @@
 ﻿body {
     background-color: gray !important;
     color: white;
-    
 }
-
 
 .custom-sidebar {
     background-color: rgba(0, 0, 0, 0.6);
@@ -19,15 +17,14 @@
     align-items: center;
 }
 
-
 .custom-sidebar-title {
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.6rem; /* Font boyutunu küçülttük */
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
+    
 }
-
 
 .custom-sidebar-list {
     list-style: none;
@@ -35,18 +32,16 @@
     width: 100%;
 }
 
-
 .custom-sidebar-item {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
 }
 
-
 .custom-sidebar-link {
     display: block;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1rem; /* Font boyutunu küçülttük */
     padding: 12px;
     border-radius: 5px;
     transition: 0.3s;
@@ -54,14 +49,12 @@
     background-color: rgba(0, 0, 0, 0.0);
     text-align: center;
     font-weight: bold;
-    width: 100%;
 }
 
     .custom-sidebar-link:hover {
         background-color: gray;
         color: gold;
     }
-
 
 .main-content {
     margin-left: 270px;

@@ -20,7 +20,7 @@ namespace DAL.ConcreteRepositories
 
         public List<Address> GetAddressByUserId(int? userId)
         {
-            var userAddresses = new List<Address>();    
+          
 
 
 

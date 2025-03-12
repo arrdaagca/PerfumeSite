@@ -20,7 +20,7 @@ namespace DAL.ConcreteRepositories
 
         public List<CreditCard> GetCreditCardByUserId(int? userId)
         {
-            var userCreditCards = new List<CreditCard>();   
+            
 
 
             var creditCards = _context.CreditCards.Where(c => c.UserId == userId).ToList();
