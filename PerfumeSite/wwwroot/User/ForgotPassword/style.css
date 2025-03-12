@@ -1,76 +1,55 @@
-﻿html, body {
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    font-family: 'Poppins', sans-serif;
+﻿body {
+    background-color: gray;
 }
 
-
 .reset-container {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    width: min(90%, 400px); 
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    color: gold;
     text-align: center;
-    backdrop-filter: blur(15px);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 450px;
+    margin:auto;
+    margin-top:100px;
 }
 
     .reset-container h1 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        font-weight: bold;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        text-align:center;
     }
 
-
 .form-floating input {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
     border: none;
-    padding: 10px;
-    width: 100%; 
-    border-radius: 5px;
-    transition: 0.3s ease-in-out;
+    color: red;
 }
 
 .form-floating label {
-    color: white;
+    color: gold;
 }
-
-.form-floating input:focus {
-    background: rgba(255, 255, 255, 0.3);
-    color: white;
-    border: none;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
 
 .btn-reset {
+    display: block;
     width: 100%;
-    background: linear-gradient(45deg, #ff7eb3, #ff4f8b);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: gold;
     border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 15px;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-top: 15px;
 }
 
     .btn-reset:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(255, 126, 179, 0.3);
+        background-color: gray;
+        color: white;
     }
 
-
 .footer-text {
+    margin-top: 20px;
     font-size: 0.9rem;
-    margin-top: 1rem;
-    opacity: 0.8;
+    color: white;
 }

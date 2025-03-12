@@ -1,19 +1,27 @@
-﻿body {
+﻿
+
+layoutbody {
     font-family: 'Montserrat', sans-serif;
-    background: url('https://source.unsplash.com/1600x900/?luxury,perfume') no-repeat center center/cover;
     color: #fff;
+    background-color:gray;
 }
 
 .navbar {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
+    height:60px;
 }
 
 .navbar-brand {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
     color: gold !important;
+    
+    transform: translateX(-40px); 
+
+
+    
 }
+
 
 .nav-link {
     color: white !important;

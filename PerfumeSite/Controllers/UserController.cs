@@ -129,7 +129,7 @@ namespace PerfumeSite.Controllers
 
             _emailService.SendResetPasswordEmail(user.Email, user.Id);
 
-            return View();
+            return RedirectToAction("Login");
 
         }
 
@@ -157,7 +157,7 @@ namespace PerfumeSite.Controllers
         {
 
             var user = _userService.GetById(id);
-            user.Password = BCrypt.Net.BCrypt.HashPassword(userViewModel.Password);
+            user.Password = userViewModel.Password;
 
             _userService.UpdatePasswordWithOutCheck(user);
             return RedirectToAction("Login");
