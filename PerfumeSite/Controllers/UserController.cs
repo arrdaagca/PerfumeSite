@@ -35,7 +35,7 @@ namespace PerfumeSite.Controllers
             if (loggedInUser == null)
             {
                 ModelState.AddModelError(string.Empty, "Yanlış email veya şifre. Ama hangisi söylemem");
-                return View("Login"); // Kullanıcıyı aynı görünüme geri döndürün
+                return View("Login"); 
             }
 
             HttpContext.Session.SetInt32("Id", loggedInUser.Id);
@@ -69,6 +69,9 @@ namespace PerfumeSite.Controllers
             return View();
         }
 
+
+
+
         [HttpPost]
         public IActionResult SignUp(UserViewModel userViewModel)
         {
@@ -79,6 +82,7 @@ namespace PerfumeSite.Controllers
 
             var getByEmail = _userService.GetByEmail(userViewModel.Email);
             var getByPhoneNumber = _userService.GetByPhoneNumber(userViewModel.PhoneNumber);
+            var getByUserName = _userService.GetByUserName(userViewModel.UserName);
             if (getByEmail != null)
             {
                 ModelState.AddModelError("Email", "Bu email adresi ile kayıtlı bir kullanıcı var.");
@@ -87,6 +91,11 @@ namespace PerfumeSite.Controllers
             else if (getByPhoneNumber != null)
             {
                 ModelState.AddModelError("PhoneNumber", "Bu telefon numarası ile kayıtlı bir kullanıcı var.");
+                return View(userViewModel);
+            }
+            else if (getByUserName != null)
+            {
+                ModelState.AddModelError("UserName", "Bu kullanıcı adı ile kayıtlı bir kullanıcı var.");
                 return View(userViewModel);
             }
 
@@ -157,11 +166,14 @@ namespace PerfumeSite.Controllers
         {
 
             var user = _userService.GetById(id);
+           
             user.Password = userViewModel.Password;
 
             _userService.UpdatePasswordWithOutCheck(user);
             return RedirectToAction("Login");
         }
+
+
         [HttpGet]
         public IActionResult MyAccount()
         {
@@ -211,12 +223,35 @@ namespace PerfumeSite.Controllers
         [HttpPost]
         public IActionResult UpdateUserProfile(UserProfileViewModel userProfileViewModel)
         {
+            var getByUserName = _userService.GetByUserName(userProfileViewModel.UserName);
+            var getByPhoneNumber = _userService.GetByPhoneNumber(userProfileViewModel.PhoneNumber);
+            var getByEmail = _userService.GetByEmail(userProfileViewModel.Email);
+
+            if (getByEmail != null)
+            {
+                TempData["ErrorMessage"] = "Bu email adresi ile kayıtlı bir kullanıcı var.";
+            }
+            else if (getByPhoneNumber != null)
+            {
+                TempData["ErrorMessage"] = "Bu telefon numarası ile kayıtlı bir kullanıcı var.";
+            }
+            else if (getByUserName != null)
+            {
+                TempData["ErrorMessage"] = "Bu kullanıcı adı ile kayıtlı bir kullanıcı var.";
+            }
+
+            if (TempData["ErrorMessage"] != null)
+            {
+                return RedirectToAction("GetUserProfile");
+            }
 
             _userService.UpdateUserProfile(_mapper.Map<UserProfileDto>(userProfileViewModel));
+            TempData["SuccessMessage"] = "Profiliniz başarıyla güncellendi.";
 
             return RedirectToAction("GetUserProfile");
-
         }
+
+
 
 
 

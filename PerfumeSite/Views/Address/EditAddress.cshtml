@@ -8,7 +8,7 @@
 }
 
 <link rel="stylesheet" href="~/Address/EditAddress/style.css">
-<link rel="stylesheet" href="~/MyAccount/style.css">
+<link rel="stylesheet" href="~/User/MyAccount/style.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -37,21 +37,21 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Country" class="form-label">Ülke</label>
-                        <input type="text" id="Country" name="Country" class="form-control" required placeholder="Ülkenizi girin">
+                        <input type="text" id="Country" name="Country" class="form-control" required asp-for="Country" placeholder="Ülkenizi girin">
                     </div>
                     <div class="mb-3">
                         <label for="City" class="form-label">Şehir</label>
-                        <input type="text" id="City" name="City" class="form-control" required placeholder="Şehrinizi girin">
+                        <input type="text" id="City" name="City" class="form-control" asp-for="City" required placeholder="Şehrinizi girin">
                     </div>
                     <div class="mb-3">
                         <label for="District" class="form-label">İlçe</label>
-                        <input type="text" id="District" name="District" class="form-control" required placeholder="İlçenizi girin">
+                        <input type="text" id="District" name="District" class="form-control" asp-for="District" required placeholder="İlçenizi girin">
                     </div>
 
             
                     <div class="mb-3 form-group">
                         <label for="Neighbourhood" class="form-label">Mahalle</label>
-                        <input type="text" id="Neighbourhood" name="Neighbourhood" class="form-control" required placeholder="Mahallenizi girin">
+                        <input type="text" id="Neighbourhood" name="Neighbourhood" class="form-control" asp-for="Neighbourhood" required placeholder="Mahallenizi girin">
                     </div>
                 </div>
 
@@ -59,15 +59,15 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Street" class="form-label">Sokak</label>
-                        <input type="text" id="Street" name="Street" class="form-control" required placeholder="Sokağınızı girin">
+                        <input type="text" id="Street" name="Street" class="form-control" asp-for="Street" required placeholder="Sokağınızı girin">
                     </div>
                     <div class="mb-3">
                         <label for="BuildingNumber" class="form-label">Bina No</label>
-                        <input type="text" id="BuildingNumber" name="BuildingNumber" class="form-control" required placeholder="Bina numaranızı girin">
+                        <input type="text" id="BuildingNumber" name="BuildingNumber" class="form-control" asp-for="BuildingNumber" required placeholder="Bina numaranızı girin">
                     </div>
                     <div class="mb-3">
                         <label for="DoorNumber" class="form-label">Daire No</label>
-                        <input type="text" id="DoorNumber" name="DoorNumber" class="form-control" required placeholder="Daire numaranızı girin">
+                        <input type="text" id="DoorNumber" name="DoorNumber" class="form-control" asp-for="DoorNumber" required placeholder="Daire numaranızı girin">
                     </div>
 
                    

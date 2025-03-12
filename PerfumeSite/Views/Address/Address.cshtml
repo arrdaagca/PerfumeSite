@@ -8,8 +8,7 @@
 }
 
 <link rel="stylesheet" href="~/Address/Address/style.css">
-<link rel="stylesheet" href="~/Address/Address/style.js">
-<link rel="stylesheet" href="~/MyAccount/style.css">
+<link rel="stylesheet" href="~/User/MyAccount/style.css">
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
@@ -29,6 +28,7 @@
             <a asp-controller="User" asp-action="AccountSettings" class="account-btn">
                 <i class="fas fa-user-cog"></i> Hesap Ayarlarım
             </a>
+           
         </div>
         <div class="col-md-9 offset-md-3">
             <h2 class="text-warning mb-4 text-center">Adres Bilgilerim</h2>
@@ -54,8 +54,14 @@
                                     <input hidden value="@address.Id" name="id" />
                                     <input hidden value="@userId" name="userId" />
                                 </form>
-
-                                
+                                <script>
+                                         function confirmDelete() {
+                                    if (confirm("Bu adresi silmek istediğinizden emin misiniz?")) {
+                                    document.getElementById("deleteForm").submit();
+                                    }
+                                    }
+                                </script>
+                               
                                 <form id="deleteForm" asp-controller="Address" asp-action="DeleteAddress" method="post">
                                     <button type="button" class="btn btn-danger" onclick="confirmDelete()">Sil</button>
                                     <input hidden value="@address.Id" name="id" />

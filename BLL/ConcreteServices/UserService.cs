@@ -119,5 +119,11 @@ namespace BLL.ConcreteServices
 
 
         }
+
+        public UserDto GetByUserName(string userName)
+        {
+            var getByUsername = _genericRepository.GetAll().FirstOrDefault(x => x.UserName == userName);
+            return _mapper.Map<UserDto>(getByUsername);
+        }
     }
 }
