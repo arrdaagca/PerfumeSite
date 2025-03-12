@@ -1,0 +1,68 @@
+﻿body{
+    background-color:gray;
+}
+.password-reset-container {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 40px;
+    width: 400px;
+    margin: auto;
+    margin-top: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+    /* Başlık */
+    .password-reset-container h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: gold;
+    }
+
+/* Giriş alanları */
+.password-input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+    .password-input-group label {
+        color: #fff;
+        font-size: 1rem;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .password-input-group input {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+/* Şifre sıfırlama butonu */
+.password-reset-button {
+    background: gold;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .password-reset-button:hover {
+        background: darkgoldenrod;
+        color: white;
+    }
+
+/* Footer */
+.password-reset-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 0.9rem;
+}

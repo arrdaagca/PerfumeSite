@@ -122,8 +122,8 @@ namespace PerfumeSite.Controllers
             var user = _userService.GetByEmail(email);
             if (user == null)
             {
-                // Kullanıcı bulunamadı durumu
-                return NotFound("Kullanıcı bulunamadı.");
+                ViewBag.ErrorMessage = "Kullanıcı bulunamadı.";
+                 return View("ForgotPassword");
 
             }
 
