@@ -1,12 +1,6 @@
 ﻿@{
-	
-    Layout = "_Layout"; 
+    Layout = "_Layout";
 }
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="tr">
@@ -16,46 +10,63 @@
     <title>Parfüm Kategorileri</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/User/Home/Index/style.css">
-
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
     <div class="container-fluid">
         <div class="row">
+            <aside class="custom-sidebar">
+                <div class="dropdown">
+                    <div class="custom-sidebar-title dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-list"></i>
+                        Tüm Kategoriler
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-male"></i> Erkek Parfümleri</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-female"></i> Kadın Parfümleri</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-genderless"></i> Unisex Parfümler</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-star"></i> En Çok Satanlar</a></li>
+                    </ul>
+                </div>
+            </aside>
 
-            <nav class="custom-sidebar">
-                <h2 class="custom-sidebar-title">Tüm Kategoriler</h2>
-                <ul class="custom-sidebar-list">
-                    <li class="custom-sidebar-item">
-                        <a href="#" class="custom-sidebar-link">
-                            <i class="fas fa-male"></i> Erkek Parfümleri
-                        </a>
-                    </li>
-                    <li class="custom-sidebar-item">
-                        <a href="#" class="custom-sidebar-link">
-                            <i class="fas fa-female"></i> Kadın Parfümleri
-                        </a>
-                    </li>
-                    <li class="custom-sidebar-item">
-                        <a href="#" class="custom-sidebar-link">
-                            <i class="fas fa-genderless"></i> Unisex Parfümler
-                        </a>
-                    </li>
-                    <li class="custom-sidebar-item">
-                        <a href="#" class="custom-sidebar-link">
-                            <i class="fas fa-star"></i> En Çok Satanlar
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-
-
-
-         
-
+            <main class="col-9" style="margin-top: 60px;">
+                <div class="container">
+                    <!-- Filtreler için üst alan -->
+                    <div class="row mb-3 filters justify-content-center">
+                        <div class="col-md-3">
+                            <label for="sort" class="form-label">Sırala</label>
+                            <select id="sort" class="form-select">
+                                <option value="default">Varsayılan</option>
+                                <option value="price_low_to_high">Fiyata Göre (Düşükten Yükseğe)</option>
+                                <option value="price_high_to_low">Fiyata Göre (Yüksekten Düşüğe)</option>
+                                <option value="popularity">Popülerliğe Göre</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="brand" class="form-label">Marka</label>
+                            <select id="brand" class="form-select">
+                                <option value="all">Tümü</option>
+                                <option value="brand1">Marka 1</option>
+                                <option value="brand2">Marka 2</option>
+                                <option value="brand3">Marka 3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="price" class="form-label">Fiyat</label>
+                            <select id="price" class="form-select">
+                                <option value="all">Tümü</option>
+                                <option value="0-50">0 - 50 TL</option>
+                                <option value="51-100">51 - 100 TL</option>
+                                <option value="101-200">101 - 200 TL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

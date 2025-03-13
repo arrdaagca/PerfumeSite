@@ -27,6 +27,9 @@
         <a asp-controller="User" asp-action="AccountSettings" class="account-btn">
             <i class="fas fa-user-cog"></i> Hesap Ayarlarım
         </a>
+        <a asp-controller="User" asp-action="Login" class="account-btn">
+            <i class="fa-solid fa-right-from-bracket"></i> Çıkış Yap
+        </a>
     </div>
 
     <div class="card-form-container">
@@ -36,8 +39,12 @@
 
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label  class="form-label">Kart Numarası</label>
-                        <input type="text" pattern="[0-9]*" inputmode="numeric" minlength="16" maxlength="16" name="CreditCardNumber" class="form-control" required asp-for="CreditCardNumber" placeholder="Kart Numarası girin">
+                        <label class="form-label">Kart Numarası</label>
+                        <input type="text" id="maskedCardNumber" class="form-control" placeholder="Kart Numarası girin"
+                               value="**** **** **** @Model.CreditCardNumber.Substring(12)" readonly>
+
+                        <input type="text" id="realCardNumber" pattern="[0-9]*" inputmode="numeric" minlength="16" maxlength="16"
+                               name="CreditCardNumber" class="form-control d-none" required asp-for="CreditCardNumber">
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Geçerlilik Tarihi</label>
@@ -59,3 +66,22 @@
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let maskedInput = document.getElementById("maskedCardNumber");
+        let realInput = document.getElementById("realCardNumber");
+
+        maskedInput.addEventListener("focus", function () {
+            maskedInput.classList.add("d-none"); 
+            realInput.classList.remove("d-none"); 
+            realInput.focus();
+        });
+
+        realInput.addEventListener("blur", function () {
+            if (realInput.value.trim() === "") {
+                realInput.classList.add("d-none"); 
+                maskedInput.classList.remove("d-none"); 
+            }
+        });
+    });
+</script>

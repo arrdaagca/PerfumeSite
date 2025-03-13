@@ -1,6 +1,8 @@
 ﻿body {
     background-color: gray !important;
     color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 .custom-sidebar {
@@ -18,46 +20,84 @@
 }
 
 .custom-sidebar-title {
-    color: white;
-    font-size: 1.6rem; /* Font boyutunu küçülttük */
+    color: black;
+    font-size: 1.1rem;
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: gray;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-menu {
+    display: none; /* Bootstrap ile uyumlu şekilde başlangıçta gizli */
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: gray; /* Daha az saydam bir arka plan */
+    min-width: 200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+    padding: 10px;
+    color: black;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Hover ile açılmasını sağla */
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.3s;
+}
+
+    .dropdown-menu a:hover {
+        background-color: gold;
+    }
+
+/* Yeni eklenen filtre alanları için stiller */
+.filters {
+   
+    text-align: center;
+    margin-top:-100px;
+    
     
 }
 
-.custom-sidebar-list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-}
-
-.custom-sidebar-item {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.custom-sidebar-link {
-    display: block;
-    color: white;
-    font-size: 1rem; /* Font boyutunu küçülttük */
-    padding: 12px;
-    border-radius: 5px;
-    transition: 0.3s;
-    text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.0);
-    text-align: center;
-    font-weight: bold;
-}
-
-    .custom-sidebar-link:hover {
-        background-color: gray;
-        color: gold;
+    .filters label {
+        color: black; /* Label metin rengi */
+        font-weight: bold; /* Kalın metin */
     }
 
-.main-content {
-    margin-left: 270px;
-    padding: 20px;
-    flex-grow: 1;
+    .filters select {
+        width: 100%; /* Seçim kutusunun genişliği */
+        padding: 10px; /* İç boşluk */
+        border-radius: 5px; /* Köşe yuvarlama */
+        border: 1px solid black; /* Kenar rengi */
+        color: black; /* Metin rengi */
+        margin-bottom: 10px; /* Alt boşluk */
+        font-size:1.0rem;
+        background-color:gray;
+    }
+
+        .filters select:hover {
+            border-color: white; /* Hover'da kenar rengi değişimi */
+        }
+       .form-select{
+           margin-left:270px;
+           text-align:center;
+       }
+.form-label {
+    margin-left: 330px;
 }
