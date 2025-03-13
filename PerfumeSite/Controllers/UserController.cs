@@ -6,6 +6,7 @@ using PerfumeSite.UserViewModels;
 using System.Net.Mail;
 using System.Net;
 using BLL.ConcreteServices;
+using BCrypt.Net;
 
 namespace PerfumeSite.Controllers
 {
@@ -226,27 +227,29 @@ namespace PerfumeSite.Controllers
             var getByUserName = _userService.GetByUserName(userProfileViewModel.UserName);
             var getByPhoneNumber = _userService.GetByPhoneNumber(userProfileViewModel.PhoneNumber);
             var getByEmail = _userService.GetByEmail(userProfileViewModel.Email);
+            var userId = HttpContext.Session.GetInt32("Id");
 
-            if (getByEmail != null)
+                 
+            
+            if (getByEmail != null && getByEmail.Id != userId)
             {
+
                 TempData["ErrorMessage"] = "Bu email adresi ile kayıtlı bir kullanıcı var.";
-            }
-            else if (getByPhoneNumber != null)
+                return RedirectToAction("GetUserProfile");
+            }            
+            else if (getByPhoneNumber != null && getByPhoneNumber.Id != userId)
             {
                 TempData["ErrorMessage"] = "Bu telefon numarası ile kayıtlı bir kullanıcı var.";
-            }
-            else if (getByUserName != null)
-            {
-                TempData["ErrorMessage"] = "Bu kullanıcı adı ile kayıtlı bir kullanıcı var.";
-            }
-
-            if (TempData["ErrorMessage"] != null)
-            {
                 return RedirectToAction("GetUserProfile");
             }
-
+            else if (getByUserName != null && getByUserName.Id != userId)
+            {
+                TempData["ErrorMessage"] = "Bu kullanıcı adı ile kayıtlı bir kullanıcı var.";
+                return RedirectToAction("GetUserProfile");
+            }
+            
             _userService.UpdateUserProfile(_mapper.Map<UserProfileDto>(userProfileViewModel));
-            TempData["SuccessMessage"] = "Profiliniz başarıyla güncellendi.";
+            TempData["SuccessMessage"] = "Profil başarıyla güncellendi.";
 
             return RedirectToAction("GetUserProfile");
         }
@@ -259,33 +262,63 @@ namespace PerfumeSite.Controllers
         public IActionResult UpdatePasswordWithCheck(UserUpdatePasswordViewModel userUpdatePasswordViewModel)
         {
 
+            if (!ModelState.IsValid)
+            {
+                // Hataları TempData'ya ekleyerek geri gönder
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        TempData["ErrorMessage"] += error.ErrorMessage + " ";
+                    }
+                }
+                return RedirectToAction("GetUserProfile");
+            }
 
 
-            var user = _userService.GetLoggedInUser(HttpContext.Session.GetInt32("Id"));
+
+
+            var userId = HttpContext.Session.GetInt32("Id");
+            
+
+            var user = _userService.GetLoggedInUser(userId.Value);
+
+           
+            if (userUpdatePasswordViewModel.NewPassword != userUpdatePasswordViewModel.ConfirmNewPassword)
+            {
+                TempData["ErrorMessage"] = "Yeni şifreler eşleşmiyor.";
+                return RedirectToAction("GetUserProfile");
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(userUpdatePasswordViewModel.Password, user.Password))
+            {
+                TempData["ErrorMessage"] = "Mevcut şifre doğru değil.";
+                return RedirectToAction("GetUserProfile");
+            }
 
             var updatePasswordDto = new UserUpdatePasswordDto
             {
                 Id = user.Id,
                 NewPassword = userUpdatePasswordViewModel.NewPassword
             };
+            _userService.UpdatePasswordWithCheck(updatePasswordDto);
 
-
-           
-
-
-              _userService.UpdatePasswordWithCheck(updatePasswordDto);
-
+            TempData["SuccessMessage"] = "Şifre başarıyla güncellendi.";
             return RedirectToAction("Login");
-           
-            
-
-
-
-
-            
-
         }
-       
+
+
+
+
+
+
+
+
+
+
 
     }
+
+
 }
+

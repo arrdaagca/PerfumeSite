@@ -4,13 +4,7 @@
 @{
     var userProfile = Model.Item1;
     var userPasswordUpdate = Model.Item2;
-}
-
-@{
     var userId = Context.Session.GetInt32("Id");
-}
-
-@{
     Layout = "_Layout";
 }
 
@@ -37,12 +31,11 @@
 
         <div class="col-md-9 offset-md-3">
             <div class="row">
-
+                <!-- Üyelik Bilgileri Kartı -->
                 <div class="col-md-6">
                     <div class="card p-4">
                         <h4>Üyelik Bilgileri</h4>
                         <hr>
-
                         @if (TempData["ErrorMessage"] != null)
                         {
                             <div id="errorAlert" class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
@@ -50,7 +43,6 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
                             </div>
                         }
-
                         @if (TempData["SuccessMessage"] != null)
                         {
                             <div id="successAlert" class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
@@ -59,26 +51,29 @@
                             </div>
                         }
 
-
                         <form asp-controller="User" asp-action="UpdateUserProfile" method="post">
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="Email" class="form-control" required asp-for="@userProfile.Email">
+                                <span asp-validation-for="@userProfile.Email" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Kullanıcı Adı</label>
                                 <input type="text" name="UserName" class="form-control" required asp-for="@userProfile.UserName">
+                                <span asp-validation-for="@userProfile.UserName" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Telefon Numarası</label>
                                 <input type="text" name="PhoneNumber" class="form-control" required asp-for="@userProfile.PhoneNumber">
+                                <span asp-validation-for="@userProfile.PhoneNumber" class="text-danger"></span>
                             </div>
                             <button type="submit" class="guncelle">Güncelle</button>
-                            <input hidden value="@userId" name="id" />
+                            <input type="hidden" value="@userId" name="id" />
                         </form>
                     </div>
                 </div>
 
+                <!-- Şifre Değiştir Kartı -->
                 <div class="col-md-6">
                     <div class="card p-4">
                         <h4>Şifre Değiştir</h4>
@@ -87,17 +82,20 @@
                             <div class="mb-3">
                                 <label class="form-label">Mevcut Şifre</label>
                                 <input type="password" name="Password" class="form-control" asp-for="@userPasswordUpdate.Password">
+                                <span asp-validation-for="@userPasswordUpdate.Password" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Yeni Şifre</label>
                                 <input type="password" name="NewPassword" class="form-control" asp-for="@userPasswordUpdate.NewPassword">
+                                <span asp-validation-for="@userPasswordUpdate.NewPassword" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Yeni Şifre (Tekrar)</label>
                                 <input type="password" name="ConfirmNewPassword" class="form-control" asp-for="@userPasswordUpdate.ConfirmNewPassword">
+                                <span asp-validation-for="@userPasswordUpdate.ConfirmNewPassword" class="text-danger"></span>
                             </div>
                             <button type="submit" class="guncelle">Şifreyi Güncelle</button>
-                            <input hidden value="@userId" name="id" />
+                            <input type="hidden" value="@userId" name="id" />
                         </form>
                     </div>
                 </div>
@@ -105,19 +103,13 @@
         </div>
     </div>
 </div>
+
 <script>
     setTimeout(function() {
-        let errorAlert = document.getElementById("errorAlert");
-        let successAlert = document.getElementById("successAlert");
-
-        if (errorAlert) {
-            errorAlert.style.opacity = "0";
-            setTimeout(() => errorAlert.remove(), 500);
-        }
-
-        if (successAlert) {
-            successAlert.style.opacity = "0";
-            setTimeout(() => successAlert.remove(), 500);
-        }
+        // Tüm custom-alert sınıflı alertleri seçiyoruz
+        document.querySelectorAll(".custom-alert").forEach(alert => {
+            alert.style.opacity = "0";
+            setTimeout(() => alert.remove(), 500);
+        });
     }, 3000); // 3 saniye sonra kapanacak
 </script>
