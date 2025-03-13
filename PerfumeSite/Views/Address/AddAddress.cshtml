@@ -39,36 +39,36 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Country" class="form-label">Ülke</label>
-                        <input type="text" id="Country" name="Country" class="form-control"  placeholder="Ülkenizi girin">
+                        <input type="text" pattern="[A-Za-zğüşıöçĞÜŞİÖÇ]*" inputmode="text" name="Country" maxlength="10" class="form-control" placeholder="Ülkenizi girin">
                     </div>
                     <div class="mb-3">
                         <label for="City" class="form-label">Şehir</label>
-                        <input type="text" id="City" name="City" class="form-control" required placeholder="Şehrinizi girin">
+                        <input type="text" pattern="[A-Za-zğüşıöçĞÜŞİÖÇ]*" inputmode="text" name="City" maxlength="10" class="form-control" required placeholder="Şehrinizi girin">
                     </div>
                     <div class="mb-3">
                         <label for="District" class="form-label">İlçe</label>
-                        <input type="text" id="District" name="District" class="form-control" required placeholder="İlçenizi girin">
+                        <input type="text" pattern="[A-Za-zğüşıöçĞÜŞİÖÇ]*" inputmode="text" name="District" maxlength="10" class="form-control" required placeholder="İlçenizi girin">
                     </div>
 
                    
                     <div class="mb-3 form-group">
                         <label for="Neighbourhood" class="form-label">Mahalle</label>
-                        <input type="text" id="Neighbourhood" name="Neighbourhood" class="form-control" required placeholder="Mahallenizi girin">
+                        <input type="text"  name="Neighbourhood" maxlength="20" class="form-control" required placeholder="Mahallenizi girin">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Street" class="form-label">Sokak</label>
-                        <input type="text" id="Street" name="Street" class="form-control" required placeholder="Sokağınızı girin">
+                        <input type="text"  name="Street" maxlength="20" class="form-control" required placeholder="Sokağınızı girin">
                     </div>
                     <div class="mb-3">
                         <label for="BuildingNumber" class="form-label">Bina No</label>
-                        <input type="text" id="BuildingNumber" name="BuildingNumber" class="form-control" required placeholder="Bina numaranızı girin">
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" name="BuildingNumber" class="form-control" required placeholder="Bina numaranızı girin">
                     </div>
                     <div class="mb-3">
                         <label for="DoorNumber" class="form-label">Daire No</label>
-                        <input type="text" id="DoorNumber" name="DoorNumber" class="form-control" required placeholder="Daire numaranızı girin">
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" name="DoorNumber" class="form-control" required placeholder="Daire numaranızı girin">
                     </div>
 
                     

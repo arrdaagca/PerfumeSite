@@ -16,7 +16,6 @@ namespace BLL.AbstractServices
         
         UserDto GetByEmail(string email);
         UserDto GetByUserName(string userName);
-        UserDto GetByPassword(string password);
         UserDto GetById(int id);
         UserDto GetLoggedInUser(int? userId);
         void UpdatePasswordWithOutCheck(UserDto userDto);

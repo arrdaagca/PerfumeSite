@@ -145,13 +145,11 @@ namespace PerfumeSite.Controllers
 
 
         [HttpGet]
-        public IActionResult ResetPassword(int id)
+        public IActionResult ResetPassword()
         {
 
 
-
-            ViewBag.id = id;
-
+            
 
 
 
@@ -161,18 +159,24 @@ namespace PerfumeSite.Controllers
 
 
 
-
         [HttpPost]
         public IActionResult UpdatePasswordWithoutCheck(int id, UserViewModel userViewModel)
         {
+            if (string.IsNullOrWhiteSpace(userViewModel.Password) || userViewModel.Password.Length < 8 ||
+          !System.Text.RegularExpressions.Regex.IsMatch(userViewModel.Password, @"(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])"))
+            {
+                TempData["ErrorMessage"] = "Şifre en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir.";
+                return RedirectToAction("ResetPassword");
+            }
 
-            var user = _userService.GetById(id);
+            var user = _userService.GetById(userViewModel.Id);
            
             user.Password = userViewModel.Password;
-
             _userService.UpdatePasswordWithOutCheck(user);
+
             return RedirectToAction("Login");
         }
+
 
 
         [HttpGet]

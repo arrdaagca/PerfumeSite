@@ -36,16 +36,16 @@
 
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="Country" class="form-label">Kart Numarası</label>
-                        <input type="text" id="Country" name="CreditCardNumber" class="form-control" required asp-for="CreditCardNumber" placeholder="Kart Numarası girin">
+                        <label  class="form-label">Kart Numarası</label>
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" minlength="16" maxlength="16" name="CreditCardNumber" class="form-control" required asp-for="CreditCardNumber" placeholder="Kart Numarası girin">
                     </div>
                     <div class="mb-3">
-                        <label for="City" class="form-label">Geçerlilik Tarihi</label>
-                        <input type="text" id="City" name="CreditCardValidityDate" class="form-control" required asp-for="CreditCardValidityDate" placeholder="Geçerlilik Tarihi girin">
+                        <label  class="form-label">Geçerlilik Tarihi</label>
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" minlength="4" maxlength="4" name="CreditCardValidityDate" class="form-control" required asp-for="CreditCardValidityDate" placeholder="Geçerlilik Tarihi girin">
                     </div>
                     <div class="mb-3">
-                        <label for="District" class="form-label">CVV</label>
-                        <input type="text" id="District" name="CreditCardVerificationCode" class="form-control" required asp-for="CreditCardVerificationCode" placeholder="CVV girin">
+                        <label  class="form-label">CVV</label>
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" minlength="3" maxlength="3" name="CreditCardVerificationCode" class="form-control" required asp-for="CreditCardVerificationCode" placeholder="CVV girin">
                     </div>
 
 

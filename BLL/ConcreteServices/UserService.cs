@@ -126,10 +126,6 @@ namespace BLL.ConcreteServices
             return _mapper.Map<UserDto>(getByUsername);
         }
 
-        public UserDto GetByPassword(string password)
-        {
-           var userPassword = _genericRepository.GetAll().FirstOrDefault(x => x.Password == password);
-            return _mapper.Map<UserDto>(userPassword);
-        }
+        
     }
 }
