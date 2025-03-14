@@ -1,0 +1,23 @@
+﻿@model AddCategoryViewModel
+
+
+
+
+
+
+@{
+    Layout = "_AdminLayout"; // Admin panelinin genel şablonunu kullan
+}
+
+<div class="container mt-4">
+    <h2>Yeni Kategori Ekle</h2>
+
+    <form asp-controller="Category" asp-action="AddCategory" method="post">
+        <div class="mb-3">
+            <label for="categoryName" class="form-label">Kategori Adı</label>
+            <input type="text" class="form-control" asp-for="Name" name="Name" required>
+        </div>
+        <button type="submit" class="btn btn-success">Ekle</button>
+        <a asp-controller="Admin" asp-action="GetProducts" class="btn btn-secondary">Geri Dön</a>
+    </form>
+</div>

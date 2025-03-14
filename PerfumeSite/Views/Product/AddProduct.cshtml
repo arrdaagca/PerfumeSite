@@ -1,0 +1,66 @@
+﻿@using PerfumeSite.ProductViewModels
+@model AddProductViewModel
+
+
+@{
+    Layout = "_AdminLayout"; // Admin paneli için genel şablonu kullan
+}
+
+<div class="container mt-4">
+    <h2>Yeni Ürün Ekle</h2>
+
+    <form asp-controller="Product" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Ürün Adı</label>
+            <input type="text" class="form-control" asp-for="Name" name="Name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="productPrice" class="form-label">Fiyat</label>
+            <input type="number" step="0.01" class="form-control" asp-for="Price" name="Price" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="productDescription" class="form-label">Açıklama</label>
+            <textarea class="form-control" asp-for="Description" name="Description" rows="3" required></textarea>
+        </div>
+">
+            ...
+            <div class="mb-3">
+                <label class="form-label">Ürün Resmi</label>
+                <input type="file" class="form-control" asp-for="Image" name="ImageFile" accept="image/*" required>
+            </div>
+            ...
+
+
+
+        <select asp-for="BrandId" class="form-select" required>
+            <option value="">Marka Seçiniz</option>
+            @if (ViewBag.Brands != null)
+            {
+                foreach (var brand in ViewBag.Brands)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+            }
+        </select>
+
+        <div class="mb-3">
+            <label for="categorySelect" class="form-label">Kategori</label>
+            <select class="form-select" asp-for="CategoryId" name="CategoryId" required>
+                <option value="">Kategori Seçiniz</option>
+                @if (ViewBag.Categories != null)
+                {
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option  value="@category.Id">@category.Name</option>
+                    }
+                }
+              
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Ürünü Ekle</button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">Geri Dön</a>
+    </form>
+</div>

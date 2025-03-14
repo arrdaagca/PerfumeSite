@@ -3,6 +3,7 @@ using BLL.AllDtos;
 using DAL.Entities;
 using PerfumeSite.AddressViewModels;
 using PerfumeSite.CreditCardViewModels;
+using PerfumeSite.ProductViewModels;
 using PerfumeSite.UserViewModels;
 
 namespace PerfumeSite.MappingForMvc
@@ -27,6 +28,14 @@ namespace PerfumeSite.MappingForMvc
 
             CreateMap<AddCreditCardDto, AddCreditCardViewModel>().ReverseMap();
             CreateMap<CreditCardDto, CreditCardViewModel>().ReverseMap();
+
+
+            CreateMap<AddProductDto, AddProductViewModel>().ReverseMap();
+
+
+            CreateMap<CategoryDto, AddCategoryViewModel>().ReverseMap();
+            CreateMap<BrandDto, AddBrandViewModel>().ReverseMap();
+
 
 
 

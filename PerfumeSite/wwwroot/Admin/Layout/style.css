@@ -1,77 +1,78 @@
 ﻿body {
-    background-color: #f8f9fa;
-    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: gray !important;
 }
 
 .navbar {
-    background-color: #343a40;
+    z-index: 1030; /* Navbar'ın diğer öğelerin üzerinde görünmesi için */
+    background: rgba(0, 0, 0, 0.6); /* Navbar arka plan rengi */
+    color: white; /* Navbar metin rengi */
+    padding: 10px; /* Navbar içi boşluk */
 }
 
-.navbar-brand {
-    color: white !important;
-    font-weight: bold;
-}
-
-.nav-link {
-    color: white !important;
-    transition: 0.3s;
-}
-
-    .nav-link:hover {
-        color: #ff758c !important;
-    }
-
-/* Sol Panel */
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    background: #343a40;
     position: fixed;
-    top: 0;
     left: 0;
-    padding-top: 60px;
+    top: 56px; /* Navbar'ın altında */
+    width: 60px; /* Dar kenar genişliği */
+    height: calc(100vh - 50px); /* Tam yükseklik, navbar hariç */
+    background: rgba(0, 0, 0, 0.6); /* Sidebar arka plan rengi */
+    overflow: hidden; /* Taşma durumunu gizle */
+    display: flex;
+    flex-direction: column; /* Dikey hizalama */
+    padding-top: 20px; /* Üstten boşluk */
+    transition: width 0.3s ease; /* Genişleme geçişi */
 }
+
+    .sidebar:hover {
+        width: 250px; /* Genişletildiğinde */
+    }
 
     .sidebar a {
-        padding: 15px 25px;
-        display: block;
-        font-size: 16px;
-        color: white;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-decoration: none; /* Alt çizgi olmaması için */
+        color: white; /* Metin rengi */
+        width: 100%; /* Genişlik */
+        padding: 15px; /* İç boşluk */
+        display: flex; /* Flex düzen */
+        align-items: center; /* Dikey hizalama */
+        white-space: nowrap; /* Tek satırda tut */
+        transition: background-color 0.3s; /* Arka plan rengi geçişi */
     }
 
-        .sidebar a:hover {
-            background: #495057;
+        /* Başlangıçta isimleri gizle */
+        .sidebar a span {
+            display: none; /* İsimler gizlenir */
+            margin-left: 10px; /* İkon ile metin arasında boşluk */
         }
 
-    .sidebar i {
-        margin-right: 10px;
+        .sidebar a i {
+            font-size: 20px; /* İkon boyutu */
+            margin-right: 10px; /* İkon ile metin arasında boşluk */
+        }
+
+    .sidebar:hover a span {
+        display: inline; /* Sidebar açıldığında isimler görünür */
+    }
+
+    /* Sidebar açıldığında ikonlar ve isimler birlikte görünür */
+    .sidebar:hover {
+        width: 250px; /* Genişletildiğinde */
+    }
+
+    .sidebar a:hover {
+        background-color: #495057; /* Hover efekti */
     }
 
 .content {
-    margin-left: 250px;
-    padding: 20px;
+    margin-left: 60px; /* Sidebar genişliği kadar soldan marj */
+    padding: 20px; /* İçerik alanı içi boşluk */
+    width: calc(100% - 60px); /* Sidebar genişliği çıkartılarak içerik genişliği */
+    padding-top: 60px; /* Navbar için üst boşluk */
 }
 
-
-.icon-container {
-    position: relative;
-    margin-right: 20px;
-}
-
-    .icon-container i {
-        font-size: 20px;
-    }
-
-
-.badge {
-    position: absolute;
-    top: -5px;
-    right: -8px;
-    background: red;
-    color: white;
-    font-size: 10px; 
-    border-radius: 50%;
-    padding: 3px 5px;
+/* Genişletilmiş kenar için içerik marjını ayarlama */
+.sidebar:hover + .content {
+    margin-left: 250px; /* Genişletildiğinde */
+    width: calc(100% - 250px); /* Genişletildiğinde */
 }

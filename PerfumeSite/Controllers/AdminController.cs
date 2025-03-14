@@ -23,6 +23,12 @@ namespace PerfumeSite.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult GetProducts()
+        {
+            return View();
+        }
+
 
 
 

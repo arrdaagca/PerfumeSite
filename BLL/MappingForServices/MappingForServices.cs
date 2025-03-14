@@ -24,6 +24,17 @@ namespace BLL.MappingForServices
 
 
 
+            CreateMap<Category, CategoryDto>().ReverseMap();
+
+
+            CreateMap<Product, AddProductDto>().ReverseMap();
+
+
+            CreateMap<Brand, BrandDto>().ReverseMap();
+
+
+
+
 
 
 
