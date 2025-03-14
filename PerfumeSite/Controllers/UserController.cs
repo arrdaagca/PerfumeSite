@@ -7,6 +7,8 @@ using System.Net.Mail;
 using System.Net;
 using BLL.ConcreteServices;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace PerfumeSite.Controllers
 {
@@ -26,8 +28,15 @@ namespace PerfumeSite.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+
+            HttpContext.Session.Clear(); 
+
             return View();
+
         }
+
+
+        
 
         [HttpPost]
         public IActionResult Login(UserLoginViewModel userLoginViewModel)
@@ -35,9 +44,10 @@ namespace PerfumeSite.Controllers
             var loggedInUser = _userService.Login(_mapper.Map<UserLoginDto>(userLoginViewModel));
             if (loggedInUser == null)
             {
-                ModelState.AddModelError(string.Empty, "Yanlış email veya şifre. Ama hangisi söylemem");
+                ModelState.AddModelError(string.Empty, "Yanlış email veya şifre.");
                 return View("Login"); 
             }
+           
 
             HttpContext.Session.SetInt32("Id", loggedInUser.Id);
 

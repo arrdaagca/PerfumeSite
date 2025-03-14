@@ -1,103 +1,56 @@
 ﻿body {
-    background-color: gray !important;
-    color: white;
     margin: 0;
-    font-family: Arial, sans-serif;
+    padding: 0;
+    background-color:gray;
 }
 
-.custom-sidebar {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    height: 100vh;
+.sidebar {
     position: fixed;
-    width: 250px;
-    top: 0;
     left: 0;
-    margin-top: 60px;
+    top: 60px;
+    width: 60px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    transition: width 0.3s;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 60px;
 }
 
-.custom-sidebar-title {
-    color: black;
-    font-size: 1.1rem;
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: gray;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    width: 100%;
-}
-
-.dropdown-menu {
-    display: none; /* Bootstrap ile uyumlu şekilde başlangıçta gizli */
-    position: absolute;
-    left: 0;
-    top: 100%;
-    background-color: gray; /* Daha az saydam bir arka plan */
-    min-width: 200px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    z-index: 1000;
-    padding: 10px;
-    color: black;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block; /* Hover ile açılmasını sağla */
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: black;
-    transition: background-color 0.3s;
-}
-
-    .dropdown-menu a:hover {
-        background-color: gold;
+    .sidebar:hover {
+        width: 250px;
     }
 
-/* Yeni eklenen filtre alanları için stiller */
-.filters {
-   
-    text-align: center;
-    margin-top:-100px;
-    
-    
-}
-
-    .filters label {
-        color: black; /* Label metin rengi */
-        font-weight: bold; /* Kalın metin */
+    .sidebar a {
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        opacity: 1;
     }
 
-    .filters select {
-        width: 100%; /* Seçim kutusunun genişliği */
-        padding: 10px; /* İç boşluk */
-        border-radius: 5px; /* Köşe yuvarlama */
-        border: 1px solid black; /* Kenar rengi */
-        color: black; /* Metin rengi */
-        margin-bottom: 10px; /* Alt boşluk */
-        font-size:1.0rem;
-        background-color:gray;
-    }
-
-        .filters select:hover {
-            border-color: white; /* Hover'da kenar rengi değişimi */
+        .sidebar a i {
+            font-size: 20px;
+            margin-right: 10px;
         }
-       .form-select{
-           margin-left:270px;
-           text-align:center;
-       }
-.form-label {
-    margin-left: 330px;
+
+    .sidebar span {
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .sidebar:hover span {
+        opacity: 1;
+    }
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    padding-top: 60px;
 }

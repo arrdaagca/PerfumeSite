@@ -12,6 +12,12 @@ layoutbody {
     height:60px;
 }
 
+
+.search-bar {
+    position: relative;
+    left: 150px;
+}
+
 .navbar-brand {
     font-family: 'Playfair Display', serif;
     color: gold !important;
@@ -25,6 +31,9 @@ layoutbody {
 
 .nav-link {
     color: white !important;
+    position: relative;
+    left:100px;
+    
 }
 
 .search-bar {
