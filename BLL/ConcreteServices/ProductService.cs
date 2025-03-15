@@ -39,5 +39,21 @@ namespace BLL.ConcreteServices
             var products = _mapper.Map<List<ProductDto>>(getAllProducts);
             return products;
         }
+
+        public ProductDto GetById(int id)
+        {
+            var getProductById = _genericRepository.GetById(id);
+            return _mapper.Map<ProductDto>(getProductById);
+        }
+
+        public void UpdateProduct(ProductDto productDto)
+        {
+            var updateProduct = _genericRepository.GetById(productDto.Id);
+
+            _mapper.Map(productDto, updateProduct);
+
+            _genericRepository.Update(updateProduct);
+
+        }
     }
 }

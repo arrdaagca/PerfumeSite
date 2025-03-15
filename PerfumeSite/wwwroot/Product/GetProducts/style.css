@@ -1,0 +1,72 @@
+﻿/* Genel stil ayarları */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Açık gri arka plan */
+}
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+}
+
+/* Başlık stili */
+h2 {
+    color: #343a40; /* Koyu gri başlık */
+    margin-bottom: 20px;
+}
+
+/* Tablo stili */
+.table {
+    background-color: #fff; /* Beyaz arka plan */
+    border-radius: 0.5rem; /* Kenar yuvarlama */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}
+
+    .table th, .table td {
+        vertical-align: middle; /* Hücre içeriği ortalama */
+    }
+
+/* Görsel stili */
+.product-image {
+    width: 100px;
+    height: auto; /* Görselin oranını koruma */
+    border-radius: 0.5rem; /* Kenar yuvarlama */
+}
+
+/* Butonlar için stil */
+.btn {
+    transition: background-color 0.3s, color 0.3s; /* Geçiş efekti */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Mavi buton hover rengi */
+}
+
+.btn-success:hover {
+    background-color: #28a745; /* Yeşil buton hover rengi */
+}
+
+.btn-info:hover {
+    background-color: #17a2b8; /* Mavi yeşil buton hover rengi */
+}
+
+.btn-warning:hover {
+    background-color: #e0a800; /* Sarı buton hover rengi */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Kırmızı buton hover rengi */
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.8em; /* Mobil için tablo yazı boyutunu küçült */
+    }
+
+    .btn {
+        width: 100%; /* Butonları tam genişlik yap */
+        margin-bottom: 10px; /* Butonlar arasında boşluk bırak */
+    }
+}

@@ -1,0 +1,70 @@
+﻿@using PerfumeSite.ProductViewModels
+@model ProductViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="address-page">
+    <div class="address-form-container">
+        <h2>Ürün Güncelle</h2>
+        <form asp-controller="Product" asp-action="UpdateProduct" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Ürün Adı</label>
+                        <input type="text" name="name" class="form-control" asp-for="Name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fiyat</label>
+                        <input type="number" step="0.01" name="price" class="form-control" asp-for="Price" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Açıklama</label>
+                        <input name="description" class="form-control" asp-for="Description" required></input>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Görsel (Yeni) Yükle</label>
+                        <input type="file" class="form-control" asp-for="Image" name="image" accept="image/*" required>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Marka</label>
+                        <select asp-for="BrandId" class="form-select" required>
+                            <option value="">Marka Seçiniz</option>
+                            @if (ViewBag.Brands != null)
+                            {
+                                foreach (var brand in ViewBag.Brands)
+                                {
+                                    <option value="@brand.Id">@brand.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kategori</label>
+                        <select class="form-select" asp-for="CategoryId" name="CategoryId" required>
+                            <option value="">Kategori Seçiniz</option>
+                            @if (ViewBag.Categories != null)
+                            {
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="btn-container">
+                        <button type="submit" id="btn" class="btn btn-primary">Güncelle</button>
+                        <input type="hidden" value="@Model.Id" name="id" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

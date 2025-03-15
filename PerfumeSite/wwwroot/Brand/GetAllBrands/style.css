@@ -1,0 +1,66 @@
+﻿/* Genel stil ayarları */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Açık gri arka plan */
+}
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Başlık stili */
+h2 {
+    color: #343a40; /* Koyu gri başlık */
+    margin-bottom: 20px;
+}
+
+/* Buton stili */
+.btn-custom {
+    background-color: #28a745; /* Yeşil arka plan */
+    color: #fff; /* Beyaz metin */
+    border: none; /* Kenar yok */
+    transition: background-color 0.3s; /* Geçiş efekti */
+}
+
+    .btn-custom:hover {
+        background-color: #218838; /* Koyu yeşil hover rengi */
+    }
+
+/* Tablo stili */
+.custom-table {
+    background-color: #fff; /* Beyaz arka plan */
+    border-radius: 0.5rem; /* Kenar yuvarlama */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}
+
+    .custom-table th, .custom-table td {
+        vertical-align: middle; /* Hücre içeriği ortalama */
+    }
+
+/* Başlık arka planı */
+.thead-custom {
+    background-color: #343a40; /* Koyu gri arka plan */
+    color: #fff; /* Beyaz metin */
+}
+
+/* Butonlar için hover efektleri */
+.btn-warning:hover {
+    background-color: #e0a800; /* Sarı buton hover rengi */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Kırmızı buton hover rengi */
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    .custom-table {
+        font-size: 0.8em; /* Mobil için tablo yazı boyutunu küçült */
+    }
+
+    .btn {
+        width: 100%; /* Butonları tam genişlik yap */
+        margin-bottom: 10px; /* Butonlar arasında boşluk bırak */
+    }
+}

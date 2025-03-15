@@ -4,10 +4,12 @@
     Layout = "_AdminLayout";
 }
 
-<div class="container mt-4">
-    <h2>Ürün Listesi</h2>
+<link rel="stylesheet" href="~/Product/GetProducts/style.css" /> 
 
-    <div class="d-flex gap-2 mb-3">
+<div class="container mt-4">
+    <h2 class="text-center">Ürün Listesi</h2>
+
+    <div class="d-flex gap-2 mb-3 justify-content-center">
         <form asp-controller="Product" asp-action="AddProduct" method="get">
             <button class="btn btn-primary">Yeni Ürün Ekle</button>
         </form>
@@ -21,8 +23,8 @@
         </form>
     </div>
 
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Ürün Adı</th>
@@ -44,19 +46,20 @@
                     <td>@item.Price</td>
                     <td>@item.Description</td>
                     <td>
-                        <img src="@item.Image" alt="@item.Name" style="width: 100px; height: auto;" />
+                        <img src="@item.Image" alt="@item.Name" class="product-image" />
                     </td>
                     <td>@item.BrandId</td>
                     <td>@item.CategoryId</td>
                     <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
                     <td>
-                        
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateProductModal">Güncelle</button>
+                        <form asp-controller="Product" asp-action="UpdateProduct" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-warning">Güncelle</button>
+                            <input type="hidden" value="@item.Id" name="id" />
+                        </form>
 
-                        <form asp-controller="Product" asp-action="DeleteProduct" method="post">
+                        <form asp-controller="Product" asp-action="DeleteProduct" method="post" style="display: inline;">
                             <button type="submit" class="btn btn-danger">Sil</button>
-                            <input hidden value="@item.Id" name="id" />
-                          
+                            <input type="hidden" value="@item.Id" name="id" />
                         </form>
                     </td>
                 </tr>

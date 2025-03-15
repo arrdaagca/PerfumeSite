@@ -33,5 +33,15 @@ namespace PerfumeSite.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult GetAllBrands()
+        {
+
+            var allBrands = _brandService.GetAllBrands();
+
+            return View(_mapper.Map<List<AddBrandViewModel>>(allBrands));
+        }
+
+
     }
 }
