@@ -1,66 +1,86 @@
-﻿/* Genel stil ayarları */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Açık gri arka plan */
+﻿.brand-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.container {
-    margin-top: 20px;
+.brand-title {
+    text-align: center;
+    font-size: 35px;
+    color: gold;
     margin-bottom: 20px;
+
 }
 
-/* Başlık stili */
-h2 {
-    color: #343a40; /* Koyu gri başlık */
+.brand-actions {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
+    color:black;
+    
 }
 
-/* Buton stili */
-.btn-custom {
-    background-color: #28a745; /* Yeşil arka plan */
-    color: #fff; /* Beyaz metin */
-    border: none; /* Kenar yok */
-    transition: background-color 0.3s; /* Geçiş efekti */
+.btn-add {
+    background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
-    .btn-custom:hover {
-        background-color: #218838; /* Koyu yeşil hover rengi */
+    .btn-add:hover {
+        background-color: gold;
     }
 
-/* Tablo stili */
-.custom-table {
-    background-color: #fff; /* Beyaz arka plan */
-    border-radius: 0.5rem; /* Kenar yuvarlama */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+.table-wrapper {
+    overflow-x: auto;
 }
 
-    .custom-table th, .custom-table td {
-        vertical-align: middle; /* Hücre içeriği ortalama */
+.brand-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: gray;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color:white;
+}
+
+    .brand-table th, .brand-table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
     }
 
-/* Başlık arka planı */
-.thead-custom {
-    background-color: #343a40; /* Koyu gri arka plan */
-    color: #fff; /* Beyaz metin */
-}
-
-/* Butonlar için hover efektleri */
-.btn-warning:hover {
-    background-color: #e0a800; /* Sarı buton hover rengi */
-}
-
-.btn-danger:hover {
-    background-color: #c82333; /* Kırmızı buton hover rengi */
-}
-
-/* Responsive tasarım */
-@media (max-width: 768px) {
-    .custom-table {
-        font-size: 0.8em; /* Mobil için tablo yazı boyutunu küçült */
+    .brand-table th {
+        background-color: black;
+        color: white;
+        font-weight: bold;
     }
 
-    .btn {
-        width: 100%; /* Butonları tam genişlik yap */
-        margin-bottom: 10px; /* Butonlar arasında boşluk bırak */
+    .brand-table tr:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+        
     }
+
+.btn-edit {
+    background-color: black;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
 }
+
+    .btn-edit:hover {
+        background-color: gold;
+        color:black;
+    }

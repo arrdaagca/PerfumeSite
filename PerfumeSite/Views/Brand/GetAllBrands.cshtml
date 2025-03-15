@@ -5,42 +5,42 @@
     Layout = "_AdminLayout";
 }
 
-<link rel="stylesheet" href="~/Brand/GetAllBrands/style.css"> 
+<!-- Stil dosyasını ekledik -->
+<link rel="stylesheet" href="~/Brand/GetAllBrands/style.css" />
 
+<div class="brand-container">
+    <h2 class="brand-title">Marka Listesi</h2>
 
-<div class="container mt-4">
-    <h2 class="text-center">Marka Listesi</h2>
-
-    <div class="d-flex gap-2 mb-3 justify-content-center">
+    <div class="brand-actions">
         <form asp-controller="Brand" asp-action="AddBrand" method="get">
-            <button class="btn btn-custom">Yeni Marka Ekle</button>
+            <button class="btn btn-add">+ Yeni Marka Ekle</button>
         </form>
     </div>
 
-    <table class="table table-bordered table-striped custom-table">
-        <thead class="thead-custom">
-            <tr>
-                <th>ID</th>
-                <th>Marka Adı</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-wrapper">
+        <table class="brand-table">
+            <thead>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>
-                        <form asp-controller="Brand" asp-action="UpdateBrand" method="get" style="display: inline;">
-                            <button type="submit" class="btn btn-warning">Güncelle</button>
-                            <input type="hidden" value="@item.Id" name="id" />
-                        </form>
-
-                     
-                    </td>
+                    <th>ID</th>
+                    <th>Marka Adı</th>
+                    <th>İşlemler</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <form asp-controller="Brand" asp-action="UpdateBrand" method="get">
+                                <button type="submit" class="btn btn-edit">Güncelle</button>
+                                <input type="hidden" value="@item.Id" name="id" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

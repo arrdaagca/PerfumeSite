@@ -30,7 +30,7 @@ namespace PerfumeSite.Controllers
 
             _brandService.AddBrand(_mapper.Map<BrandDto>(addBrandViewModel));
 
-            return View();
+            return RedirectToAction("GetAllBrands");
         }
 
 
@@ -54,6 +54,7 @@ namespace PerfumeSite.Controllers
 
             return View(_mapper.Map<AddBrandViewModel>(updateBrand));
         }
+
         [HttpPost]
         public IActionResult UpdateBrand(AddBrandViewModel addBrandViewModel)
         {

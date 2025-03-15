@@ -2,18 +2,23 @@
 @model AddBrandViewModel
 
 @{
-    Layout = "_AdminLayout"; // Admin panelinin genel şablonunu kullan
+    Layout = "_AdminLayout";
 }
 
-<div class="container mt-4">
-    <h2>Yeni Marka Ekle</h2>
+<!-- Stil dosyasını ekledik -->
+<link rel="stylesheet" href="~/Brand/AddBrand/style.css" />
 
-    <form asp-controller="Brand" asp-action="AddBrand" method="post">
-        <div class="mb-3">
-            <label  class="form-label">Marka Adı</label>
-            <input type="text" class="form-control" asp-for="Name" name="Name" required>
+<div class="brand-form-container">
+    <h2 class="brand-title">Yeni Marka Ekle</h2>
+
+    <form asp-controller="Brand" asp-action="AddBrand" method="post" class="brand-form">
+        <div class="form-group">
+            <label for="brandName">Marka Adı</label>
+            <input type="text" id="brandName" class="form-control" asp-for="Name" name="Name" required>
         </div>
-        <button type="submit" class="btn btn-success">Ekle</button>
-        <a asp-controller="Admin" asp-action="GetProducts" class="btn btn-secondary">Geri Dön</a>
+        <div class="button-group">
+            <a asp-controller="Admin" asp-action="GetProducts" class="btn btn-back">Geri Dön</a>
+            <button type="submit" class="btn btn-add">Ekle</button>
+        </div>
     </form>
 </div>
