@@ -1,0 +1,46 @@
+﻿@model List<AddCategoryViewModel>
+
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center">Kategori Listesi</h2>
+
+    <div class="d-flex gap-2 mb-3 justify-content-center">
+        <form asp-controller="Category" asp-action="AddCategory" method="get">
+            <button class="btn btn-custom">Yeni Kategori Ekle</button>
+        </form>
+    </div>
+
+    <table class="table table-bordered table-striped custom-table">
+        <thead class="thead-custom">
+            <tr>
+                <th>ID</th>
+                <th>Marka Adı</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <form asp-controller="Product" asp-action="UpdateProduct" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-warning">Güncelle</button>
+                            <input type="hidden" value="@item.Id" name="id" />
+                        </form>
+
+                        <form asp-controller="Product" asp-action="DeleteProduct" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                            <input type="hidden" value="@item.Id" name="id" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

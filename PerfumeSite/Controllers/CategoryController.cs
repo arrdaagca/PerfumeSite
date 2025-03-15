@@ -33,5 +33,17 @@ namespace PerfumeSite.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public IActionResult GetAllCategories()
+        {
+
+            var getAllCategories = _categoryService.GetAllCategories();
+
+
+            return View(_mapper.Map<List<AddCategoryViewModel>>(getAllCategories));
+        }
+
+
     }
 }
