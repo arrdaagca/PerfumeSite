@@ -50,8 +50,14 @@
                     <td>@item.CategoryId</td>
                     <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
                     <td>
+                        
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateProductModal">Güncelle</button>
-                        <button class="btn btn-danger" onclick="deleteProduct(@item.Id)">Sil</button>
+
+                        <form asp-controller="Product" asp-action="DeleteProduct" method="post">
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                            <input hidden value="@item.Id" name="id" />
+                          
+                        </form>
                     </td>
                 </tr>
             }

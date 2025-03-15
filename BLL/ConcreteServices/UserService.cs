@@ -128,7 +128,7 @@ namespace BLL.ConcreteServices
 
         public List<GetAllUsersDto> GetAllUsers()
         {
-            var getAllUsers = _genericRepository.GetAll();
+            var getAllUsers = _genericRepository.GetAll().Where(x=>x.IsAdmin == false);
 
             return _mapper.Map<List<GetAllUsersDto>>(getAllUsers);
 

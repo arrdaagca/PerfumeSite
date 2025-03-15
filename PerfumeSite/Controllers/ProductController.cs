@@ -66,7 +66,7 @@ namespace PerfumeSite.Controllers
 
 
         [HttpGet]
-        public IActionResult GetProducts(int id)
+        public IActionResult GetProducts()
         {
           var allProducts = _productService.GetAllProducts();
 
@@ -77,6 +77,16 @@ namespace PerfumeSite.Controllers
 
 
             return View(products);
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult DeleteProduct(int id)
+        {
+            _productService.DeleteById(id);
+            return RedirectToAction("GetProducts");
         }
 
 

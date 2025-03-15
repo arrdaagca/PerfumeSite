@@ -14,6 +14,8 @@ namespace BLL.AbstractServices
 
         List<ProductDto> GetAllProducts();
 
+        void DeleteById(int id);
+
 
 
     }

@@ -33,14 +33,14 @@ namespace DAL.Data
                 .HasOne(p => p.Brand) // Her ürünün bir markası var
                 .WithMany(b => b.Products) // Her markanın birden fazla ürünü olabilir
                 .HasForeignKey(p => p.BrandId) // Yabancı anahtar
-                .OnDelete(DeleteBehavior.Cascade); // İlişkili ürün silindiğinde markayı da sil
+                .OnDelete(DeleteBehavior.Restrict); // İlişkili ürün silindiğinde markayı da sil
 
             // Product ve Category ilişkisi
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category) // Her ürünün bir kategorisi var
                 .WithMany(c => c.Products) // Her kategorinin birden fazla ürünü olabilir
                 .HasForeignKey(p => p.CategoryId) // Yabancı anahtar
-                .OnDelete(DeleteBehavior.Cascade); // İlişkili ürün silindiğinde kategoriyi de sil
+                .OnDelete(DeleteBehavior.Restrict); // İlişkili ürün silindiğinde kategoriyi de sil
 
             modelBuilder.Entity<Product>()
        .Property(p => p.Price)

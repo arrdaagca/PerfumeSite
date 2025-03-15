@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.AllDtos
 {
-    public class ProductDto
+    public class ProductDto : BaseDto
     {
 
         public string Name { get; set; }

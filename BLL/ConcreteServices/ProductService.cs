@@ -27,6 +27,12 @@ namespace BLL.ConcreteServices
             _genericRepository.Add(_mapper.Map<Product>(addProductDto));
         }
 
+        public void DeleteById(int id)
+        {
+            
+            _genericRepository.DeleteById(id);
+        }
+
         public List<ProductDto> GetAllProducts()
         {
             var getAllProducts = _genericRepository.GetAll();
