@@ -66,9 +66,11 @@ namespace PerfumeSite.Controllers
 
 
         [HttpGet]
-        public IActionResult GetProducts()
+        public IActionResult GetProducts(int id)
         {
           var allProducts = _productService.GetAllProducts();
+
+           
 
 
             var products = _mapper.Map<List<ProductViewModel>>(allProducts);

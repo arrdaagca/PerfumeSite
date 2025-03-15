@@ -13,8 +13,9 @@ namespace BLL.AbstractServices
 
         void AddBrand(BrandDto addBrandDto);
 
+        
 
-      List<BrandDto> GetAllBrands();
+        List<BrandDto> GetAllBrands();
 
     }
 }

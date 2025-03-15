@@ -12,8 +12,8 @@ namespace BLL.AbstractServices
 
         void AddCategory(CategoryDto addCategoryDto);
 
-
-      List<CategoryDto> GetAllCategories();
+       
+        List<CategoryDto> GetAllCategories();
 
 
     }

@@ -126,6 +126,12 @@ namespace BLL.ConcreteServices
             return _mapper.Map<UserDto>(getByUsername);
         }
 
-        
+        public List<GetAllUsersDto> GetAllUsers()
+        {
+            var getAllUsers = _genericRepository.GetAll();
+
+            return _mapper.Map<List<GetAllUsersDto>>(getAllUsers);
+
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null; // Bu ana düzen dosyası ise null olarak ayarlayın
+    Layout = null; 
 }
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
     </nav>
 
     <div class="sidebar">
-        <a asp-controller="Admin" asp-action="Users"><i class="fas fa-users"></i><span>Kullanıcılar</span></a>
+        <a asp-controller="Admin" asp-action="GetAllUsers"><i class="fas fa-users"></i><span>Kullanıcılar</span></a>
         <a asp-controller="Product" asp-action="GetProducts"><i class="fas fa-box"></i><span>Ürün Yönetimi</span></a>
         <a asp-controller="User" asp-action="Login"><i class="fas fa-sign-out-alt"></i><span>Çıkış Yap</span></a>
     </div>

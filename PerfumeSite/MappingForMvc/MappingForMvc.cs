@@ -31,6 +31,9 @@ namespace PerfumeSite.MappingForMvc
 
 
             CreateMap<ProductDto, ProductViewModel>().ReverseMap();
+            CreateMap<GetAllUsersDto, GetAllUsersViewModel>().ReverseMap();
+
+
 
 
             CreateMap<CategoryDto, AddCategoryViewModel>().ReverseMap();

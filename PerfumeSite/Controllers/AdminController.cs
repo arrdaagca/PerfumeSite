@@ -29,7 +29,16 @@ namespace PerfumeSite.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
 
+           var allUsers =   _userService.GetAllUsers();
+
+            var getAllUsers = _mapper.Map<List<GetAllUsersViewModel>>(allUsers);
+
+            return View(getAllUsers);
+        }
 
 
 

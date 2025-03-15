@@ -1,0 +1,53 @@
+﻿@using PerfumeSite.UserViewModels
+@model List<GetAllUsersViewModel>
+
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<div class="container mt-4">
+    <h2>Kullanıcı Listesi</h2>
+
+    <div class="d-flex gap-2 mb-3">
+        <form asp-controller="Product" asp-action="AddProduct" method="get">
+            <button class="btn btn-primary">Sipariş Geçmişi Görüntüle</button>
+        </form>
+
+        <form asp-controller="Category" asp-action="AddCategory" method="get">
+            <button class="btn btn-success">Favorilenleri Görüntüle</button>
+        </form>
+
+        <form asp-controller="Brand" asp-action="AddBrand" method="get">
+            <button class="btn btn-info">Adres Bilgisi Görüntüle</button>
+        </form>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>CreatedDate</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.CreatedDate</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

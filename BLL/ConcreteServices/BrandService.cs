@@ -35,5 +35,7 @@ namespace BLL.ConcreteServices
 
             return brandDtos; 
         }
+
+      
     }
 }
