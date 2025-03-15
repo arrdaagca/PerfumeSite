@@ -1,15 +1,9 @@
-﻿using DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PerfumeSite.UserViewModels;
 
-namespace BLL.AllDtos
+namespace PerfumeSite.ProductViewModels
 {
-    public class AddProductDto
+    public class ProductViewModel : BaseViewModel
     {
-
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
@@ -18,7 +12,6 @@ namespace BLL.AllDtos
 
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
-
 
     }
 }

@@ -10,7 +10,11 @@ namespace BLL.AbstractServices
     public interface IProductService
     {
 
-        void AddProduct(AddProductDto addProductDto);   
+        void AddProduct(ProductDto addProductDto);   
+
+        List<ProductDto> GetAllProducts();
+
+
 
     }
 }

@@ -22,9 +22,16 @@ namespace BLL.ConcreteServices
             _mapper = mapper;
         }
 
-        public void AddProduct(AddProductDto addProductDto)
+        public void AddProduct(ProductDto addProductDto)
         {
             _genericRepository.Add(_mapper.Map<Product>(addProductDto));
+        }
+
+        public List<ProductDto> GetAllProducts()
+        {
+            var getAllProducts = _genericRepository.GetAll();
+            var products = _mapper.Map<List<ProductDto>>(getAllProducts);
+            return products;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace PerfumeSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(AddProductViewModel addProductViewModel,IFormFile ImageFile)
+        public IActionResult AddProduct(ProductViewModel addProductViewModel,IFormFile ImageFile)
         {
           
             // 2️⃣ Resim dosyasını kontrol et
@@ -59,9 +59,24 @@ namespace PerfumeSite.Controllers
             addProductViewModel.Image = "/uploads/" + fileName;
 
 
-            _productService.AddProduct(_mapper.Map<AddProductDto>(addProductViewModel));
+            _productService.AddProduct(_mapper.Map<ProductDto>(addProductViewModel));
             return View();
         }
+
+
+
+        [HttpGet]
+        public IActionResult GetProducts()
+        {
+          var allProducts = _productService.GetAllProducts();
+
+
+            var products = _mapper.Map<List<ProductViewModel>>(allProducts);
+
+
+            return View(products);
+        }
+
 
     }
 }
