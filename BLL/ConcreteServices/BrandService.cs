@@ -27,6 +27,8 @@ namespace BLL.ConcreteServices
            _genericRepository.Add(_mapper.Map<Brand>(addBrandDto));
         }
 
+      
+
         public List<BrandDto> GetAllBrands()
         {
             var brands = _genericRepository.GetAll(); 
@@ -36,6 +38,17 @@ namespace BLL.ConcreteServices
             return brandDtos; 
         }
 
-      
+        public BrandDto GetById(int id)
+        {
+           var brand = _genericRepository.GetById(id);
+            return _mapper.Map<BrandDto>(brand);
+        }
+
+        public void UpdateBrand(BrandDto brandDto)
+        {
+            var updateBrand = _genericRepository.GetById(brandDto.Id);
+            _mapper.Map(brandDto, updateBrand);
+            _genericRepository.Update(updateBrand);
+        }
     }
 }

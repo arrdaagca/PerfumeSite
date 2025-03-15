@@ -2,6 +2,7 @@
 using BLL.AbstractServices;
 using BLL.AllDtos;
 using Microsoft.AspNetCore.Mvc;
+using PerfumeSite.CategoryViewModels;
 
 namespace PerfumeSite.Controllers
 {
@@ -44,6 +45,27 @@ namespace PerfumeSite.Controllers
             return View(_mapper.Map<List<AddCategoryViewModel>>(getAllCategories));
         }
 
+
+        [HttpGet]
+        public IActionResult UpdateCategory(int id)
+        {
+
+
+            var category = _categoryService.GetById(id);  
+      
+
+            return View(_mapper.Map<AddCategoryViewModel>(category));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCategory(AddCategoryViewModel addCategoryViewModel)
+        {
+
+
+            _categoryService.UpdateCategory(_mapper.Map<CategoryDto>(addCategoryViewModel));
+
+            return RedirectToAction("GetAllCategories");
+        }
 
     }
 }

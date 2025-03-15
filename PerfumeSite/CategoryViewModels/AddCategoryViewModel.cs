@@ -1,8 +1,8 @@
 ﻿using PerfumeSite.UserViewModels;
 
-namespace PerfumeSite
+namespace PerfumeSite.CategoryViewModels
 {
-    public class AddBrandViewModel : BaseViewModel
+    public class AddCategoryViewModel : BaseViewModel
     {
 
         public string Name { get; set; }

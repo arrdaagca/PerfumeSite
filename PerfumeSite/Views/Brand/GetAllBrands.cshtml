@@ -1,4 +1,5 @@
-﻿@model List<AddBrandViewModel>
+﻿@using PerfumeSite.BrandViewModels
+@model List<AddBrandViewModel>
 
 @{
     Layout = "_AdminLayout";
@@ -31,15 +32,12 @@
                     <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>
-                        <form asp-controller="Product" asp-action="UpdateProduct" method="get" style="display: inline;">
+                        <form asp-controller="Brand" asp-action="UpdateBrand" method="get" style="display: inline;">
                             <button type="submit" class="btn btn-warning">Güncelle</button>
                             <input type="hidden" value="@item.Id" name="id" />
                         </form>
 
-                        <form asp-controller="Product" asp-action="DeleteProduct" method="post" style="display: inline;">
-                            <button type="submit" class="btn btn-danger">Sil</button>
-                            <input type="hidden" value="@item.Id" name="id" />
-                        </form>
+                     
                     </td>
                 </tr>
             }

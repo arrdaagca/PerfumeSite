@@ -2,6 +2,7 @@
 using BLL.AbstractServices;
 using BLL.AllDtos;
 using Microsoft.AspNetCore.Mvc;
+using PerfumeSite.BrandViewModels;
 
 namespace PerfumeSite.Controllers
 {
@@ -40,6 +41,26 @@ namespace PerfumeSite.Controllers
             var allBrands = _brandService.GetAllBrands();
 
             return View(_mapper.Map<List<AddBrandViewModel>>(allBrands));
+        }
+
+
+        [HttpGet]
+        public IActionResult UpdateBrand(int id)
+        {
+
+         var updateBrand =    _brandService.GetById(id);
+
+
+
+            return View(_mapper.Map<AddBrandViewModel>(updateBrand));
+        }
+        [HttpPost]
+        public IActionResult UpdateBrand(AddBrandViewModel addBrandViewModel)
+        {
+
+            _brandService.UpdateBrand(_mapper.Map<BrandDto>(addBrandViewModel));
+
+            return RedirectToAction("GetAllBrands");
         }
 
 

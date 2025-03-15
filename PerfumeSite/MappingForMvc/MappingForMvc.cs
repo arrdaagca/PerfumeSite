@@ -2,6 +2,8 @@
 using BLL.AllDtos;
 using DAL.Entities;
 using PerfumeSite.AddressViewModels;
+using PerfumeSite.BrandViewModels;
+using PerfumeSite.CategoryViewModels;
 using PerfumeSite.CreditCardViewModels;
 using PerfumeSite.ProductViewModels;
 using PerfumeSite.UserViewModels;

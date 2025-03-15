@@ -36,6 +36,19 @@ namespace BLL.ConcreteServices
 
         }
 
-        
+        public CategoryDto GetById(int id)
+        {
+            var category = _genericRepository.GetById(id);
+            return _mapper.Map<CategoryDto>(category);
+        }
+
+        public void UpdateCategory(CategoryDto categoryDto)
+        {
+            var updateCategory = _genericRepository.GetById(categoryDto.Id);
+
+            _mapper.Map(categoryDto, updateCategory);
+
+            _genericRepository.Update(updateCategory);
+        }
     }
 }
