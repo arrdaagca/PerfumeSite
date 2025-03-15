@@ -1,42 +1,46 @@
 ﻿@using PerfumeSite.CategoryViewModels
 @model List<AddCategoryViewModel>
 
-
 @{
     Layout = "_AdminLayout";
 }
 
-<div class="container mt-4">
-    <h2 class="text-center">Kategori Listesi</h2>
+<!-- Stil dosyasını ekledik -->
+<link rel="stylesheet" href="~/Category/GetAllCategories/style.css" />
 
-    <div class="d-flex gap-2 mb-3 justify-content-center">
+<div class="category-container">
+    <h2 class="category-title">Kategori Listesi</h2>
+
+    <div class="category-actions">
         <form asp-controller="Category" asp-action="AddCategory" method="get">
-            <button class="btn btn-custom">Yeni Kategori Ekle</button>
+            <button class="btn-add">+ Yeni Kategori Ekle</button>
         </form>
-    </div> 
+    </div>
 
-    <table class="table table-bordered table-striped custom-table">
-        <thead class="thead-custom">
-            <tr>
-                <th>ID</th>
-                <th>Kategori Adı</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-wrapper">
+        <table class="category-table">
+            <thead>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>
-                        <form asp-controller="Category" asp-action="UpdateCategory" method="get" style="display: inline;">
-                            <button type="submit" class="btn btn-warning">Güncelle</button>
-                            <input type="hidden" value="@item.Id" name="id" />
-                        </form>                        
-                    </td>
+                    <th>ID</th>
+                    <th>Kategori Adı</th>
+                    <th>İşlemler</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <form asp-controller="Category" asp-action="UpdateCategory" method="get" class="inline-form">
+                                <button type="submit" class="btn-edit">Güncelle</button>
+                                <input type="hidden" value="@item.Id" name="id" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

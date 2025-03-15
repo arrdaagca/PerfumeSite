@@ -1,25 +1,27 @@
 ﻿@using PerfumeSite.BrandViewModels
 @model AddBrandViewModel
 
-
 @{
     Layout = "_AdminLayout";
 }
 
+<!-- Stil dosyasını ekledik -->
+<link rel="stylesheet" href="~/Brand/UpdateBrand/style.css" />
 
-<div class="address-page">
-    <div class="address-form-container">
-        <h2>Marka Güncelle</h2>
-        <form asp-controller="Brand" asp-action="UpdateBrand" method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">Marka Adı</label>
-                        <input type="text" name="name" class="form-control" asp-for="Name" required />
-                    </div>                                    
-                </div>
-                <button type="submit" class="btn btn-success">Güncelle</button>
-                <input hidden value="@Model.Id" name="id" />
-        </form>
-    </div>
+<div class="brand-update-container">
+    <h2 class="brand-update-title">Marka Güncelle</h2>
+
+    <form asp-controller="Brand" asp-action="UpdateBrand" method="post" class="brand-update-form">
+        <div class="form-group">
+            <label>Marka Adı</label>
+            <input type="text" id="brandName" class="form-control" asp-for="Name" name="Name" required>
+        </div>
+
+        <input type="hidden" value="@Model.Id" name="id" />
+
+        <div class="button-group">
+            <a asp-controller="Brand" asp-action="GetAllBrands" class="btn btn-back">Geri Dön</a>
+            <button type="submit" class="btn btn-update">Güncelle</button>
+        </div>
+    </form>
 </div>

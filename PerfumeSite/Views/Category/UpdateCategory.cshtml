@@ -1,26 +1,23 @@
 ﻿@using PerfumeSite.CategoryViewModels
 @model AddCategoryViewModel
 
-
-
 @{
     Layout = "_AdminLayout";
 }
+<link rel="stylesheet" href="~/Category/UpdateCategory/style.css" />
 
+<div class="category-update-container">
+    <h2 class="category-update-title">Kategori Güncelle</h2>
 
-<div class="address-page">
-    <div class="address-form-container">
-        <h2>Kategori Güncelle</h2>
-        <form asp-controller="Category" asp-action="UpdateCategory" method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">Kategori Adı</label>
-                        <input type="text" name="name" class="form-control" asp-for="Name" required />
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success">Güncelle</button>
-                <input hidden value="@Model.Id" name="id" />
-        </form>
-    </div>
+    <form asp-controller="Category" asp-action="UpdateCategory" method="post" class="category-update-form">
+        <div class="form-group">
+            <label>Kategori Adı</label>
+            <input type="text" class="form-control" asp-for="Name" name="Name" required />
+        </div>
+        <input type="hidden" value="@Model.Id" name="id" />
+        <div class="button-group">
+            <a asp-controller="Admin" asp-action="GetProducts" class="btn-back">Geri Dön</a>
+            <button type="submit" class="btn-update">Güncelle</button>
+        </div>
+    </form>
 </div>
