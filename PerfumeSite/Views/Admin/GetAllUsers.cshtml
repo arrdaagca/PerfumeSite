@@ -1,53 +1,55 @@
 ﻿@using PerfumeSite.UserViewModels
 @model List<GetAllUsersViewModel>
 
-
 @{
     Layout = "_AdminLayout";
 }
 
+<!-- Stil dosyasını ekledik -->
+<link rel="stylesheet" href="~/Admin/GetAllUsers/style.css" />
 
-<div class="container mt-4">
-    <h2>Kullanıcı Listesi</h2>
+<div class="user-container mt-4">
+    <h2 class="user-title">Kullanıcı Listesi</h2>
 
-    <div class="d-flex gap-2 mb-3">
-        <form asp-controller="Product" asp-action="AddProduct" method="get">
-            <button class="btn btn-primary">Sipariş Geçmişi Görüntüle</button>
+    <td style="padding-bottom: 20px;">
+        <!-- 20 piksel alt boşluk ekledik -->
+        <form asp-controller="Product" asp-action="OrderHistory" method="get" style="display:inline; margin-right: 10px; ">
+            <button class="btn btn-order-history">Sipariş Geçmişi Görüntüle</button>
+        </form>
+        <form asp-controller="Category" asp-action="Favorites" method="get" style="display:inline; margin-right: 10px; ">
+            <button class="btn btn-order-history">Favorilenleri Görüntüle</button>
+        </form>
+        <form asp-controller="Brand" asp-action="AddressInfo" method="get" style="display:inline; ">
+            <button class="btn btn-order-history">Adres Bilgisi Görüntüle</button>
         </form>
 
-        <form asp-controller="Category" asp-action="AddCategory" method="get">
-            <button class="btn btn-success">Favorilenleri Görüntüle</button>
-        </form>
+    </td>
 
-        <form asp-controller="Brand" asp-action="AddBrand" method="get">
-            <button class="btn btn-info">Adres Bilgisi Görüntüle</button>
-        </form>
-    </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>PhoneNumber</th>
-                <th>CreatedDate</th>
-              
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+
+    <div class="table-wrapper">
+        <table class="user-table">
+            <thead>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.UserName</td>
-                    <td>@item.Email</td>
-                    <td>@item.PhoneNumber</td>
-                    <td>@item.CreatedDate</td>
-
+                    <th>ID</th>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>PhoneNumber</th>
+                    <th>CreatedDate</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.CreatedDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-

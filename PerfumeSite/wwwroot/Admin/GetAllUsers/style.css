@@ -1,5 +1,5 @@
 ﻿/* Genel Konteyner */
-.product-container {
+.user-container {
     max-width: 1200px; /* Genişlik sınırı */
     margin: 40px auto; /* Otomatik kenar boşluğu ile ortala */
     padding: 20px; /* İçerik boşluğu */
@@ -10,20 +10,21 @@
 }
 
 /* Başlık */
-.product-title {
+.user-title {
     font-size: 35px; /* Başlık boyutu */
     color: gold; /* Başlık rengi */
     margin-bottom: 20px; /* Alt boşluk */
 }
 
-/* Yeni Ürün Ekle Butonu */
-.product-actions {
+/* Eylem Butonları */
+.user-actions {
     display: flex; /* Flex düzen */
     justify-content: center; /* Ortala */
     margin-bottom: 20px; /* Alt boşluk */
+    
 }
 
-.btn-add-product {
+.btn-order-history {
     background-color: gray; /* Arka plan rengi */
     color: white; /* Yazı rengi */
     padding: 10px 20px; /* İçerik boşluğu */
@@ -32,9 +33,10 @@
     cursor: pointer; /* İmleci değiştirme */
     font-size: 16px; /* Yazı boyutu */
     transition: background 0.3s; /* Geçiş efekti */
+    margin-bottom: 20px;
 }
-
-    .btn-add-product:hover {
+    
+    .btn-order-history:hover {
         background-color: gold; /* Hover rengi */
         color: black; /* Hover yazı rengi */
     }
@@ -44,7 +46,7 @@
     overflow-x: auto; /* Taşma durumunda kaydırma */
 }
 
-.product-table {
+.user-table {
     width: 100%; /* Genişlik %100 */
     border-collapse: collapse; /* Kenar çökmesini önle */
     background: gray; /* Arka plan rengi */
@@ -54,70 +56,18 @@
     color: white; /* Yazı rengi */
 }
 
-    .product-table th, .product-table td {
+    .user-table th, .user-table td {
         padding: 12px; /* Hücre içi boşluk */
         text-align: center; /* Metin ortalaması */
         border-bottom: 1px solid #ddd; /* Alt kenar */
     }
 
-    /* Dikey Çizgi için Sağ Kenar Çizgisi */
-    .product-table td {
-        border-right: 1px solid #ddd; /* Dikey çizgi */
-    }
-
-        .product-table td:last-child {
-            border-right: none; /* Son hücre için sağ kenarı kaldır */
-        }
-
-    .product-table th {
+    .user-table th {
         background-color: black; /* Başlık arka plan rengi */
         color: white; /* Başlık yazı rengi */
         font-weight: bold; /* Kalın yazı */
     }
 
-    .product-table tr:hover {
+    .user-table tr:hover {
         background-color: rgba(0, 0, 0, 0.6); /* Hover rengi */
     }
-
-/* Buton Stilleri */
-.btn-edit {
-    background-color: black; /* Güncelle butonu arka plan rengi */
-    color: white; /* Yazı rengi */
-    padding: 8px 12px; /* İçerik boşluğu */
-    border: none; /* Kenar yok */
-    border-radius: 5px; /* Kenar yuvarlama */
-    cursor: pointer; /* İmleci değiştirme */
-    font-size: 14px; /* Yazı boyutu */
-    transition: background 0.3s; /* Geçiş efekti */
-    width: 120px; /* Genişliği belirle */
-}
-
-    .btn-edit:hover {
-        background-color: gold; /* Hover rengi */
-        color: black; /* Hover yazı rengi */
-    }
-
-.btn-delete {
-    background-color: black; /* Sil butonu arka plan rengi */
-    margin-top:20px;
-    color: white; /* Yazı rengi */
-    padding: 8px 12px; /* İçerik boşluğu */
-    border: none; /* Kenar yok */
-    border-radius: 5px; /* Kenar yuvarlama */
-    cursor: pointer; /* İmleci değiştirme */
-    font-size: 14px; /* Yazı boyutu */
-    transition: background 0.3s; /* Geçiş efekti */
-    width: 120px; /* Genişliği güncelle butonuyla aynı olacak şekilde ayarla */
-}
-
-    .btn-delete:hover {
-        background-color: gold; /* Hover rengi */
-        color: black; /* Hover yazı rengi */
-    }
-
-/* Ürün Resmi Ayarları */
-.product-image {
-    width: 150px !important; /* Genişlik 150 piksel */
-    height: 150px !important; /* Yükseklik 150 piksel */
-    border-radius: 5px; /* Kenar yuvarlama */
-}
