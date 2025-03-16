@@ -60,7 +60,7 @@ namespace PerfumeSite.Controllers
 
 
             _productService.AddProduct(_mapper.Map<ProductDto>(addProductViewModel));
-            return View();
+            return RedirectToAction("GetProducts");
         }
 
 

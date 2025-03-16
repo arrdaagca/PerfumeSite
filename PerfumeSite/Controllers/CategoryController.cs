@@ -31,7 +31,7 @@ namespace PerfumeSite.Controllers
             _categoryService.AddCategory(_mapper.Map<CategoryDto>(addCategoryViewModel));
 
 
-            return View();
+            return RedirectToAction("GetAllCategories");
         }
 
 
