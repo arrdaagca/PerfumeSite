@@ -30,9 +30,7 @@ namespace BLL.MappingForServices
 
 
             CreateMap<Product, ProductDto>().ReverseMap();
-
-
-
+            
             CreateMap<Brand, BrandDto>().ReverseMap();
 
 

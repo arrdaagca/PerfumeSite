@@ -1,0 +1,90 @@
+﻿/* Genel Stil */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background: gray;
+    margin-top: 20px;
+}
+
+/* Kullanıcı Formu */
+.user-form {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    color: white;
+}
+
+    .user-form .form-group {
+        margin-bottom: 15px;
+    }
+
+.btn-user-btn {
+    width: 100%;
+    background-color: gray;
+    color: white;
+}
+.btn-user-btn:hover{
+    background-color:gold;
+    color:black;
+}
+
+/* Adres Kartları */
+.address-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Kartları sola hizala */
+    margin-left: -240px; /* Sağdan boşluk bırakma */
+}
+
+/* Adres Kartı Genel Stil */
+.address-card {
+    background: gray;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    width: calc(33.33% - 20px); /* Üç kart için genişliği ayarlama */
+    max-width: 350px; /* Maksimum genişlik */
+    transition: transform 0.3s ease-in-out;
+    box-sizing: border-box; /* Padding ve border'ı genişliğe dahil et */
+}
+
+    /* Hover Efekti */
+    .address-card:hover {
+        transform: scale(1.05);
+    }
+
+.address-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+    text-align: center;
+}
+
+.address-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.address-card li {
+    padding: 5px 0;
+    font-size: 18px;
+}
+
+.text-center {
+    text-align: center;
+    font-size: 26px;
+    color: gold;
+    margin-left:-230px;
+}
+.text-center2 {
+    text-align: center;
+    color: gold;
+    font-size: 20px;
+}

@@ -32,7 +32,9 @@ namespace PerfumeSite.MappingForMvc
             CreateMap<CreditCardDto, CreditCardViewModel>().ReverseMap();
 
 
-            CreateMap<ProductDto, ProductViewModel>().ReverseMap();
+            CreateMap<ProductViewModel, ProductDto>().ReverseMap();
+       
+
             CreateMap<GetAllUsersDto, GetAllUsersViewModel>().ReverseMap();
 
 

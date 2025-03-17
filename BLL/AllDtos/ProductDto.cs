@@ -17,7 +17,9 @@ namespace BLL.AllDtos
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         public int BrandId { get; set; }
+
         public int CategoryId { get; set; }
+
 
 
     }

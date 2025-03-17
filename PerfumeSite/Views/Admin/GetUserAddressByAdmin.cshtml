@@ -1,0 +1,52 @@
+﻿@using PerfumeSite.AddressViewModels
+@model List<AddressViewModel>
+@{
+    Layout = "_AdminLayout";
+}
+<link rel="stylesheet" href="~/Admin/GetUserAddressByAdmin/style.css" >
+
+<div class="container">
+    <form asp-controller="Admin" asp-action="EnterUserId" method="post" class="user-form">
+        <div class="form-group">
+            <label for="UserId">Kullanıcı ID:</label>
+            <input type="text" class="form-control" name="enterUserId" required />
+        </div>
+        <button type="submit" class="btn btn-user-btn">Adres Bilgilerini Getir</button>
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Message"]</div>
+        }
+        @if (TempData["Message2"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Message2"]</div>
+        }
+    </form>
+
+    <div class="col-md-9 offset-md-3">
+        <h2 class="text-warning mb-4 text-center">  Adres Bilgileri</h2>
+
+        <div class="address-container">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var address in Model)
+                {
+                    <div class="address-card">
+                        <h3 class="address-title">@address.City, @address.District</h3>
+                        <ul class="list-unstyled mb-0">
+                            <li><strong>Ülke:</strong> @address.Country</li>
+                            <li><strong>Mahalle:</strong> @address.Neighbourhood</li>
+                            <li><strong>Sokak:</strong> @address.Street</li>
+                            <li><strong>Bina No:</strong> @address.BuildingNumber</li>
+                            <li><strong>Daire No:</strong> @address.DoorNumber</li>
+                        </ul>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-center2">Henüz adres bilgisi bulunmamaktadır.  </p>
+                
+            }
+        </div>
+    </div>
+</div>
