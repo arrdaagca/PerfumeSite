@@ -1,14 +1,14 @@
 ﻿body {
     margin: 0;
     padding: 0;
-    background-color:gray;
+    background-color: gray;
 }
 
 .sidebar {
     position: fixed;
     left: 0;
-    top: 60px;
-    width: 60px;
+    top: 0px;
+    width: 60px; /* Başlangıçta dar */
     height: 100vh;
     background: rgba(0, 0, 0, 0.6);
     overflow: hidden;
@@ -17,10 +17,12 @@
     flex-direction: column;
     align-items: flex-start;
     padding-top: 60px;
+    z-index: 1000; /* Sidebar için z-index değeri */
 }
 
+
     .sidebar:hover {
-        width: 250px;
+        width: 250px; /* Fare üzerine gelindiğinde genişler */
     }
 
     .sidebar .dropdown-menu {
@@ -37,7 +39,6 @@
 .sidebar-dropdown {
     position: relative;
     width: 100%;
-    top:-60px
 }
 
     .sidebar-dropdown:hover .dropdown-menu {
@@ -67,12 +68,13 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    opacity: 1;
+   
 }
 
     .sidebar a i {
         font-size: 20px;
         margin-right: 10px;
+
     }
 
 .sidebar span {
@@ -85,8 +87,79 @@
 }
 
 .content {
-    margin-left: 250px;
+    margin-left: 250px; /* Sidebar genişliğine göre ayarlanacak */
     padding: 20px;
     width: calc(100% - 250px);
     padding-top: 60px;
+    position: relative; /* İçerik alanını konumlandırmak için */
+    z-index: 1; /* İçerik alanı için z-index değeri */
+
 }
+
+
+/* Ürün Kartı Stilleri */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 sütun olacak şekilde ayarla */
+    gap: 20px; /* Ürünler arasındaki boşluk */
+    justify-content: flex-start;
+    transform: translateX(-250px);
+    
+}
+
+.product-card {
+    width: 250px; /* Genişliği değiştirmiyoruz */
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s;
+    margin-top: -70px;
+    height: 300px;
+    margin-bottom: 80px;
+}
+    .product-card:hover {
+        transform: scale(1.05);
+    }
+
+.product-image-container {
+    width: 100%;
+    height: 200px;
+    border: 2px solid gold;
+    padding: 10px;
+    border-radius: 4px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Taşmayı önlemek için overflow gizle */
+    
+}
+
+.product-image {
+    max-width: 320px;
+    max-height: 320px;
+    object-fit: contain;
+    object-fit: contain;
+}
+
+.product-info {
+    margin-top: 10px;
+    max-height: 70px; /* Ürün bilgisi alanının yüksekliğini sınırlandırmak için */
+    overflow: hidden;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    color:gold;
+}
+
+.product-price {
+    color: #e44d26;
+    font-size: 16px;
+    font-weight: bold;
+    color:gold;
+}
+

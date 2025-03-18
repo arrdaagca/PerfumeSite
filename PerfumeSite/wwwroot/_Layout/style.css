@@ -4,18 +4,20 @@ layoutbody {
     font-family: 'Montserrat', sans-serif;
     color: #fff;
     background-color:gray;
+    
 }
 
 .navbar {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
-    height:60px;
+    height: 60px;
+    z-index: 5000;
 }
 
 
 .search-bar {
     position: relative;
-    left: 150px;
+    left: 130px;
 }
 
 .navbar-brand {
