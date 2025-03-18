@@ -2,6 +2,8 @@
 using BLL.AbstractServices;
 using BLL.AllDtos;
 using Microsoft.AspNetCore.Mvc;
+using PerfumeSite.BrandViewModels;
+using PerfumeSite.CategoryViewModels;
 using PerfumeSite.ProductViewModels;
 
 namespace PerfumeSite.Controllers
@@ -38,24 +40,24 @@ namespace PerfumeSite.Controllers
         public IActionResult AddProduct(ProductViewModel addProductViewModel, IFormFile ImageFile)
         {
 
-            // 2️⃣ Resim dosyasını kontrol et
+           
             if (ImageFile == null || ImageFile.Length == 0)
             {
                 ModelState.AddModelError("Image", "Lütfen bir resim seçiniz.");
                 return View(addProductViewModel);
             }
 
-            // 3️⃣ Dosya adını oluştur
+            
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
 
-            // 4️⃣ Dosyayı wwwroot içine kaydet
+            
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                ImageFile.CopyTo(stream); // Senkron olarak dosyayı kopyala
+                ImageFile.CopyTo(stream); 
             }
 
-            // 5️⃣ DTO içindeki Image alanına dosya yolunu ata
+            
             addProductViewModel.Image = "/uploads/" + fileName;
 
 
@@ -70,7 +72,27 @@ namespace PerfumeSite.Controllers
         {
             var allProducts = _productService.GetAllProducts();
 
+            var allBrands = _brandService.GetAllBrands();
+            var allCategories = _categoryService.GetAllCategories();
 
+          
+
+            var brandViewModels = allBrands.Select(b => new AddBrandViewModel
+            {
+                Id = b.Id,
+                Name = b.Name
+                
+            }).ToList();
+
+            var categoryViewModels = allCategories.Select(c => new AddCategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.Name
+                
+            }).ToList();
+
+            ViewBag.Brands = brandViewModels; 
+            ViewBag.Categories = categoryViewModels; 
 
 
             var products = _mapper.Map<List<ProductViewModel>>(allProducts);

@@ -18,7 +18,8 @@ namespace DAL.Entities
         public Brand Brand { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-
+       
+       
 
 
     }

@@ -1,4 +1,6 @@
-﻿@using PerfumeSite.ProductViewModels
+﻿@using PerfumeSite.BrandViewModels
+@using PerfumeSite.CategoryViewModels
+@using PerfumeSite.ProductViewModels
 @model List<ProductViewModel>
 
 @{
@@ -42,8 +44,28 @@
                         <td>
                             <img src="@item.Image" alt="@item.Name" class="product-image" />
                         </td>
-                        <td>@item.BrandId</td>
-                        <td>@item.CategoryId</td>
+                        
+                        <td>
+                            @{
+                                var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
+                                .FirstOrDefault(b => b.Id == item.BrandId);
+                            }
+                            @if (brand != null)
+                            {
+                                @brand.Name 
+                            }
+                        </td>
+                       
+                        <td>
+                            @{
+                                var category = ((List<AddCategoryViewModel>)ViewBag.Categories)
+                                .FirstOrDefault(c => c.Id == item.CategoryId);
+                            }
+                            @if (category != null)
+                            {
+                                @category.Name 
+                            }
+                        </td>
                         <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
                         <td>
                             <form asp-controller="Product" asp-action="UpdateProduct" method="get" class="inline-form">

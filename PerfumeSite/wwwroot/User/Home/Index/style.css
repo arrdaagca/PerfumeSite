@@ -8,7 +8,7 @@
     position: fixed;
     left: 0;
     top: 0px;
-    width: 60px; /* Başlangıçta dar */
+    width: 60px; 
     height: 100vh;
     background: rgba(0, 0, 0, 0.6);
     overflow: hidden;
@@ -17,12 +17,12 @@
     flex-direction: column;
     align-items: flex-start;
     padding-top: 60px;
-    z-index: 1000; /* Sidebar için z-index değeri */
+    z-index: 1000; 
 }
 
 
     .sidebar:hover {
-        width: 250px; /* Fare üzerine gelindiğinde genişler */
+        width: 250px; 
     }
 
     .sidebar .dropdown-menu {
@@ -87,28 +87,28 @@
 }
 
 .content {
-    margin-left: 250px; /* Sidebar genişliğine göre ayarlanacak */
+    margin-left: 250px; 
     padding: 20px;
     width: calc(100% - 250px);
     padding-top: 60px;
-    position: relative; /* İçerik alanını konumlandırmak için */
-    z-index: 1; /* İçerik alanı için z-index değeri */
+    position: relative; 
+    z-index: 1; 
 
 }
 
 
-/* Ürün Kartı Stilleri */
+
 .product-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 sütun olacak şekilde ayarla */
-    gap: 20px; /* Ürünler arasındaki boşluk */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
     justify-content: flex-start;
     transform: translateX(-250px);
     
 }
 
 .product-card {
-    width: 250px; /* Genişliği değiştirmiyoruz */
+    width: 250px; 
     background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -133,8 +133,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Taşmayı önlemek için overflow gizle */
-    
+    overflow: hidden; 
+   
 }
 
 .product-image {
@@ -146,7 +146,7 @@
 
 .product-info {
     margin-top: 10px;
-    max-height: 70px; /* Ürün bilgisi alanının yüksekliğini sınırlandırmak için */
+    max-height: 70px;
     overflow: hidden;
 }
 
@@ -162,4 +162,51 @@
     font-weight: bold;
     color:gold;
 }
+.favorite-icon {
+    position: absolute; /* İkonun konumunu belirler */
+    top: 10px; /* Üstten mesafe */
+    right: 10px; /* Sağdan mesafe */
+    background-color: rgba(255, 255, 255, 0.8); /* Arka plan rengi */
+    color: black; /* İkon rengi */
+    border-radius: 50%; /* Daire şeklinde görünüm */
+    padding: 8px; /* İç boşluk */
+    font-size: 18px; /* İkon boyutu */
+    cursor: pointer; /* Fare ile üzerine gelince işaretçi */
+    transition: background-color 0.3s, color 0.3s; /* Geçiş efekti */
+    z-index: 1; /* Diğer öğelerin üzerinde görünmesi için */
+    opacity: 0; /* Başlangıçta görünmez */
+    visibility: hidden; /* Başlangıçta gizli */
+    transition: opacity 0.3s, visibility 0.3s; /* Opaklık ve görünürlük geçişi */
+}
 
+
+    /* Hover efekti */
+.product-card:hover .favorite-icon {
+    opacity: 1; /* Görünür hale gelir */
+    visibility: visible; /* Görünürlük ayarlanır */
+    
+}
+ .favorite-icon:hover{
+   background-color:black;
+   color:gold;
+}
+
+#scrollToTopBtn {
+    position: fixed; /* Sayfanın sağ alt köşesinde sabit kalması için */
+    bottom: 20px; /* Alt taraftan mesafe */
+    right: 20px; /* Sağ taraftan mesafe */
+    display: none; /* Başlangıçta görünmez */
+    background-color: gold; /* Arka plan rengi */
+    color: white; /* Yazı rengi */
+    border: none; /* Kenar yok */
+    border-radius: 5px; /* Köşeleri yuvarlaştırma */
+    padding: 10px; /* İç boşluk */
+    font-size: 18px; /* Yazı boyutu */
+    cursor: pointer; /* Fare ile üzerine gelince işaretçi */
+    z-index: 1000; /* Diğer öğelerin üzerinde görünmesi için */
+    transition: background-color 0.3s; /* Geçiş efekti */
+}
+
+    #scrollToTopBtn:hover {
+        background-color: rgba(0, 0, 0, 1); /* Üzerine gelindiğinde arka plan rengi */
+    }
