@@ -1,0 +1,114 @@
+﻿@using PerfumeSite.BrandViewModels
+@using PerfumeSite.CategoryViewModels
+@using PerfumeSite.ProductViewModels
+@model ProductViewModel
+
+@{
+    Layout = "_Layout";
+    var averageRating = ViewBag.AverageRating ?? 0; // Ortalama puan
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Name - Ürün Detay</title>
+    <link rel="stylesheet" href="~/Product/ProductDetails/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="product-detail-container">
+        <div class="product-detail-row">
+            <div class="product-image">
+                <img src="@Model.Image" alt="@Model.Name">
+            </div>
+              
+                <div class="average-rating">
+                    <span>Ortalama Puan: </span>
+                    <span class="rating-stars">
+                        @{
+                            for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= averageRating)
+                                {
+                                    <i class="fas fa-star"></i> 
+                                }
+                                else
+                                {
+                                    <i class="far fa-star"></i> 
+                                }
+                            }
+                        }
+                    </span>
+                    <span>(@averageRating.ToString("0.0"))</span>
+                </div>
+            <div class="product-info">
+                <h2 class="product-brand">
+                    @{
+                        var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
+                        .FirstOrDefault(b => b.Id == Model.BrandId);
+                    }
+                    @if (brand != null)
+                    {
+                        @brand.Name
+                    }
+                </h2>
+                <p class="product-category">
+                    @{
+                        var category = ((List<AddCategoryViewModel>)ViewBag.Categories)
+                        .FirstOrDefault(c => c.Id == Model.CategoryId);
+                    }
+                    @if (category != null)
+                    {
+                        @category.Name
+                    }
+                </p>
+
+                <h4 class="product-price">@Model.Price.ToString("C")</h4>
+
+                <p class="product-description">@Model.Description</p>
+               
+                <div class="button-container">
+                    <button class="favorite-button">
+                        <i class="fas fa-heart"></i> Favorilere Ekle
+                    </button>
+
+                    <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                        <input type="hidden" name="productId" value="@Model.Id">
+                        <div class="product-quantity">
+                            <label for="quantity">Adet</label>
+                            <input type="number" name="quantity" id="quantity" value="1" min="1">
+                        </div>
+                        <button type="submit" class="product-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+      
+        
+            <div class="product-reviews">
+                <h3>Ürün Yorumları</h3>
+                <ul class="review-list">
+                    <li>Ahmet: Harika bir ürün, tavsiye ederim! ⭐⭐⭐⭐⭐</li>
+                    <li>Elif: Kokusu çok kalıcı. 👍</li>
+                </ul>
+
+            
+                <form method="post" asp-controller="Product" asp-action="AddReview">
+                    <input type="hidden" name="productId" value="@Model.Id">
+                    <textarea name="reviewText" class="review-textarea" placeholder="Yorumunuzu yazın..." required></textarea>
+                    <button type="submit" class="submit-review">Yorumu Gönder</button>
+                </form>
+            </div>
+      
+        
+    </div>
+
+</body>
+</html>

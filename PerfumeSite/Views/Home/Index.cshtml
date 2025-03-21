@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body>  
     <button id="scrollToTopBtn" title="Yukarı Çık" onclick="scrollToTop()">↑</button>
     <aside class="sidebar">
         <div class="sidebar-dropdown">
@@ -93,36 +93,40 @@
 
     <main class="content">
         <div class="product-list row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-4">
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <a href="/Product/Detail/@item.Id">
-                                <img src="@item.Image" alt="@item.Name" class="product-image" />
-                            </a>
-                            <i class="fa-regular fa-heart favorite-icon"></i> 
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">
+           
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <a href="/Product/ProductDetails/@item.Id">
+                                    <img src="@item.Image" alt="@item.Name" class="product-image" />
+                                </a>
+                                <i class="fa-regular fa-heart favorite-icon"></i>
+                            </div>
+                            <div class="product-info">
+                                <h5 class="product-name">
 
-                                @{
-                                    var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
-                                    .FirstOrDefault(b => b.Id == item.BrandId);
-                                }
-                                @if (brand != null)
-                                {
-                                    @brand.Name
-                                }
+                                    @{
+                                        var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
+                                        .FirstOrDefault(b => b.Id == item.BrandId);
+                                    }
+                                    @if (brand != null)
+                                    {
+                                        @brand.Name
+                                    }
 
 
-                            </h5>
-                            <p class="product-price">@item.Price TL</p>
-                            
+                                </h5>
+                                <p class="product-price">@item.Price TL</p>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+               
+                }
+            
+           
         </div>
 
 

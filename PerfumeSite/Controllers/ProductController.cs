@@ -157,5 +157,61 @@ namespace PerfumeSite.Controllers
         }
 
 
+
+
+        [HttpGet]
+        public IActionResult ProductDetails(int id)
+        {
+
+            var productDetail = _productService.GetById(id);
+
+
+
+            var allBrands = _brandService.GetAllBrands();
+            var allCategories = _categoryService.GetAllCategories();
+
+
+
+
+
+            var brandViewModels = allBrands.Select(b => new AddBrandViewModel
+            {
+                Id = b.Id,
+                Name = b.Name
+
+            }).ToList();
+
+            var categoryViewModels = allCategories.Select(c => new AddCategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.Name
+
+            }).ToList();
+
+            ViewBag.Brands = brandViewModels;
+            ViewBag.Categories = categoryViewModels;
+
+
+
+
+
+
+
+            return View(_mapper.Map<ProductViewModel>(productDetail));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
