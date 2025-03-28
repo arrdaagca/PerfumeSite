@@ -100,6 +100,36 @@ namespace DAL.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("DAL.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CommentText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("DAL.Entities.CreditCard", b =>
                 {
                     b.Property<int>("Id")
@@ -220,6 +250,25 @@ namespace DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DAL.Entities.Comment", b =>
+                {
+                    b.HasOne("DAL.Entities.Product", "Product")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Entities.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DAL.Entities.CreditCard", b =>
                 {
                     b.HasOne("DAL.Entities.User", "User")
@@ -260,9 +309,16 @@ namespace DAL.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("DAL.Entities.Product", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
             modelBuilder.Entity("DAL.Entities.User", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("Comments");
 
                     b.Navigation("CreditCards");
                 });

@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using BLL.AbstractServices;
 using BLL.AllDtos;
+using BLL.ConcreteServices;
+using DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using PerfumeSite.BrandViewModels;
 using PerfumeSite.CategoryViewModels;
+using PerfumeSite.CommentViewModels;
 using PerfumeSite.ProductViewModels;
 
 namespace PerfumeSite.Controllers
@@ -14,13 +17,17 @@ namespace PerfumeSite.Controllers
         private readonly IMapper _mapper;
         private readonly IBrandService _brandService;
         private readonly ICategoryService _categoryService;
+        private readonly ICommentService _commentService;
+        private readonly IUserService _userService;
 
-        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService)
+        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService,ICommentService commentService,IUserService userService)
         {
             _productService = productService;
             _mapper = mapper;
             _brandService = brandService;
             _categoryService = categoryService;
+            _commentService = commentService;
+            _userService = userService;
         }
 
 
@@ -130,75 +137,79 @@ namespace PerfumeSite.Controllers
         [HttpPost]
         public IActionResult UpdateProduct(ProductViewModel productViewModel, IFormFile image)
         {
-            // Yüklenen resim yoksa hata mesajı ekle
             if (image == null || image.Length == 0)
             {
                 ModelState.AddModelError("Image", "Lütfen bir resim seçiniz.");
-                return View(productViewModel); // Hata durumunda aynı sayfayı göster
+                return View(productViewModel); 
             }
 
-            // Görseli uygun bir dizine kaydetme işlemleri
-            var fileName = Path.GetFileName(image.FileName); // Dosya adını al
-            var filePath = Path.Combine("wwwroot/uploads", fileName); // Yolu belirle
+            var fileName = Path.GetFileName(image.FileName); 
+            var filePath = Path.Combine("wwwroot/uploads", fileName); 
 
-            // Dosya kaydetme işlemi
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                image.CopyTo(stream); // Senkron kopyalama
+                image.CopyTo(stream); 
             }
 
-            // Görsel yolunu ProductViewModel'e ekle
-            productViewModel.Image = "/uploads/" + fileName; // Veya tam yolunu ayarlayın
+            productViewModel.Image = "/uploads/" + fileName; 
 
-            // Ürünü güncelle
             _productService.UpdateProduct(_mapper.Map<ProductDto>(productViewModel));
 
-            return RedirectToAction("GetProducts"); // Güncelleme başarılı ise yönlendir
+            return RedirectToAction("GetProducts"); 
         }
-
-
-
 
         [HttpGet]
         public IActionResult ProductDetails(int id)
         {
-
             var productDetail = _productService.GetById(id);
-
-
 
             var allBrands = _brandService.GetAllBrands();
             var allCategories = _categoryService.GetAllCategories();
-
-
-
-
 
             var brandViewModels = allBrands.Select(b => new AddBrandViewModel
             {
                 Id = b.Id,
                 Name = b.Name
-
             }).ToList();
 
             var categoryViewModels = allCategories.Select(c => new AddCategoryViewModel
             {
                 Id = c.Id,
                 Name = c.Name
-
             }).ToList();
 
             ViewBag.Brands = brandViewModels;
             ViewBag.Categories = categoryViewModels;
 
+            var comments = _commentService.GetCommentsByProductId(id);
 
+            var commentViewModels = comments.Select(c => new CommentViewModel
+            {
+                UserId = c.UserId,
+                ProductId = c.ProductId,
+                CommentText = c.CommentText,
+                CreatedDate = c.CreatedDate,
+                UserName = _userService.GetById(c.UserId).UserName 
+            }).ToList();
 
+            ViewBag.Comments = commentViewModels;
 
+           
+            var commentViewModel = new CommentViewModel
+            {
+                ProductId = id
+            };
 
+            var viewModel = Tuple.Create(_mapper.Map<ProductViewModel>(productDetail), commentViewModel);
 
-
-            return View(_mapper.Map<ProductViewModel>(productDetail));
+            return View(viewModel);
         }
+
+
+
+
+
+
 
 
 

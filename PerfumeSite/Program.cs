@@ -24,6 +24,8 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -34,6 +36,9 @@ builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<ICreditCardRepository, CreditCardRepository>();
 builder.Services.AddScoped<ICreditCardService, CreditCardService>();
+
+builder.Services.AddScoped<ICommentService, CommentService>();
+
 
 
 

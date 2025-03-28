@@ -1,54 +1,60 @@
 ﻿@using PerfumeSite.BrandViewModels
 @using PerfumeSite.CategoryViewModels
 @using PerfumeSite.ProductViewModels
-@model ProductViewModel
+@using PerfumeSite.CommentViewModels
+@model Tuple<ProductViewModel, CommentViewModel>
 
 @{
     Layout = "_Layout";
-    var averageRating = ViewBag.AverageRating ?? 0; // Ortalama puan
+    var averageRating = ViewBag.AverageRating ?? 0; 
+    var userId = Context.Session.GetInt32("Id"); 
+    var comments = ViewBag.Comments as List<CommentViewModel> ?? new List<CommentViewModel>();
 }
+
+
+
 
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Model.Name - Ürün Detay</title>
+    <title>@Model.Item1.Name - Ürün Detay</title>
     <link rel="stylesheet" href="~/Product/ProductDetails/style.css" asp-append-version="true">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="product-detail-container">
-        <!-- Ürün Fotoğrafı -->
+   
         <div class="product-image">
-            <img src="@Model.Image" alt="@Model.Name">
+            <img src="@Model.Item1.Image" alt="@Model.Item1.Name">
         </div>
 
-        <!-- Ürün Bilgileri -->
-            <div class="average-rating">
-                <span>Ortalama Puan: </span>
-                <span class="rating-stars">
-                    @{
-                        for (int i = 1; i <= 5; i++)
+        
+        <div class="average-rating">
+            <span>Ortalama Puan: </span>
+            <span class="rating-stars">
+                @{
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= averageRating)
                         {
-                            if (i <= averageRating)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
-                            else
-                            {
-                                <i class="far fa-star"></i>
-                            }
+                            <i class="fas fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-star"></i>
                         }
                     }
-                </span>
-                <span>(@averageRating.ToString("0.0"))</span>
-            </div>
+                }
+            </span>
+            <span>(@averageRating.ToString("0.0"))</span>
+        </div>
         <div class="product-info">
             <h2 class="product-brand">
                 @{
                     var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
-                    .FirstOrDefault(b => b.Id == Model.BrandId);
+                    .FirstOrDefault(b => b.Id == Model.Item1.BrandId);
                 }
                 @if (brand != null)
                 {
@@ -58,7 +64,7 @@
             <p class="product-category">
                 @{
                     var category = ((List<AddCategoryViewModel>)ViewBag.Categories)
-                    .FirstOrDefault(c => c.Id == Model.CategoryId);
+                    .FirstOrDefault(c => c.Id == Model.Item1.CategoryId);
                 }
                 @if (category != null)
                 {
@@ -66,11 +72,11 @@
                 }
             </p>
 
-            <p class="product-description">@Model.Description</p>
+            <p class="product-description">@Model.Item1.Description</p>
 
-            <h4 class="product-price">@Model.Price.ToString("C")</h4>
+            <h4 class="product-price">@Model.Item1.Price.ToString("C")</h4>
 
-            <!-- Parfüm Boyutu -->
+            
             <div class="product-size">
                 <label class="perfume-text">Parfüm Boyutu</label>
                 <div class="size-options">
@@ -81,16 +87,14 @@
                 <input type="hidden" name="size" id="size" value="50ml">
             </div>
 
-            <!-- Ortalama Puan -->
-
-            <!-- Butonlar -->
+            
             <div class="button-container">
                 <button class="favorite-button">
                     <i class="fas fa-heart"></i> Favorilere Ekle
                 </button>
 
                 <form method="post" asp-controller="Cart" asp-action="AddToCart">
-                    <input type="hidden" name="productId" value="@Model.Id">
+                    <input type="hidden" name="productId" value="@Model.Item1.Id">
                     <div class="product-quantity">
                         <label for="quantity">Adet</label>
                         <input type="number" name="quantity" class="quantity" value="1" min="1">
@@ -103,36 +107,60 @@
         </div>
     </div>
 
-    <!-- Yorum Bölümü -->
+   
     <div class="product-reviews">
         <h3>Ürün Yorumları</h3>
         <ul class="review-list">
-            <li>Ahmet: Harika bir ürün, tavsiye ederim! ⭐⭐⭐⭐⭐</li>
-            <li>Elif: Kokusu çok kalıcı. 👍</li>
+            @if (comments.Count > 0)
+            {
+                @foreach (var comment in comments)
+                {
+                    <li>
+                        <strong>@comment.UserName</strong> - @comment.CommentText
+                        <span>(@comment.CreatedDate.ToShortDateString())</span>
+                    </li>
+                }
+            }
+            else
+            {
+                <li>Bu ürün için henüz yorum yapılmadı.</li>
+            }
         </ul>
+        @if(userId != null)
+        {
+            <form method="post" asp-controller="Comment" asp-action="AddComment">
+                <input type="hidden" name="productId" value="@Model.Item1.Id">
+                <input type="hidden" name="userId" value="@userId">
 
-        <form method="post" asp-controller="Product" asp-action="AddReview">
-            <input type="hidden" name="productId" value="@Model.Id">
-            <textarea name="reviewText" class="review-textarea" placeholder="Yorumunuzu yazın..." required></textarea>
-            <button type="submit" class="submit-review">Yorumu Gönder</button>
-        </form>
+                <textarea name="CommentText" asp-for="@Model.Item2.CommentText" class="review-textarea" placeholder="Yorumunuzu yazın..." required></textarea>
+
+                <button type="submit" class="submit-review">Yorumu Gönder</button>
+
+
+            </form>
+        }
+      else{
+			<p>Yorum yapabilmek için giriş yapmalısınız.</p>
+      }
+      
+
     </div>
 
     <script>
-        // Sayfa yüklendiğinde
+       
         document.addEventListener('DOMContentLoaded', function () {
             const sizeButtons = document.querySelectorAll('.size-option');
             const sizeInput = document.getElementById('size');
 
             sizeButtons.forEach(button => {
                 button.addEventListener('click', function () {
-                    // Tüm butonlardan 'active' sınıfını kaldır
+                    
                     sizeButtons.forEach(btn => btn.classList.remove('active'));
 
-                    // Tıklanan butona 'active' sınıfını ekle
+                    
                     this.classList.add('active');
 
-                    // Seçilen boyutu gizli inputa ata
+                  
                     sizeInput.value = this.dataset.size;
                 });
             });

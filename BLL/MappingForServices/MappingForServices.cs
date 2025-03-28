@@ -26,6 +26,14 @@ namespace BLL.MappingForServices
 
 
 
+
+
+            CreateMap<Comment, CommentDto>().ReverseMap();
+
+
+
+
+
             CreateMap<Category, CategoryDto>().ReverseMap();
 
 

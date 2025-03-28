@@ -4,6 +4,7 @@ using DAL.Entities;
 using PerfumeSite.AddressViewModels;
 using PerfumeSite.BrandViewModels;
 using PerfumeSite.CategoryViewModels;
+using PerfumeSite.CommentViewModels;
 using PerfumeSite.CreditCardViewModels;
 using PerfumeSite.ProductViewModels;
 using PerfumeSite.UserViewModels;
@@ -23,6 +24,16 @@ namespace PerfumeSite.MappingForMvc
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
             CreateMap<Address, AddressViewModel>().ReverseMap();
             CreateMap<UserProfileDto, UserProfileViewModel>().ReverseMap();
+
+
+          
+
+
+
+
+
+            CreateMap<CommentDto, CommentViewModel>().ReverseMap();
+
 
 
 

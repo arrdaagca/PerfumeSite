@@ -23,28 +23,48 @@ namespace DAL.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
 
-       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Product ve Brand ilişkisi
+          
             modelBuilder.Entity<Product>()
-                .HasOne(p => p.Brand) // Her ürünün bir markası var
-                .WithMany(b => b.Products) // Her markanın birden fazla ürünü olabilir
-                .HasForeignKey(p => p.BrandId) // Yabancı anahtar
-                .OnDelete(DeleteBehavior.Restrict); // İlişkili ürün silindiğinde markayı da sil
+                .HasOne(p => p.Brand) 
+                .WithMany(b => b.Products) 
+                .HasForeignKey(p => p.BrandId) 
+                .OnDelete(DeleteBehavior.Restrict); 
 
-            // Product ve Category ilişkisi
             modelBuilder.Entity<Product>()
-                .HasOne(p => p.Category) // Her ürünün bir kategorisi var
-                .WithMany(c => c.Products) // Her kategorinin birden fazla ürünü olabilir
-                .HasForeignKey(p => p.CategoryId) // Yabancı anahtar
-                .OnDelete(DeleteBehavior.Restrict); // İlişkili ürün silindiğinde kategoriyi de sil
+                .HasOne(p => p.Category) 
+                .WithMany(c => c.Products) 
+                .HasForeignKey(p => p.CategoryId) 
+                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Product>()
        .Property(p => p.Price)
-       .HasColumnType("decimal(18, 2)"); // 18 basamak toplam, 2 basamak ondalık
+       .HasColumnType("decimal(18, 2)"); 
+
+
+
+
+
+            modelBuilder.Entity<Comment>()
+        .HasOne(c => c.User)
+        .WithMany(u => u.Comments)
+        .HasForeignKey(c => c.UserId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Product)
+                .WithMany(p => p.Comments)
+                .HasForeignKey(c => c.ProductId)
+                .OnDelete(DeleteBehavior.Cascade); 
+
+
+
+
+
         }
 
 

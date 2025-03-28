@@ -17,7 +17,7 @@ namespace DAL.Entities
         public bool IsAdmin { get; set; }
         public List<Address> Addresses { get; set; }
         public List<CreditCard> CreditCards { get; set; }
-
+        public List<Comment> Comments { get; set; } = new List<Comment>();
 
 
 

@@ -39,15 +39,13 @@ namespace BLL.ConcreteServices
 
         public UserDto Login(UserLoginDto userLoginDto)
         {
-            // Kullanıcı adı veya e-posta ile kullanıcıyı bul
             var loggedInUser = _genericRepository.GetAll().FirstOrDefault(x => x.Email == userLoginDto.Email);
 
 
 
-            // Kullanıcı var mı kontrol et
             if (loggedInUser == null || !BCrypt.Net.BCrypt.Verify(userLoginDto.Password, loggedInUser.Password))
             {
-                return null; // Kullanıcı yoksa veya şifre yanlışsa null dön
+                return null; 
             }
 
             return _mapper.Map<UserDto>(loggedInUser);
