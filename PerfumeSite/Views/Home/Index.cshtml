@@ -3,6 +3,7 @@
 @using PerfumeSite.ProductViewModels
 @{
     Layout = "_Layout";
+	var userId = Context.Session.GetInt32("Id");
 }
 @model List<ProductViewModel>
 <!DOCTYPE html>
@@ -102,7 +103,31 @@
                                 <a href="/Product/ProductDetails/@item.Id">
                                     <img src="@item.Image" alt="@item.Name" class="product-image" />
                                 </a>
-                                <i class="fa-regular fa-heart favorite-icon"></i>
+
+
+                            @if (ViewBag.IsFavorite == false)
+                            {
+                                <form asp-controller="Favorite" asp-action="AddFavorites" method="post">
+                                    <i class="fa-regular fa-heart favorite-icon"></i>
+                                    <input hidden value="@userId" name="id" />
+                                    <input type="hidden" name="ProductId" value="@item.Id" />
+
+
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-controller="Favorite" asp-action="RemoveFavorites" method="post">
+                                    <i class="fa-regular fa-heart favorite-icon2"></i>
+                                    <input hidden value="@userId" name="id" />
+                                    <input type="hidden" name="ProductId" value="@item.Id" />
+
+
+                                </form>
+                            }
+
+
+                              
                             </div>
                             <div class="product-info">
                                 <h5 class="product-name">
@@ -140,21 +165,20 @@
 </body>
 </html>
  <script>
-        // Butonu göster ve gizle
         window.onscroll = function() {
             const button = document.getElementById("scrollToTopBtn");
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                button.style.display = "block"; // Butonu göster
+                button.style.display = "block"; 
             } else {
-                button.style.display = "none"; // Butonu gizle
+                button.style.display = "none"; 
             }
         };
 
-        // Yukarı kaydırma fonksiyonu
+        
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
-                behavior: "smooth" // Yumuşak kaydırma
+                behavior: "smooth" 
             });
         }
     </script>

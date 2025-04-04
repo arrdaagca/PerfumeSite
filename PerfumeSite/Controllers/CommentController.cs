@@ -40,8 +40,8 @@ namespace PerfumeSite.Controllers
             }
 
             
-            var commentDto = _mapper.Map<CommentDto>(commentViewModel);
-            _commentService.AddComment(commentDto); 
+            var comment = _mapper.Map<CommentDto>(commentViewModel);
+            _commentService.AddComment(comment); 
 
             
             return RedirectToAction("ProductDetails", "Product", new { id = commentViewModel.ProductId });

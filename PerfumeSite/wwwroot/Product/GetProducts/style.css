@@ -1,123 +1,116 @@
-﻿/* Genel Konteyner */
-.product-container {
-    max-width: 1200px; /* Genişlik sınırı */
-    margin: 40px auto; /* Otomatik kenar boşluğu ile ortala */
-    padding: 20px; /* İçerik boşluğu */
-    background: rgba(0, 0, 0, 0.6); /* Arka plan rengi */
-    border-radius: 10px; /* Kenar yuvarlama */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-    text-align: center; /* Metin ortalaması */
+﻿.product-container {
+    max-width: 1200px; 
+    margin: 40px auto; 
+    padding: 20px; 
+    background: rgba(0, 0, 0, 0.6); 
+    border-radius: 10px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
 }
 
-/* Başlık */
 .product-title {
-    font-size: 35px; /* Başlık boyutu */
-    color: gold; /* Başlık rengi */
-    margin-bottom: 20px; /* Alt boşluk */
+    font-size: 35px; 
+    color: gold; 
+    margin-bottom: 20px; 
 }
 
-/* Yeni Ürün Ekle Butonu */
 .product-actions {
-    display: flex; /* Flex düzen */
-    justify-content: center; /* Ortala */
-    margin-bottom: 20px; /* Alt boşluk */
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 20px; 
 }
 
 .btn-add-product {
-    background-color: gray; /* Arka plan rengi */
-    color: white; /* Yazı rengi */
-    padding: 10px 20px; /* İçerik boşluğu */
-    border: none; /* Kenar yok */
-    border-radius: 5px; /* Kenar yuvarlama */
-    cursor: pointer; /* İmleci değiştirme */
-    font-size: 16px; /* Yazı boyutu */
-    transition: background 0.3s; /* Geçiş efekti */
+    background-color: gray;
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background 0.3s; 
 }
 
     .btn-add-product:hover {
-        background-color: gold; /* Hover rengi */
-        color: black; /* Hover yazı rengi */
+        background-color: gold; 
+        color: black; 
     }
 
-/* Tablo Stili */
 .table-wrapper {
-    overflow-x: auto; /* Taşma durumunda kaydırma */
+    overflow-x: auto; 
 }
 
 .product-table {
-    width: 100%; /* Genişlik %100 */
-    border-collapse: collapse; /* Kenar çökmesini önle */
-    background: gray; /* Arka plan rengi */
-    border-radius: 8px; /* Kenar yuvarlama */
-    overflow: hidden; /* Taşma önleme */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-    color: white; /* Yazı rengi */
+    width: 100%; 
+    border-collapse: collapse; 
+    background: gray; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    color: white; 
 }
 
     .product-table th, .product-table td {
-        padding: 12px; /* Hücre içi boşluk */
-        text-align: center; /* Metin ortalaması */
-        border-bottom: 1px solid #ddd; /* Alt kenar */
+        padding: 12px; 
+        text-align: center; 
+        border-bottom: 1px solid #ddd; 
     }
 
-    /* Dikey Çizgi için Sağ Kenar Çizgisi */
     .product-table td {
-        border-right: 1px solid #ddd; /* Dikey çizgi */
+        border-right: 1px solid #ddd; 
     }
 
         .product-table td:last-child {
-            border-right: none; /* Son hücre için sağ kenarı kaldır */
+            border-right: none; 
         }
 
     .product-table th {
-        background-color: black; /* Başlık arka plan rengi */
-        color: white; /* Başlık yazı rengi */
-        font-weight: bold; /* Kalın yazı */
+        background-color: black; 
+        color: white; 
+        font-weight: bold; 
     }
 
     .product-table tr:hover {
-        background-color: rgba(0, 0, 0, 0.6); /* Hover rengi */
+        background-color: rgba(0, 0, 0, 0.6); 
     }
 
-/* Buton Stilleri */
 .btn-edit {
-    background-color: black; /* Güncelle butonu arka plan rengi */
-    color: white; /* Yazı rengi */
-    padding: 8px 12px; /* İçerik boşluğu */
-    border: none; /* Kenar yok */
-    border-radius: 5px; /* Kenar yuvarlama */
-    cursor: pointer; /* İmleci değiştirme */
-    font-size: 14px; /* Yazı boyutu */
-    transition: background 0.3s; /* Geçiş efekti */
-    width: 120px; /* Genişliği belirle */
+    background-color: black; 
+    color: white; 
+    padding: 8px 12px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    transition: background 0.3s; 
+    width: 120px; 
 }
 
     .btn-edit:hover {
-        background-color: gold; /* Hover rengi */
-        color: black; /* Hover yazı rengi */
+        background-color: gold; 
+        color: black; 
     }
 
 .btn-delete {
-    background-color: black; /* Sil butonu arka plan rengi */
+    background-color: black; 
     margin-top:20px;
-    color: white; /* Yazı rengi */
-    padding: 8px 12px; /* İçerik boşluğu */
-    border: none; /* Kenar yok */
-    border-radius: 5px; /* Kenar yuvarlama */
-    cursor: pointer; /* İmleci değiştirme */
-    font-size: 14px; /* Yazı boyutu */
-    transition: background 0.3s; /* Geçiş efekti */
-    width: 120px; /* Genişliği güncelle butonuyla aynı olacak şekilde ayarla */
+    color: white; 
+    padding: 8px 12px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px;
+    transition: background 0.3s; 
+    width: 120px; 
 }
 
     .btn-delete:hover {
-        background-color: gold; /* Hover rengi */
-        color: black; /* Hover yazı rengi */
+        background-color: gold; 
+        color: black; 
     }
 
-/* Ürün Resmi Ayarları */
 .product-image {
-    width: 150px !important; /* Genişlik 150 piksel */
-    height: 150px !important; /* Yükseklik 150 piksel */
-    border-radius: 5px; /* Kenar yuvarlama */
+    width: 150px !important; 
+    height: 150px !important; 
+    border-radius: 5px; 
 }

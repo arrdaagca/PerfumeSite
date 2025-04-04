@@ -15,21 +15,43 @@ namespace PerfumeSite.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IBrandService _brandService;
+        private readonly IFavoriteService _favoriteService;
 
-        public HomeController(IMapper mapper,IProductService productService,ICategoryService categoryService,IBrandService brandService)
+        public HomeController(IMapper mapper,IProductService productService,ICategoryService categoryService,IBrandService brandService,IFavoriteService favoriteService)
         {
             _mapper = mapper;
             _productService = productService;
             _categoryService = categoryService;
             _brandService = brandService;
+            _favoriteService = favoriteService;
         }
 
-        public IActionResult Index(string sortOrder,string sortPrice,int? brandId,int? categoryId)
+        public IActionResult Index(string sortOrder,string sortPrice,int? brandId,int? categoryId,int productId)
         {
 
-          var getAllProducts =   _productService.GetAllProducts();
+
+            var userId = HttpContext.Session.GetInt32("Id");
+
+            var getAllProducts =   _productService.GetAllProducts();
             var allBrands = _brandService.GetAllBrands();
             var allCategories = _categoryService.GetAllCategories();
+
+
+
+
+
+            if (userId != null)
+            {
+                ViewBag.IsFavorite = _favoriteService.IsFavorite(userId.Value, productId);
+            }
+            else
+            {
+                ViewBag.IsFavorite = false;
+            }
+
+
+
+
 
 
 

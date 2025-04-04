@@ -163,27 +163,28 @@
     color:gold;
 }
 .favorite-icon {
-    position: absolute; /* İkonun konumunu belirler */
-    top: 10px; /* Üstten mesafe */
-    right: 10px; /* Sağdan mesafe */
-    background-color: rgba(255, 255, 255, 0.8); /* Arka plan rengi */
-    color: black; /* İkon rengi */
-    border-radius: 50%; /* Daire şeklinde görünüm */
-    padding: 8px; /* İç boşluk */
-    font-size: 18px; /* İkon boyutu */
-    cursor: pointer; /* Fare ile üzerine gelince işaretçi */
-    transition: background-color 0.3s, color 0.3s; /* Geçiş efekti */
-    z-index: 1; /* Diğer öğelerin üzerinde görünmesi için */
-    opacity: 0; /* Başlangıçta görünmez */
-    visibility: hidden; /* Başlangıçta gizli */
-    transition: opacity 0.3s, visibility 0.3s; /* Opaklık ve görünürlük geçişi */
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: black; 
+    border-radius: 50%; 
+    padding: 8px; 
+    font-size: 18px;
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s; 
+    z-index: 1; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s, visibility 0.3s; 
 }
 
 
-    /* Hover efekti */
+
+   
 .product-card:hover .favorite-icon {
-    opacity: 1; /* Görünür hale gelir */
-    visibility: visible; /* Görünürlük ayarlanır */
+    opacity: 1; 
+    visibility: visible; 
     
 }
  .favorite-icon:hover{
@@ -191,22 +192,23 @@
    color:gold;
 }
 
+
 #scrollToTopBtn {
-    position: fixed; /* Sayfanın sağ alt köşesinde sabit kalması için */
-    bottom: 20px; /* Alt taraftan mesafe */
-    right: 20px; /* Sağ taraftan mesafe */
-    display: none; /* Başlangıçta görünmez */
-    background-color: gold; /* Arka plan rengi */
-    color: white; /* Yazı rengi */
-    border: none; /* Kenar yok */
-    border-radius: 5px; /* Köşeleri yuvarlaştırma */
-    padding: 10px; /* İç boşluk */
-    font-size: 18px; /* Yazı boyutu */
-    cursor: pointer; /* Fare ile üzerine gelince işaretçi */
-    z-index: 1000; /* Diğer öğelerin üzerinde görünmesi için */
-    transition: background-color 0.3s; /* Geçiş efekti */
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    display: none; 
+    background-color: gold; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 18px;
+    cursor: pointer; 
+    z-index: 1000; 
+    transition: background-color 0.3s; 
 }
 
     #scrollToTopBtn:hover {
-        background-color: rgba(0, 0, 0, 1); /* Üzerine gelindiğinde arka plan rengi */
+        background-color: rgba(0, 0, 0, 1); 
     }

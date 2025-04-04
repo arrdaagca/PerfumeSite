@@ -25,6 +25,7 @@ namespace DAL.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Favorite> Favorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -59,9 +60,14 @@ namespace DAL.Data
                 .HasOne(c => c.Product)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.ProductId)
-                .OnDelete(DeleteBehavior.Cascade); 
+                .OnDelete(DeleteBehavior.Cascade);
 
 
+            modelBuilder.Entity<Favorite>()
+    .HasOne(f => f.User)
+    .WithMany(u => u.Favorites)
+    .HasForeignKey(f => f.UserId)
+    .OnDelete(DeleteBehavior.Cascade);
 
 
 

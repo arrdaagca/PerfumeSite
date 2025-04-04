@@ -160,6 +160,32 @@ namespace DAL.Migrations
                     b.ToTable("CreditCards");
                 });
 
+            modelBuilder.Entity("DAL.Entities.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Favorites");
+                });
+
             modelBuilder.Entity("DAL.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -280,6 +306,25 @@ namespace DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DAL.Entities.Favorite", b =>
+                {
+                    b.HasOne("DAL.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Entities.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DAL.Entities.Product", b =>
                 {
                     b.HasOne("DAL.Entities.Brand", "Brand")
@@ -321,6 +366,8 @@ namespace DAL.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("CreditCards");
+
+                    b.Navigation("Favorites");
                 });
 #pragma warning restore 612, 618
         }

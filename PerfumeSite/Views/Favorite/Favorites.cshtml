@@ -1,0 +1,72 @@
+﻿@using PerfumeSite.BrandViewModels
+@using PerfumeSite.FavoriteViewModels
+@using PerfumeSite.ProductViewModels
+@model List<Tuple<ProductViewModel, FavoriteViewModel>>
+
+
+@{
+    Layout = "_Layout";
+}
+
+
+<link rel="stylesheet" href="~/Favorite/style.css">
+
+
+<h1>Favorilerim</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            var product = item.Item1; 
+            var favorite = item.Item2; 
+
+            <li>
+
+                <div class="product">
+                    <a href="/Product/ProductDetails/@product.Id">
+
+                    <img src="@product.Image" alt="@product.Name" style="width: 100px; height: auto;" />
+                    </a>
+
+                    <h3>@product.Name</h3>
+                    <p class="fav-brand">Marka:
+
+
+                        @{
+                            var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
+                            .FirstOrDefault(b => b.Id == product.BrandId);
+                        }
+                        @if (brand != null)
+                        {
+                            @brand.Name
+                        }
+
+                    </p>
+                    <p class="fav-description">Açıklama: @product.Description</p>
+                    <p class="fav-price">Fiyat: @product.Price</p>
+                    <form asp-controller="Favorite" asp-action="RemoveFavorite" method="post">
+                        <input type="hidden" name="UserId" value="@favorite.UserId" />
+                        <input type="hidden" name="ProductId" value="@favorite.ProductId" />
+                        <button type="submit" class="remove-favorite-button">Favorilerden Kaldır</button>
+                    </form>
+
+
+                    <form asp-controller="Basket" asp-action="AddBasket" method="post">
+                        <input type="hidden" name="UserId" value="@favorite.UserId" />
+                        <input type="hidden" name="ProductId" value="@favorite.ProductId" />
+
+                        <button type="submit" class="add-basket">Sepete Ekle</button>
+                    </form>
+
+
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Henüz favori ürününüz yok.</p>
+}

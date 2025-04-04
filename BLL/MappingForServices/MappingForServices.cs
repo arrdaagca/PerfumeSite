@@ -25,6 +25,7 @@ namespace BLL.MappingForServices
 
 
 
+            CreateMap<Favorite, FavoriteDto>().ReverseMap();
 
 
 

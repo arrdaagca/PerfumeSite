@@ -1,5 +1,6 @@
 ﻿@using PerfumeSite.BrandViewModels
 @using PerfumeSite.CategoryViewModels
+@using PerfumeSite.FavoriteViewModels
 @using PerfumeSite.ProductViewModels
 @using PerfumeSite.CommentViewModels
 @model Tuple<ProductViewModel, CommentViewModel>
@@ -9,6 +10,8 @@
     var averageRating = ViewBag.AverageRating ?? 0; 
     var userId = Context.Session.GetInt32("Id"); 
     var comments = ViewBag.Comments as List<CommentViewModel> ?? new List<CommentViewModel>();
+  
+
 }
 
 
@@ -48,7 +51,7 @@
                     }
                 }
             </span>
-            <span>(@averageRating.ToString("0.0"))</span>
+            <span>(@averageRating)</span>
         </div>
         <div class="product-info">
             <h2 class="product-brand">
@@ -74,7 +77,7 @@
 
             <p class="product-description">@Model.Item1.Description</p>
 
-            <h4 class="product-price">@Model.Item1.Price.ToString("C")</h4>
+            <h4 class="product-price">@Model.Item1.Price</h4>
 
             
             <div class="product-size">
@@ -87,11 +90,40 @@
                 <input type="hidden" name="size" id="size" value="50ml">
             </div>
 
-            
             <div class="button-container">
-                <button class="favorite-button">
-                    <i class="fas fa-heart"></i> Favorilere Ekle
-                </button>
+
+                
+
+
+                    @if (ViewBag.IsFavorite == false)
+                    {
+                        <form asp-controller="Favorite" asp-action="AddFavorite" method="post">
+                            <input type="hidden" name="UserId" value="@userId" />
+                            <input type="hidden" name="ProductId" value="@Model.Item1.Id" />
+                            <button class="favorite-button">
+                                <i class="fas fa-heart"></i>Favorilere Ekle
+                                
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Favorite" asp-action="RemoveFavorite" method="post">
+
+                        <input type="hidden" name="UserId" value="@userId" />
+                        <input type="hidden" name="ProductId" value="@Model.Item1.Id" />
+                            <button class="favorite-button">
+                                <i class="fas fa-heart"></i>Favorilerden Kaldır
+
+                            </button>
+                        
+                        </form>
+                    }
+
+                   
+                
+
+
 
                 <form method="post" asp-controller="Cart" asp-action="AddToCart">
                     <input type="hidden" name="productId" value="@Model.Item1.Id">

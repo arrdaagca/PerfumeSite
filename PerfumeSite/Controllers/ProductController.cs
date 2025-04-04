@@ -19,8 +19,9 @@ namespace PerfumeSite.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ICommentService _commentService;
         private readonly IUserService _userService;
+        private readonly IFavoriteService _favoriteService;
 
-        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService,ICommentService commentService,IUserService userService)
+        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService,ICommentService commentService,IUserService userService,IFavoriteService favoriteService)
         {
             _productService = productService;
             _mapper = mapper;
@@ -28,6 +29,7 @@ namespace PerfumeSite.Controllers
             _categoryService = categoryService;
             _commentService = commentService;
             _userService = userService;
+            _favoriteService = favoriteService;
         }
 
 
@@ -161,10 +163,13 @@ namespace PerfumeSite.Controllers
         [HttpGet]
         public IActionResult ProductDetails(int id)
         {
+
+            var userId = HttpContext.Session.GetInt32("Id");
+
             var productDetail = _productService.GetById(id);
 
-            var allBrands = _brandService.GetAllBrands();
             var allCategories = _categoryService.GetAllCategories();
+            var allBrands = _brandService.GetAllBrands();
 
             var brandViewModels = allBrands.Select(b => new AddBrandViewModel
             {
@@ -194,7 +199,18 @@ namespace PerfumeSite.Controllers
 
             ViewBag.Comments = commentViewModels;
 
-           
+
+
+            if (userId != null)
+            {
+                ViewBag.IsFavorite = _favoriteService.IsFavorite(userId.Value, id);
+            }
+            else
+            {
+                ViewBag.IsFavorite = false;
+            }
+
+
             var commentViewModel = new CommentViewModel
             {
                 ProductId = id
