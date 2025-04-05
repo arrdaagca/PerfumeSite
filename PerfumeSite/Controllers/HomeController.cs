@@ -26,6 +26,7 @@ namespace PerfumeSite.Controllers
             _favoriteService = favoriteService;
         }
 
+        [HttpGet]
         public IActionResult Index(string sortOrder,string sortPrice,int? brandId,int? categoryId,int productId)
         {
 
@@ -35,8 +36,6 @@ namespace PerfumeSite.Controllers
             var getAllProducts =   _productService.GetAllProducts();
             var allBrands = _brandService.GetAllBrands();
             var allCategories = _categoryService.GetAllCategories();
-
-
 
 
 

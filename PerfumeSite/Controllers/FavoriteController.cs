@@ -25,9 +25,9 @@ namespace PerfumeSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddFavorite(FavoriteViewModel favoriteViewModel)
+        public IActionResult AddFavorite(FavoriteViewModel favoriteViewModel,int productId)
         {
-            var userId = HttpContext.Session.GetInt32("Id");
+            var userId = (int)HttpContext.Session.GetInt32("Id");
 
 
         
@@ -39,9 +39,12 @@ namespace PerfumeSite.Controllers
             }
 
 
-         
+            var IsFavorite = _favoriteService.IsFavorite(userId, productId);
 
-
+            if (IsFavorite == true)
+            {
+                return RedirectToAction("Index","Home");
+            }
 
             var favorite = _mapper.Map<FavoriteDto>(favoriteViewModel);
             _favoriteService.AddFavorite(favorite);

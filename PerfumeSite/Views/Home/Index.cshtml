@@ -104,28 +104,7 @@
                                     <img src="@item.Image" alt="@item.Name" class="product-image" />
                                 </a>
 
-
-                            @if (ViewBag.IsFavorite == false)
-                            {
-                                <form asp-controller="Favorite" asp-action="AddFavorites" method="post">
-                                    <i class="fa-regular fa-heart favorite-icon"></i>
-                                    <input hidden value="@userId" name="id" />
-                                    <input type="hidden" name="ProductId" value="@item.Id" />
-
-
-                                </form>
-                            }
-                            else
-                            {
-                                <form asp-controller="Favorite" asp-action="RemoveFavorites" method="post">
-                                    <i class="fa-regular fa-heart favorite-icon2"></i>
-                                    <input hidden value="@userId" name="id" />
-                                    <input type="hidden" name="ProductId" value="@item.Id" />
-
-
-                                </form>
-                            }
-
+                        
 
                               
                             </div>

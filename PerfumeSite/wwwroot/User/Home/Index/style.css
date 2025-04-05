@@ -162,34 +162,13 @@
     font-weight: bold;
     color:gold;
 }
-.favorite-icon {
-    position: absolute; 
-    top: 10px; 
-    right: 10px; 
-    background-color: rgba(255, 255, 255, 0.8); 
-    color: black; 
-    border-radius: 50%; 
-    padding: 8px; 
-    font-size: 18px;
-    cursor: pointer; 
-    transition: background-color 0.3s, color 0.3s; 
-    z-index: 1; 
-    opacity: 0; 
-    visibility: hidden; 
-    transition: opacity 0.3s, visibility 0.3s; 
-}
-
 
 
    
-.product-card:hover .favorite-icon {
+.product-card:hover{
     opacity: 1; 
     visibility: visible; 
     
-}
- .favorite-icon:hover{
-   background-color:black;
-   color:gold;
 }
 
 
