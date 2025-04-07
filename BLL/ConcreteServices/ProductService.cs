@@ -3,6 +3,7 @@ using BLL.AbstractServices;
 using BLL.AllDtos;
 using DAL.AbstractRepositories;
 using DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,13 @@ namespace BLL.ConcreteServices
     {
         private readonly IGenericRepository<Product> _genericRepository;
         private readonly IMapper _mapper;
+        private readonly IProductRepository _productRepository;
 
-        public ProductService(IGenericRepository<Product> genericRepository,IMapper mapper)
+        public ProductService(IGenericRepository<Product> genericRepository,IMapper mapper,IProductRepository productRepository)
         {
             _genericRepository = genericRepository;
             _mapper = mapper;
+            _productRepository = productRepository;
         }
 
         public void AddProduct(ProductDto addProductDto)
@@ -44,6 +47,20 @@ namespace BLL.ConcreteServices
         {
             var getProductById = _genericRepository.GetById(id);
             return _mapper.Map<ProductDto>(getProductById);
+        }
+
+        public List<ProductDto> SearchProducts(string query)
+        {
+            var products = _productRepository.SearchProducts(query);
+
+            return products.Select(p => new ProductDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Image = p.Image,
+                Description = p.Description,
+            }).ToList();
         }
 
         public void UpdateProduct(ProductDto productDto)

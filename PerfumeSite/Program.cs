@@ -35,6 +35,17 @@ builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 
 
 
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddScoped<IBasketService, BasketService>();
+
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+
+
+
+
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 

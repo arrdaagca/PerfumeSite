@@ -21,6 +21,9 @@ namespace DAL.Entities
 
         public List<Favorite> Favorites { get; set; } = new List<Favorite>();
 
+        public List<Basket> Baskets { get; set; } = new List<Basket>();
+
+
 
 
 

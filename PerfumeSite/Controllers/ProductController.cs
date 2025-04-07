@@ -4,6 +4,7 @@ using BLL.AllDtos;
 using BLL.ConcreteServices;
 using DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
+using PerfumeSite.BasketViewModels;
 using PerfumeSite.BrandViewModels;
 using PerfumeSite.CategoryViewModels;
 using PerfumeSite.CommentViewModels;
@@ -20,8 +21,9 @@ namespace PerfumeSite.Controllers
         private readonly ICommentService _commentService;
         private readonly IUserService _userService;
         private readonly IFavoriteService _favoriteService;
+        private readonly IBasketService _basketService;
 
-        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService,ICommentService commentService,IUserService userService,IFavoriteService favoriteService)
+        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService,ICommentService commentService,IUserService userService,IFavoriteService favoriteService,IBasketService basketService)
         {
             _productService = productService;
             _mapper = mapper;
@@ -30,6 +32,7 @@ namespace PerfumeSite.Controllers
             _commentService = commentService;
             _userService = userService;
             _favoriteService = favoriteService;
+            _basketService = basketService;
         }
 
 
@@ -199,6 +202,8 @@ namespace PerfumeSite.Controllers
 
             ViewBag.Comments = commentViewModels;
 
+           
+         
 
 
             if (userId != null)
@@ -208,6 +213,20 @@ namespace PerfumeSite.Controllers
             else
             {
                 ViewBag.IsFavorite = false;
+                
+            }
+
+
+
+
+            if (userId != null)
+            {
+                ViewBag.IsBasket = _basketService.IsBasket(userId.Value, id);
+            }
+            else
+            {
+                ViewBag.IsBasket = false;
+
             }
 
 
@@ -216,7 +235,19 @@ namespace PerfumeSite.Controllers
                 ProductId = id
             };
 
-            var viewModel = Tuple.Create(_mapper.Map<ProductViewModel>(productDetail), commentViewModel);
+
+
+            var basketViewModel = new BasketViewModel
+            {
+                ProductId = id,
+                UserId = userId ?? 0
+            };
+
+
+
+
+
+            var viewModel = Tuple.Create(_mapper.Map<ProductViewModel>(productDetail), commentViewModel,basketViewModel);
 
             return View(viewModel);
         }
@@ -225,6 +256,37 @@ namespace PerfumeSite.Controllers
 
 
 
+
+        [HttpGet]
+        public IActionResult Search(string query)
+        {
+            
+            if (string.IsNullOrEmpty(query))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
+
+            var results = _productService.SearchProducts(query);
+
+            
+            var viewModelResults = results.Select(p => new ProductViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Image = p.Image,
+                Description = p.Description,
+            }).ToList();
+
+            
+            if (!viewModelResults.Any())
+            {
+                ViewBag.Message = "Ürün bulunamadı."; 
+            }
+
+            
+            return RedirectToAction("Index", "Home", new { query = query, results = viewModelResults });
+        }
 
 
 

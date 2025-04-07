@@ -28,8 +28,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                <form class="search-bar">
-                    <input type="text" placeholder="Aradığınız ürün,kategori veya markayı yazınız">
+                <form class="search-bar" asp-controller="Product" asp-action="Search" method="get">
+                    <input type="text" name="query" placeholder="Aradığınız ürün,kategori veya markayı yazınız">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <ul class="navbar-nav">
@@ -61,7 +61,7 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Favorite" asp-action="Favorites" >
+                            <a class="nav-link" asp-controller="Favorite" asp-action="GetFavorites">
                                 <i class="fas fa-heart"></i> Favorilerim
                             </a>
                         </li>
@@ -78,7 +78,7 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-controller="Basket" asp-action="GetBasket">
                                 <i class="fas fa-shopping-cart"></i> Sepetim
                             </a>
                         </li>

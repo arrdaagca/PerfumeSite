@@ -27,7 +27,7 @@ namespace PerfumeSite.Controllers
         [HttpPost]
         public IActionResult AddFavorite(FavoriteViewModel favoriteViewModel,int productId)
         {
-            var userId = (int)HttpContext.Session.GetInt32("Id");
+            var userId = HttpContext.Session.GetInt32("Id");
 
 
         
@@ -39,7 +39,7 @@ namespace PerfumeSite.Controllers
             }
 
 
-            var IsFavorite = _favoriteService.IsFavorite(userId, productId);
+            var IsFavorite = _favoriteService.IsFavorite((int)userId, productId);
 
             if (IsFavorite == true)
             {
@@ -49,7 +49,7 @@ namespace PerfumeSite.Controllers
             var favorite = _mapper.Map<FavoriteDto>(favoriteViewModel);
             _favoriteService.AddFavorite(favorite);
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Get Favorites");
         }
 
 
@@ -58,7 +58,7 @@ namespace PerfumeSite.Controllers
         public IActionResult RemoveFavorite(int productId)
         {
             var userId = HttpContext.Session.GetInt32("Id");
-            if (userId == null)
+            if (userId == null) 
             {
                 return RedirectToAction("Login", "User");
             }
@@ -66,10 +66,10 @@ namespace PerfumeSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+         
 
         [HttpGet]
-        public IActionResult Favorites()
+        public IActionResult GetFavorites()
         {
             var allBrands = _brandService.GetAllBrands();
 

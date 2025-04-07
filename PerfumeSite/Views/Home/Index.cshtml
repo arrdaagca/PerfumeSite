@@ -132,7 +132,30 @@
             
            
         </div>
-
+        @if (ViewBag.SearchQuery != null)
+        {
+            <h3>Arama Sonuçları: "@ViewBag.SearchQuery"</h3>
+            if (Model != null && Model.Any())
+            {
+                <ul>
+                    @foreach (var product in Model)
+                    {
+                        <li>
+                            <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
+                                <img src="@product.Image" alt="@product.Name" />
+                                <h3>@product.Name</h3>
+                                <p>@product.Price.ToString("C")</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Hiçbir ürün bulunamadı.</p>
+            }
+        }
+       
 
 
     </main>

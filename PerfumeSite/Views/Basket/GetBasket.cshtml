@@ -1,0 +1,91 @@
+﻿@using PerfumeSite.BasketViewModels
+@using PerfumeSite.BrandViewModels
+@using PerfumeSite.ProductViewModels
+@model List<Tuple<ProductViewModel, BasketViewModel>>
+
+@{
+    Layout = "_Layout";
+}
+@{
+    decimal toplamFiyat = Model.Sum(item => item.Item2.Quantity * item.Item1.Price);
+    decimal kargoUcreti = 100; 
+    decimal sonFiyat = toplamFiyat + kargoUcreti; 
+}
+<link rel="stylesheet" href="~/Basket/style.css">
+
+<div class="basket-container">
+    <h2>Sepetim</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="basket-table">
+            <thead>
+                <tr>
+                    <th>Ürün Resmi</th>
+                    <th>Ürün Adı</th>
+                    <th>Marka</th>
+                    <th>Açıklama</th>
+                    <th>Fiyat</th>
+                    <th>Adet</th>
+                    <th>Toplam Fiyat</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var product = item.Item1; 
+                    var basket = item.Item2;   
+
+                    <tr>
+                        <td>
+                            <img src="@product.Image" alt="@product.Name" class="product-image" />
+                        </td>
+                        <td>@product.Name</td>
+                        <td>
+                            @{
+                                var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
+                                .FirstOrDefault(b => b.Id == product.BrandId);
+                            }
+                            @if (brand != null)
+                            {
+                                @brand.Name
+                            }
+                        </td>
+                        <td>@product.Description</td>
+                        <td>@product.Price.ToString("C")</td>
+                        <td>
+                            <input type="number" value="@basket.Quantity" min="1" class="quantity-input" />
+                        </td>
+                        <td>
+                            @( basket.Quantity * product.Price)                         
+                        </td>
+                        <td>
+                            <form method="post" asp-controller="Basket" asp-action="RemoveBasket">
+                                <input type="hidden" name="productId" value="@product.Id" />
+                                <input type="hidden" name="UserId" value="@basket.UserId" />
+                                <button type="submit" class="remove-button">Sepetten Çıkar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+       
+
+        <div class="basket-summary">
+            <h3>Toplam Fiyat: @toplamFiyat.ToString("C")</h3>
+            <h4>Kargo Ücreti: @kargoUcreti.ToString("C")</h4>
+            <h3>Ödenecek Tutar: @sonFiyat.ToString("C")</h3> 
+            <form method="post" asp-controller="Checkout" asp-action="ConfirmBasket">
+                <input type="hidden" name="UserId" value="@Model.First().Item2.UserId" />
+                <button type="submit" class="confirm-button">Sepeti Onayla</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <p>Sepetinizde ürün bulunmamaktadır.</p>
+    }
+</div>

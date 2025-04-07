@@ -16,8 +16,9 @@ namespace BLL.AbstractServices
 
         void DeleteById(int id);
 
+        List<ProductDto> SearchProducts(string query);
 
-        
+
 
         void UpdateProduct(ProductDto productDto);
 

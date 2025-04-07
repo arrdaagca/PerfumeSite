@@ -1,15 +1,17 @@
-﻿@using PerfumeSite.BrandViewModels
+﻿@using PerfumeSite.BasketViewModels
+@using PerfumeSite.BrandViewModels
 @using PerfumeSite.CategoryViewModels
 @using PerfumeSite.FavoriteViewModels
 @using PerfumeSite.ProductViewModels
 @using PerfumeSite.CommentViewModels
-@model Tuple<ProductViewModel, CommentViewModel>
+@model Tuple<ProductViewModel, CommentViewModel,BasketViewModel>
 
 @{
     Layout = "_Layout";
     var averageRating = ViewBag.AverageRating ?? 0; 
     var userId = Context.Session.GetInt32("Id"); 
     var comments = ViewBag.Comments as List<CommentViewModel> ?? new List<CommentViewModel>();
+
   
 
 }
@@ -121,20 +123,38 @@
                     }
 
                    
-                
+                @if (ViewBag.IsBasket == false)
+                {
+                    <form method="post" asp-controller="Basket" asp-action="AddBasket">
+                        <input type="hidden" name="productId" value="@Model.Item1.Id">
+                        <input type="hidden" name="UserId" value="@userId" />
+                        <div class="product-quantity">
+                            <label for="quantity">Adet</label>
+                            <input type="number" name="quantity" class="quantity" value="1" min="1" asp-for="@Model.Item3.Quantity">
+                        </div>
+                        <button type="submit" class="product-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" asp-controller="Basket" asp-action="RemoveBasket">
+                        <input type="hidden" name="productId" value="@Model.Item1.Id">
+                        <input type="hidden" name="UserId" value="@userId" />
+                        <div class="product-quantity">
+                            <label for="quantity">Adet</label>
+                            <input type="number" name="quantity" class="quantity" value="1" min="1" asp-for="@Model.Item3.Quantity">
+                        </div>
+                        <button type="submit" class="product-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i> Sepetten Çıkar
+                        </button>
+                    </form>
+                }
 
 
 
-                <form method="post" asp-controller="Cart" asp-action="AddToCart">
-                    <input type="hidden" name="productId" value="@Model.Item1.Id">
-                    <div class="product-quantity">
-                        <label for="quantity">Adet</label>
-                        <input type="number" name="quantity" class="quantity" value="1" min="1">
-                    </div>
-                    <button type="submit" class="product-add-to-cart">
-                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
-                    </button>
-                </form>
+             
             </div>
         </div>
     </div>

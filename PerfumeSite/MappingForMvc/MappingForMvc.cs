@@ -2,6 +2,7 @@
 using BLL.AllDtos;
 using DAL.Entities;
 using PerfumeSite.AddressViewModels;
+using PerfumeSite.BasketViewModels;
 using PerfumeSite.BrandViewModels;
 using PerfumeSite.CategoryViewModels;
 using PerfumeSite.CommentViewModels;
@@ -29,6 +30,12 @@ namespace PerfumeSite.MappingForMvc
 
 
             CreateMap<FavoriteDto, FavoriteViewModel>().ReverseMap();
+
+
+
+
+            CreateMap<BasketDto, BasketViewModel>().ReverseMap();
+
 
 
 

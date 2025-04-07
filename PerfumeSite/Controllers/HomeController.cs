@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 using PerfumeSite.BrandViewModels;
 using PerfumeSite.CategoryViewModels;
 using PerfumeSite.ProductViewModels;
+using System.Runtime.InteropServices;
 
 namespace PerfumeSite.Controllers
 {
@@ -26,18 +27,24 @@ namespace PerfumeSite.Controllers
             _favoriteService = favoriteService;
         }
 
-        [HttpGet]
-        public IActionResult Index(string sortOrder,string sortPrice,int? brandId,int? categoryId,int productId)
+
+
+
+
+
+
+
+
+
+
+
+        public IActionResult Index(string query, int? brandId, int? categoryId, string sortOrder, string sortPrice, int productId)
         {
-
-
             var userId = HttpContext.Session.GetInt32("Id");
+            var getAllProducts = _productService.GetAllProducts(); 
 
-            var getAllProducts =   _productService.GetAllProducts();
             var allBrands = _brandService.GetAllBrands();
             var allCategories = _categoryService.GetAllCategories();
-
-
 
             if (userId != null)
             {
@@ -48,81 +55,78 @@ namespace PerfumeSite.Controllers
                 ViewBag.IsFavorite = false;
             }
 
-
-
-
-
-
-
+           
             if (categoryId.HasValue)
             {
-                getAllProducts = getAllProducts.Where(x=>x.CategoryId == categoryId.Value).ToList();
+                getAllProducts = getAllProducts.Where(x => x.CategoryId == categoryId.Value).ToList();
             }
 
-
+          
             if (brandId.HasValue)
             {
-                getAllProducts = getAllProducts.Where(x=>x.BrandId == brandId.Value).ToList();
+                getAllProducts = getAllProducts.Where(x => x.BrandId == brandId.Value).ToList();
             }
 
+           
+            if (!string.IsNullOrEmpty(query))
+            {
+                getAllProducts = getAllProducts
+                    .Where(p => p.Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                                 allBrands.Any(b => b.Id == p.BrandId && b.Name.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
+                                 allCategories.Any(c => c.Id == p.CategoryId && c.Name.Contains(query, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+            }
 
-
-
-
-
+            
             switch (sortOrder)
             {
                 case "priceAsc":
-                    getAllProducts = getAllProducts.OrderBy(x=>x.Price).ToList(); // Fiyat: Düşükten Yükseğe
+                    getAllProducts = getAllProducts.OrderBy(x => x.Price).ToList(); 
                     break;
                 case "priceDesc":
-                    getAllProducts = getAllProducts.OrderByDescending(x=>x.Price).ToList(); // Fiyat: Yüksekten Düşüğe
+                    getAllProducts = getAllProducts.OrderByDescending(x => x.Price).ToList(); 
                     break;
-              
                 default:
-                    break; 
+                    break;
             }
 
-
-
-
-            switch (sortPrice)
+           
+            if (!string.IsNullOrEmpty(sortPrice))
             {
-                case "0-1000":
-                    getAllProducts = getAllProducts.Where(x=>x.Price >= 0 && x.Price <= 1000).ToList();
-                    break;
-                case "1001-2000":
-                    getAllProducts = getAllProducts.Where(x=>x.Price >= 1001 && x.Price <= 2000).ToList();
-                    break;
-                case "2001-10000":
-                    getAllProducts = getAllProducts.Where(x=>x.Price >= 2001 && x.Price <= 10000).ToList();
-                    break;
-                default:
-                    break; 
+                switch (sortPrice)
+                {
+                    case "0-1000":
+                        getAllProducts = getAllProducts.Where(x => x.Price >= 0 && x.Price <= 1000).ToList();
+                        break;
+                    case "1001-2000":
+                        getAllProducts = getAllProducts.Where(x => x.Price >= 1001 && x.Price <= 2000).ToList();
+                        break;
+                    case "2001-10000":
+                        getAllProducts = getAllProducts.Where(x => x.Price >= 2001 && x.Price <= 10000).ToList();
+                        break;
+                    default:
+                        break;
+                }
             }
-
-
-
 
             var brandViewModels = allBrands.Select(b => new AddBrandViewModel
             {
                 Id = b.Id,
                 Name = b.Name
-
             }).ToList();
 
             var categoryViewModels = allCategories.Select(c => new AddCategoryViewModel
             {
                 Id = c.Id,
                 Name = c.Name
-
             }).ToList();
 
             ViewBag.Brands = brandViewModels;
             ViewBag.Categories = categoryViewModels;
-            
 
             return View(_mapper.Map<List<ProductViewModel>>(getAllProducts));
         }
+
+
     }
 }
