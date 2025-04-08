@@ -21,6 +21,8 @@ namespace DAL.Entities
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Order> Orders { get; set; } = new List<Order>();
+
 
 
 

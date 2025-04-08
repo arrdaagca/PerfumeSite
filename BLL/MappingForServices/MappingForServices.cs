@@ -32,6 +32,10 @@ namespace BLL.MappingForServices
             CreateMap<Basket, BasketDto>().ReverseMap();
 
 
+            CreateMap<Order, OrderDto>().ReverseMap();
+
+
+
 
 
             CreateMap<Comment, CommentDto>().ReverseMap();

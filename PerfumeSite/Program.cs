@@ -42,6 +42,12 @@ builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
+
+
+
 
 
 

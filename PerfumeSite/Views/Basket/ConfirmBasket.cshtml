@@ -1,0 +1,99 @@
+﻿@using PerfumeSite.AddressViewModels
+@using PerfumeSite.BasketViewModels
+@using PerfumeSite.BrandViewModels
+@using PerfumeSite.CreditCardViewModels
+@using PerfumeSite.OrderViewModels
+@using PerfumeSite.ProductViewModels
+@using System.Linq;
+
+@model List<Tuple<AddressViewModel,CreditCardViewModel,ProductViewModel,BasketViewModel>>
+
+<link rel="stylesheet" href="~/Basket/ConfirmBasket/style.css" />
+
+@{
+    ViewData["Title"] = "Sipariş Onayı";
+    Layout = "_Layout";
+}
+@{
+    var toplamFiyat = Model.Sum(item => item.Item3.Price * item.Item4.Quantity);
+    decimal kargoUcreti = 100;
+    decimal sonFiyat = toplamFiyat + kargoUcreti;
+
+    var userId = Context.Session.GetInt32("Id");
+}
+
+<h2>Sipariş Onay Sayfası</h2>
+
+<form method="post" asp-controller="Order" asp-action="ConfirmOrder">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Adres Seçimi</h4>
+            @foreach (var address in Model.Select(x => x.Item1).DistinctBy(a => a.Id))
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="AddressId" value="@address.Id" required />
+                    <label class="form-check-label">@address.Street</label>
+                </div>
+            }
+
+            <h4>Kredi Kartı Seçimi</h4>
+            @foreach (var card in Model.Select(x => x.Item2).DistinctBy(c => c.Id))
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="CreditCardId" value="@card.Id" required />
+                    <label class="form-check-label">**** **** **** @card.CreditCardNumber.Substring(12)</label>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <h4>Ürün Bilgisi</h4>
+            @foreach (var item in Model.DistinctBy(x => x.Item3.Id))
+            {
+                var urunId = item.Item3.Id;
+                var toplamAdet = Model.Where(x => x.Item3.Id == urunId).Sum(x => x.Item4.Quantity);
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="@item.Item3.Image" class="img-fluid rounded-start" alt="@item.Item3.Name">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Item3.Name</h5>
+                                <p class="card-text">@item.Item3.Description</p>
+                                <p class="card-text">Fiyat: @item.Item3.Price TL</p>
+                                <p class="card-text">Adet: @toplamAdet</p>
+                                <p class="card-text">
+                                    Marka:
+                                    @{
+                                        var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
+                                        .FirstOrDefault(b => b.Id == item.Item3.BrandId);
+                                    }
+                                    @if (brand != null)
+                                    {
+                                        @brand.Name
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="ProductId" value="@urunId" />
+                <input type="hidden" name="Quantity" value="@item.Item4.Quantity" />
+
+                
+            }
+        </div>
+    </div>
+
+    <div class="text-end mt-4">
+        <h4>Tutar: @toplamFiyat.ToString("C")</h4>
+        <h4>Kargo Ücreti: @kargoUcreti.ToString("C")</h4>
+        <h4>Toplam Tutar: @sonFiyat.ToString("C")</h4>
+    </div>
+
+    <input type="hidden" name="UserId" value="@userId" />
+    <button type="submit" class="btn-success">Sepeti Onayla</button>
+</form>

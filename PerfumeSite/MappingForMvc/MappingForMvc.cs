@@ -8,6 +8,7 @@ using PerfumeSite.CategoryViewModels;
 using PerfumeSite.CommentViewModels;
 using PerfumeSite.CreditCardViewModels;
 using PerfumeSite.FavoriteViewModels;
+using PerfumeSite.OrderViewModels;
 using PerfumeSite.ProductViewModels;
 using PerfumeSite.UserViewModels;
 
@@ -35,6 +36,11 @@ namespace PerfumeSite.MappingForMvc
 
 
             CreateMap<BasketDto, BasketViewModel>().ReverseMap();
+
+
+
+            CreateMap<OrderDto, OrderViewModel>().ReverseMap();
+
 
 
 

@@ -49,7 +49,7 @@ namespace PerfumeSite.Controllers
             var favorite = _mapper.Map<FavoriteDto>(favoriteViewModel);
             _favoriteService.AddFavorite(favorite);
 
-            return RedirectToAction("Get Favorites");
+            return RedirectToAction("GetFavorites");
         }
 
 
@@ -63,7 +63,7 @@ namespace PerfumeSite.Controllers
                 return RedirectToAction("Login", "User");
             }
             _favoriteService.RemoveFavorite((int)userId, productId);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetFavorites");
         }
 
          

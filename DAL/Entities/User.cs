@@ -23,6 +23,9 @@ namespace DAL.Entities
 
         public List<Basket> Baskets { get; set; } = new List<Basket>();
 
+        public List<Order> Orders { get; set; } = new List<Order>();
+
+
 
 
 

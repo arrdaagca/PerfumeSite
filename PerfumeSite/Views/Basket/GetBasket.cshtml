@@ -8,8 +8,10 @@
 }
 @{
     decimal toplamFiyat = Model.Sum(item => item.Item2.Quantity * item.Item1.Price);
-    decimal kargoUcreti = 100; 
-    decimal sonFiyat = toplamFiyat + kargoUcreti; 
+    
+
+	var userId = Context.Session.GetInt32("Id");
+
 }
 <link rel="stylesheet" href="~/Basket/style.css">
 
@@ -76,10 +78,8 @@
 
         <div class="basket-summary">
             <h3>Toplam Fiyat: @toplamFiyat.ToString("C")</h3>
-            <h4>Kargo Ücreti: @kargoUcreti.ToString("C")</h4>
-            <h3>Ödenecek Tutar: @sonFiyat.ToString("C")</h3> 
-            <form method="post" asp-controller="Checkout" asp-action="ConfirmBasket">
-                <input type="hidden" name="UserId" value="@Model.First().Item2.UserId" />
+            
+            <form asp-controller="Basket" asp-action="ConfirmBasket" method="get">
                 <button type="submit" class="confirm-button">Sepeti Onayla</button>
             </form>
         </div>

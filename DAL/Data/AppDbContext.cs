@@ -27,6 +27,8 @@ namespace DAL.Data
 
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +79,29 @@ namespace DAL.Data
             .HasForeignKey(f => f.UserId)
             .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Order>()
+                    .HasOne(o => o.User)
+                    .WithMany(u => u.Orders) 
+                    .HasForeignKey(o => o.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Product)
+                .WithMany(p => p.Orders) 
+                .HasForeignKey(o => o.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Address)
+                .WithMany(a => a.Orders) 
+                .HasForeignKey(o => o.AddressId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.CreditCard)
+                .WithMany(cc => cc.Orders) 
+                .HasForeignKey(o => o.CreditCardId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
         }

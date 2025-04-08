@@ -1,0 +1,47 @@
+﻿@using PerfumeSite.OrderViewModels
+@using PerfumeSite.ProductViewModels
+@model List<Tuple<OrderViewModel, ProductViewModel>>
+
+@{
+    ViewData["Title"] = "Geçmiş Siparişler";
+    Layout = "_Layout";
+}
+<link rel="stylesheet" href="~/Order/GetOrders/style.css">
+
+<h2>Geçmiş Siparişler</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ürün Fotoğrafı</th> 
+                <th>Ürün Adı</th>
+                <th>Adet</th>
+                <th>Fiyat</th>
+                <th>Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tuple in Model)
+            {
+                var order = tuple.Item1;
+                var product = tuple.Item2;
+
+                <tr>
+                    <td>
+                        <img src="@product.Image" alt="@product.Name" style="width: 50px; height: 50px;" /> 
+                    </td>
+                    <td>@product.Name</td>
+                    <td>@order.Quantity</td>
+                    <td>@product.Price.ToString("C")</td>
+                    <td>@order.CreatedDate.ToString("dd.MM.yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Henüz geçmiş siparişiniz yok.</p>
+}

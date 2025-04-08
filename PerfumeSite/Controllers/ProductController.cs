@@ -240,7 +240,7 @@ namespace PerfumeSite.Controllers
             var basketViewModel = new BasketViewModel
             {
                 ProductId = id,
-                UserId = userId ?? 0
+                UserId = (int)userId
             };
 
 
