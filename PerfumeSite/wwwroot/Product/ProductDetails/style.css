@@ -65,21 +65,12 @@
     margin-top:-100px;
 }
 
-.average-rating {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    color: #ff9800;
-    margin-top: 450px;
-    margin-left:-370px;
-}
+
 .product-description{
     color:gold;
 }
 
-.rating-stars i {
-    color: #ffcc00;
-}
+
 
 .product-size {
     margin: 20px 0;
@@ -203,3 +194,55 @@
     .submit-review:hover {
         background-color: #218838;
     }
+.product-rating {
+    text-align: center;
+    margin-top: 450px;
+    margin-left:-410px;
+}
+
+.rating-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rating-label {
+    color: gold;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+
+.rating-score {
+    color: gold;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.star-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 15px;
+    transition: transform 0.2s ease, color 0.2s ease;
+    
+}
+
+    .star-button:hover {
+        transform: scale(1.2);
+    }
+
+.filled-star {
+    color: gold;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+
+.empty-star {
+    color: #555;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.star-button:active {
+    transform: scale(0.95);
+}

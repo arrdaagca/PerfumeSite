@@ -18,6 +18,8 @@ namespace DAL.Entities
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         public int Quantity { get; set; }
+        public decimal Price { get; set; }
+
 
 
 

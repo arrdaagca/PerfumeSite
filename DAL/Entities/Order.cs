@@ -20,6 +20,8 @@ namespace DAL.Entities
         public int CreditCardId { get; set; }
         public CreditCard CreditCard { get; set; }
         public int Quantity { get; set; }
+        public decimal TotalPrice { get; set; }
+
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 

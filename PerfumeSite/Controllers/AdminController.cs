@@ -2,6 +2,7 @@
 using BLL.AbstractServices;
 using Microsoft.AspNetCore.Mvc;
 using PerfumeSite.AddressViewModels;
+using PerfumeSite.FavoriteViewModels;
 using PerfumeSite.UserViewModels;
 
 namespace PerfumeSite.Controllers
@@ -11,8 +12,9 @@ namespace PerfumeSite.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly IAddressService _addressService;
+        private readonly IFavoriteService _favoriteService;
 
-        public AdminController(IUserService userService,IMapper mapper,IAddressService addressService )
+        public AdminController(IUserService userService,IMapper mapper,IAddressService addressService)
         {
             _userService = userService;
             _mapper = mapper;
@@ -76,13 +78,6 @@ namespace PerfumeSite.Controllers
 
 
 
-
-
-
-
-
-
-
         [HttpGet]
         public IActionResult GetUserAddressByAdmin(int enterUserId)
         {
@@ -94,7 +89,7 @@ namespace PerfumeSite.Controllers
             var getUserAddress = _addressService.GetAddressByUserId(enterUserId);
             
 
-            // Doğru model dönüşümü yap
+            
             var addressViewModelList = _mapper.Map<List<AddressViewModel>>(getUserAddress);
 
             return View(addressViewModelList);

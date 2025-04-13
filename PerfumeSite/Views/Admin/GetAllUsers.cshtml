@@ -5,20 +5,13 @@
     Layout = "_AdminLayout";
 }
 
-<!-- Stil dosyasını ekledik -->
 <link rel="stylesheet" href="~/Admin/GetAllUsers/style.css" />
 
 <div class="user-container mt-4">
     <h2 class="user-title">Kullanıcı Listesi</h2>
 
     <td style="padding-bottom: 20px;">
-        <!-- 20 piksel alt boşluk ekledik -->
-        <form asp-controller="Product" asp-action="OrderHistory" method="get" style="display:inline; margin-right: 10px; ">
-            <button class="btn btn-order-history">Sipariş Geçmişi Görüntüle</button>
-        </form>
-        <form asp-controller="Category" asp-action="Favorites" method="get" style="display:inline; margin-right: 10px; ">
-            <button class="btn btn-order-history">Favorilenleri Görüntüle</button>
-        </form>
+        
         <form asp-controller="Admin" asp-action="GetUserAddressByAdmin" method="get" style="display:inline; ">
             <button class="btn btn-order-history">Adres Bilgisi Görüntüle</button>
         </form>

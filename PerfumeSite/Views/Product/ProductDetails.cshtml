@@ -4,56 +4,56 @@
 @using PerfumeSite.FavoriteViewModels
 @using PerfumeSite.ProductViewModels
 @using PerfumeSite.CommentViewModels
-@model Tuple<ProductViewModel, CommentViewModel,BasketViewModel>
+@model Tuple<ProductViewModel, CommentViewModel, BasketViewModel>
 
 @{
     Layout = "_Layout";
-    var averageRating = ViewBag.AverageRating ?? 0; 
-    var userId = Context.Session.GetInt32("Id"); 
+    var averageRating = ViewBag.AverageRating ?? 0;
+    var userId = Context.Session.GetInt32("Id");
     var comments = ViewBag.Comments as List<CommentViewModel> ?? new List<CommentViewModel>();
-
-  
-
 }
-
-
-
-
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Model.Item1.Name - Ürün Detay</title>
-    <link rel="stylesheet" href="~/Product/ProductDetails/style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/Product/ProductDetails/style.css" >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="product-detail-container">
-   
         <div class="product-image">
             <img src="@Model.Item1.Image" alt="@Model.Item1.Name">
         </div>
 
-        
-        <div class="average-rating">
-            <span>Ortalama Puan: </span>
-            <span class="rating-stars">
-                @{
-                    for (int i = 1; i <= 5; i++)
-                    {
-                        if (i <= averageRating)
+        <div class="product-rating">
+            <form asp-controller="ProductRating" asp-action="AddRating" method="post" class="rating-form">
+                <input type="hidden" name="productId" value="@Model.Item1.Id" />
+                <input type="hidden" name="UserId" value="@userId" />
+
+                <span class="rating-label">Ortalama Puan:</span>
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <button type="submit" name="score" value="@i" class="star-button" title="@i Yıldız">
+                        @if (i <= averageRating)
                         {
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star filled-star"></i>
                         }
                         else
                         {
-                            <i class="far fa-star"></i>
+                            <i class="far fa-star empty-star"></i>
                         }
-                    }
+                    </button>
                 }
-            </span>
-            <span>(@averageRating)</span>
+                <span class="rating-score">(@averageRating)</span>
+            </form>
         </div>
         <div class="product-info">
             <h2 class="product-brand">
@@ -79,9 +79,8 @@
 
             <p class="product-description">@Model.Item1.Description</p>
 
-            <h4 class="product-price">@Model.Item1.Price</h4>
+            <h4 class="product-price" id="product-price">@Model.Item1.Price</h4>
 
-            
             <div class="product-size">
                 <label class="perfume-text">Parfüm Boyutu</label>
                 <div class="size-options">
@@ -93,36 +92,27 @@
             </div>
 
             <div class="button-container">
-
-                
-
-
-                    @if (ViewBag.IsFavorite == false)
-                    {
-                        <form asp-controller="Favorite" asp-action="AddFavorite" method="post">
-                            <input type="hidden" name="UserId" value="@userId" />
-                            <input type="hidden" name="ProductId" value="@Model.Item1.Id" />
-                            <button class="favorite-button">
-                                <i class="fas fa-heart"></i>Favorilere Ekle
-                                
-                            </button>
-                        </form>
-                    }
-                    else
-                    {
-                        <form asp-controller="Favorite" asp-action="RemoveFavorite" method="post">
-
+                @if (ViewBag.IsFavorite == false)
+                {
+                    <form asp-controller="Favorite" asp-action="AddFavorite" method="post">
                         <input type="hidden" name="UserId" value="@userId" />
                         <input type="hidden" name="ProductId" value="@Model.Item1.Id" />
-                            <button class="favorite-button">
-                                <i class="fas fa-heart"></i>Favorilerden Kaldır
+                        <button class="favorite-button">
+                            <i class="fas fa-heart"></i>Favorilere Ekle
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="Favorite" asp-action="RemoveFavorite" method="post">
+                        <input type="hidden" name="UserId" value="@userId" />
+                        <input type="hidden" name="ProductId" value="@Model.Item1.Id" />
+                        <button class="favorite-button">
+                            <i class="fas fa-heart"></i>Favorilerden Kaldır
+                        </button>
+                    </form>
+                }
 
-                            </button>
-                        
-                        </form>
-                    }
-
-                   
                 @if (ViewBag.IsBasket == false)
                 {
                     <form method="post" asp-controller="Basket" asp-action="AddBasket">
@@ -132,10 +122,13 @@
                             <label for="quantity">Adet</label>
                             <input type="number" name="quantity" class="quantity" value="1" min="1" asp-for="@Model.Item3.Quantity">
                         </div>
+                        <input type="hidden" name="adjustedPrice" id="adjusted-price" value="@Model.Item1.Price" /> 
                         <button type="submit" class="product-add-to-cart">
                             <i class="fas fa-shopping-cart"></i> Sepete Ekle
                         </button>
                     </form>
+
+
                 }
                 else
                 {
@@ -146,20 +139,16 @@
                             <label for="quantity">Adet</label>
                             <input type="number" name="quantity" class="quantity" value="1" min="1" asp-for="@Model.Item3.Quantity">
                         </div>
+                        <input type="hidden" name="AdjustedPrice" id="adjusted-price" value="@Model.Item1.Price" />
                         <button type="submit" class="product-add-to-cart">
                             <i class="fas fa-shopping-cart"></i> Sepetten Çıkar
                         </button>
                     </form>
                 }
-
-
-
-             
             </div>
         </div>
     </div>
 
-   
     <div class="product-reviews">
         <h3>Ürün Yorumları</h3>
         <ul class="review-list">
@@ -178,7 +167,7 @@
                 <li>Bu ürün için henüz yorum yapılmadı.</li>
             }
         </ul>
-        @if(userId != null)
+        @if (userId != null)
         {
             <form method="post" asp-controller="Comment" asp-action="AddComment">
                 <input type="hidden" name="productId" value="@Model.Item1.Id">
@@ -187,36 +176,52 @@
                 <textarea name="CommentText" asp-for="@Model.Item2.CommentText" class="review-textarea" placeholder="Yorumunuzu yazın..." required></textarea>
 
                 <button type="submit" class="submit-review">Yorumu Gönder</button>
-
-
             </form>
         }
-      else{
-			<p>Yorum yapabilmek için giriş yapmalısınız.</p>
-      }
-      
-
+        else
+        {
+            <p>Yorum yapabilmek için giriş yapmalısınız.</p>
+        }
     </div>
 
     <script>
-       
-        document.addEventListener('DOMContentLoaded', function () {
+                  document.addEventListener('DOMContentLoaded', function () {
             const sizeButtons = document.querySelectorAll('.size-option');
             const sizeInput = document.getElementById('size');
+            const priceDisplay = document.getElementById('product-price');
+            const adjustedPriceInput = document.getElementById('adjusted-price');
+            const basePrice = parseFloat('@Model.Item1.Price'.replace(",", ".")); 
+
+            function updatePrice(size) {
+                let newPrice = basePrice;
+
+                if (size === "100ml") {
+                    newPrice += 500;
+                } else if (size === "200ml") {
+                    newPrice += 1000;
+                }
+
+                priceDisplay.textContent = newPrice.toLocaleString('tr-TR', {
+                    style: 'currency',
+                    currency: 'TRY'
+                });
+
+                adjustedPriceInput.value = newPrice; 
+            }
+
+            updatePrice("50ml");
 
             sizeButtons.forEach(button => {
                 button.addEventListener('click', function () {
-                    
                     sizeButtons.forEach(btn => btn.classList.remove('active'));
-
-                    
                     this.classList.add('active');
-
-                  
-                    sizeInput.value = this.dataset.size;
+                    const selectedSize = this.dataset.size;
+                    sizeInput.value = selectedSize;
+                    updatePrice(selectedSize); 
                 });
             });
         });
+
     </script>
 </body>
 </html>

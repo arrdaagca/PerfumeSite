@@ -22,8 +22,9 @@ namespace PerfumeSite.Controllers
         private readonly IUserService _userService;
         private readonly IFavoriteService _favoriteService;
         private readonly IBasketService _basketService;
+        private readonly IProductRatingService _productRatingService;
 
-        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService,ICommentService commentService,IUserService userService,IFavoriteService favoriteService,IBasketService basketService)
+        public ProductController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService,ICommentService commentService,IUserService userService,IFavoriteService favoriteService,IBasketService basketService,IProductRatingService productRatingService)
         {
             _productService = productService;
             _mapper = mapper;
@@ -33,6 +34,7 @@ namespace PerfumeSite.Controllers
             _userService = userService;
             _favoriteService = favoriteService;
             _basketService = basketService;
+            _productRatingService = productRatingService;
         }
 
 
@@ -166,8 +168,7 @@ namespace PerfumeSite.Controllers
         [HttpGet]
         public IActionResult ProductDetails(int id)
         {
-
-            var userId = HttpContext.Session.GetInt32("Id");
+            var userId = HttpContext.Session.GetInt32("Id"); 
 
             var productDetail = _productService.GetById(id);
 
@@ -197,61 +198,48 @@ namespace PerfumeSite.Controllers
                 ProductId = c.ProductId,
                 CommentText = c.CommentText,
                 CreatedDate = c.CreatedDate,
-                UserName = _userService.GetById(c.UserId).UserName 
+                UserName = _userService.GetById(c.UserId).UserName
             }).ToList();
 
             ViewBag.Comments = commentViewModels;
 
-           
-         
+            var ratings = _productRatingService.GetRatingsByProductId(id);
 
+            double averageRating = 0;
 
-            if (userId != null)
+            if (ratings != null && ratings.Any())
             {
-                ViewBag.IsFavorite = _favoriteService.IsFavorite(userId.Value, id);
-            }
-            else
-            {
-                ViewBag.IsFavorite = false;
-                
+                averageRating = ratings.Average(r => r.Score);
             }
 
+            ViewBag.AverageRating = averageRating;
 
-
-
-            if (userId != null)
-            {
-                ViewBag.IsBasket = _basketService.IsBasket(userId.Value, id);
-            }
-            else
-            {
-                ViewBag.IsBasket = false;
-
-            }
-
+            ViewBag.IsFavorite = userId != null && _favoriteService.IsFavorite(userId.Value, id);
+            ViewBag.IsBasket = userId != null && _basketService.IsBasket(userId.Value, id);
 
             var commentViewModel = new CommentViewModel
             {
                 ProductId = id
             };
 
-
-
-            var basketViewModel = new BasketViewModel
+            BasketViewModel basketViewModel = null;
+            if (userId != null)
             {
-                ProductId = id,
-                UserId = (int)userId
-            };
+                basketViewModel = new BasketViewModel
+                {
+                    ProductId = id,
+                    UserId = userId.Value
+                };
+            }
+            else
+            {
+                basketViewModel = new BasketViewModel(); 
+            }
 
-
-
-
-
-            var viewModel = Tuple.Create(_mapper.Map<ProductViewModel>(productDetail), commentViewModel,basketViewModel);
+            var viewModel = Tuple.Create(_mapper.Map<ProductViewModel>(productDetail), commentViewModel, basketViewModel);
 
             return View(viewModel);
         }
-
 
 
 

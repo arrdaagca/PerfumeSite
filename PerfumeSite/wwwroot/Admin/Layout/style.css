@@ -5,74 +5,74 @@
 }
 
 .navbar {
-    z-index: 1030; /* Navbar'ın diğer öğelerin üzerinde görünmesi için */
-    background: rgba(0, 0, 0, 0.6); /* Navbar arka plan rengi */
-    color: white; /* Navbar metin rengi */
-    padding: 10px; /* Navbar içi boşluk */
+    z-index: 1030; 
+    background: rgba(0, 0, 0, 0.6); 
+    color: white; 
+    padding: 10px; 
 }
 
 .sidebar {
     position: fixed;
     left: 0;
-    top: 56px; /* Navbar'ın altında */
-    width: 60px; /* Dar kenar genişliği */
-    height: calc(100vh - 50px); /* Tam yükseklik, navbar hariç */
-    background: rgba(0, 0, 0, 0.6); /* Sidebar arka plan rengi */
-    overflow: hidden; /* Taşma durumunu gizle */
+    top: 56px; 
+    width: 60px; 
+    height: calc(100vh - 50px); 
+    background: rgba(0, 0, 0, 0.6); 
+    overflow: hidden; 
     display: flex;
-    flex-direction: column; /* Dikey hizalama */
-    padding-top: 20px; /* Üstten boşluk */
-    transition: width 0.3s ease; /* Genişleme geçişi */
+    flex-direction: column; 
+    padding-top: 20px;
+    transition: width 0.3s ease; 
 }
 
     .sidebar:hover {
-        width: 250px; /* Genişletildiğinde */
+        width: 250px; 
     }
 
     .sidebar a {
-        text-decoration: none; /* Alt çizgi olmaması için */
-        color: white; /* Metin rengi */
-        width: 100%; /* Genişlik */
-        padding: 15px; /* İç boşluk */
-        display: flex; /* Flex düzen */
-        align-items: center; /* Dikey hizalama */
-        white-space: nowrap; /* Tek satırda tut */
-        transition: background-color 0.3s; /* Arka plan rengi geçişi */
+        text-decoration: none; 
+        color: white; 
+        width: 100%; 
+        padding: 15px; 
+        display: flex; 
+        align-items: center; 
+        white-space: nowrap; 
+        transition: background-color 0.3s; 
     }
 
-        /* Başlangıçta isimleri gizle */
+       
         .sidebar a span {
-            display: none; /* İsimler gizlenir */
-            margin-left: 10px; /* İkon ile metin arasında boşluk */
+            display: none; 
+            margin-left: 10px; 
         }
 
         .sidebar a i {
-            font-size: 20px; /* İkon boyutu */
-            margin-right: 10px; /* İkon ile metin arasında boşluk */
+            font-size: 20px;
+            margin-right: 10px; 
         }
 
     .sidebar:hover a span {
-        display: inline; /* Sidebar açıldığında isimler görünür */
+        display: inline; 
     }
 
-    /* Sidebar açıldığında ikonlar ve isimler birlikte görünür */
+
     .sidebar:hover {
-        width: 250px; /* Genişletildiğinde */
+        width: 250px; 
     }
 
     .sidebar a:hover {
-        background-color: #495057; /* Hover efekti */
+        background-color: #495057;
     }
 
 .content {
-    margin-left: 60px; /* Sidebar genişliği kadar soldan marj */
-    padding: 20px; /* İçerik alanı içi boşluk */
-    width: calc(100% - 60px); /* Sidebar genişliği çıkartılarak içerik genişliği */
-    padding-top: 60px; /* Navbar için üst boşluk */
+    margin-left: 60px; 
+    padding: 20px; 
+    width: calc(100% - 60px); 
+    padding-top: 60px; 
 }
 
-/* Genişletilmiş kenar için içerik marjını ayarlama */
+
 .sidebar:hover + .content {
-    margin-left: 250px; /* Genişletildiğinde */
-    width: calc(100% - 250px); /* Genişletildiğinde */
+    margin-left: 250px;
+    width: calc(100% - 250px); 
 }

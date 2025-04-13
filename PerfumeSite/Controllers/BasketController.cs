@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using PerfumeSite.AddressViewModels;
 using PerfumeSite.BasketViewModels;
 using PerfumeSite.BrandViewModels;
+using PerfumeSite.CommentViewModels;
 using PerfumeSite.CreditCardViewModels;
 using PerfumeSite.FavoriteViewModels;
 using PerfumeSite.ProductViewModels;
@@ -34,35 +35,33 @@ namespace PerfumeSite.Controllers
             _orderService = orderService;
         }
 
-
-
-
         [HttpPost]
-        public IActionResult AddBasket(BasketViewModel basketViewModel,int productId)
+        public IActionResult AddBasket(BasketViewModel basketViewModel, int productId, decimal adjustedPrice)
         {
             var userId = HttpContext.Session.GetInt32("Id");
-
-
-
 
             if (userId == null)
             {
                 return RedirectToAction("Login", "User");
             }
-            var IsBasket = _basketService.IsBasket((int)userId, productId);
 
-            if (IsBasket == true)
+            var isBasket = _basketService.IsBasket((int)userId, productId);
+
+            if (isBasket)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-
             var basket = _mapper.Map<BasketDto>(basketViewModel);
-            _basketService.AddBasket(basket);
+            basket.Price = adjustedPrice; 
 
+            _basketService.AddBasket(basket); 
 
             return RedirectToAction("GetBasket");
         }
+
+
+
 
 
 
@@ -81,47 +80,33 @@ namespace PerfumeSite.Controllers
 
         }
 
-
-
-
-
-
         [HttpGet]
         public IActionResult GetBasket()
         {
             var userId = HttpContext.Session.GetInt32("Id");
-
-            var allBrands = _brandService.GetAllBrands();
 
             if (userId == null)
             {
                 return RedirectToAction("Login", "User");
             }
 
-            var brandViewModels = allBrands.Select(b => new AddBrandViewModel
-            {
-                Id = b.Id,
-                Name = b.Name
-            }).ToList();
-
-            ViewBag.Brands = brandViewModels;
-
             var basketEntities = _basketService.GetBasketByUserId(userId.Value);
-
             var basketProducts = new List<Tuple<ProductViewModel, BasketViewModel>>();
 
             foreach (var basket in basketEntities)
             {
                 var product = _productService.GetById(basket.ProductId);
-
                 var productViewModel = _mapper.Map<ProductViewModel>(product);
-                var basketViewModel = _mapper.Map<BasketViewModel>(basket); 
 
-                basketProducts.Add(Tuple.Create(productViewModel, basketViewModel));
+                basketProducts.Add(Tuple.Create(productViewModel, _mapper.Map<BasketViewModel>(basket)));
             }
 
-            return View(basketProducts);
+            return View(basketProducts); 
         }
+
+
+
+
 
         [HttpGet]
         public IActionResult ConfirmBasket()
@@ -134,7 +119,7 @@ namespace PerfumeSite.Controllers
             var brandViewModels = _mapper.Map<List<AddBrandViewModel>>(allBrands);
             ViewBag.Brands = brandViewModels;
 
-
+            
 
            
 
@@ -146,6 +131,12 @@ namespace PerfumeSite.Controllers
 
             var cards = _creditCardService.GetCreditCardsByUserId((int)userId);
             var cardViewModels = _mapper.Map<List<CreditCardViewModel>>(cards);
+
+            if (addresses == null || !addresses.Any() || cards == null || !cards.Any())
+            {
+                TempData["ErrorMessage"] = "Lütfen Adres ve Kredi Kartı Bilgilerinizi Ekleyiniz.";
+            }
+
 
             var basketItems = _basketService.GetBasketByUserId((int)userId); 
             var viewModelList = new List<Tuple<AddressViewModel, CreditCardViewModel, ProductViewModel, BasketViewModel>>();

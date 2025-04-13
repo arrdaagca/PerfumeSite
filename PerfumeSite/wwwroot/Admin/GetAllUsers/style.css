@@ -1,73 +1,73 @@
-﻿/* Genel Konteyner */
+﻿
 .user-container {
-    max-width: 1200px; /* Genişlik sınırı */
-    margin: 40px auto; /* Otomatik kenar boşluğu ile ortala */
-    padding: 20px; /* İçerik boşluğu */
-    background: rgba(0, 0, 0, 0.6); /* Arka plan rengi */
-    border-radius: 10px; /* Kenar yuvarlama */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-    text-align: center; /* Metin ortalaması */
+    max-width: 1200px; 
+    margin: 40px auto; 
+    padding: 20px; 
+    background: rgba(0, 0, 0, 0.6); 
+    border-radius: 10px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; 
 }
 
-/* Başlık */
+
 .user-title {
-    font-size: 35px; /* Başlık boyutu */
-    color: gold; /* Başlık rengi */
-    margin-bottom: 20px; /* Alt boşluk */
+    font-size: 35px; 
+    color: gold;
+    margin-bottom: 20px; 
 }
 
-/* Eylem Butonları */
+
 .user-actions {
-    display: flex; /* Flex düzen */
-    justify-content: center; /* Ortala */
-    margin-bottom: 20px; /* Alt boşluk */
+    display: flex; 
+    justify-content: center;
+    margin-bottom: 20px; 
     
 }
 
 .btn-order-history {
-    background-color: gray; /* Arka plan rengi */
-    color: white; /* Yazı rengi */
-    padding: 10px 20px; /* İçerik boşluğu */
-    border: none; /* Kenar yok */
-    border-radius: 5px; /* Kenar yuvarlama */
-    cursor: pointer; /* İmleci değiştirme */
-    font-size: 16px; /* Yazı boyutu */
-    transition: background 0.3s; /* Geçiş efekti */
+    background-color: gray; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background 0.3s; 
     margin-bottom: 20px;
 }
     
     .btn-order-history:hover {
-        background-color: gold; /* Hover rengi */
-        color: black; /* Hover yazı rengi */
+        background-color: gold; 
+        color: black; 
     }
 
-/* Tablo Stili */
+
 .table-wrapper {
-    overflow-x: auto; /* Taşma durumunda kaydırma */
+    overflow-x: auto; 
 }
 
 .user-table {
-    width: 100%; /* Genişlik %100 */
-    border-collapse: collapse; /* Kenar çökmesini önle */
-    background: gray; /* Arka plan rengi */
-    border-radius: 8px; /* Kenar yuvarlama */
-    overflow: hidden; /* Taşma önleme */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-    color: white; /* Yazı rengi */
+    width: 100%; 
+    border-collapse: collapse; 
+    background: gray; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
 }
 
     .user-table th, .user-table td {
-        padding: 12px; /* Hücre içi boşluk */
-        text-align: center; /* Metin ortalaması */
-        border-bottom: 1px solid #ddd; /* Alt kenar */
+        padding: 12px; 
+        text-align: center; 
+        border-bottom: 1px solid #ddd; 
     }
 
     .user-table th {
-        background-color: black; /* Başlık arka plan rengi */
-        color: white; /* Başlık yazı rengi */
-        font-weight: bold; /* Kalın yazı */
+        background-color: black; 
+        color: white; 
+        font-weight: bold; 
     }
 
     .user-table tr:hover {
-        background-color: rgba(0, 0, 0, 0.6); /* Hover rengi */
+        background-color: rgba(0, 0, 0, 0.6);
     }

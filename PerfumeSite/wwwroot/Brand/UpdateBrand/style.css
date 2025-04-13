@@ -1,4 +1,4 @@
-﻿/* Genel Konteyner */
+﻿
 .brand-update-container {
     max-width: 500px;
     margin: 40px auto;
@@ -9,21 +9,21 @@
     text-align: center;
 }
 
-/* Başlık */
+
 .brand-update-title {
     font-size: 35px;
     color: gold;
     margin-bottom: 20px;
 }
 
-/* Form Stili */
+
 .brand-update-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Form Alanları */
+
 .form-group {
     text-align: left;
 }
@@ -41,13 +41,12 @@
     font-size: 16px;
 }
 
-/* Buton Grubu */
+
 .button-group {
     display: flex;
     justify-content: space-between;
 }
 
-/* Güncelle Butonu */
 .btn-update {
     background-color: gray;
     color: gold;
@@ -65,7 +64,7 @@
 
     }
 
-/* İptal Butonu */
+
 .btn-back {
     background-color: gray;
     color: gold;

@@ -20,6 +20,7 @@ namespace BLL.AllDtos
         public int CreditCardId { get; set; }
         public CreditCardDto CreditCard { get; set; }
         public int Quantity { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 

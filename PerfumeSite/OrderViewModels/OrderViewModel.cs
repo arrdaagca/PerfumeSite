@@ -21,6 +21,7 @@ namespace PerfumeSite.OrderViewModels
         public int CreditCardId { get; set; }
         public CreditCardViewModel CreditCard { get; set; }
         public int Quantity { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 

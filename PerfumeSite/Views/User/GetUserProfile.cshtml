@@ -15,7 +15,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3 sidebar">
-            <a asp-controller="Order" asp-action="Index" class="account-btn">
+            <a asp-controller="Order" asp-action="GetOrders" class="account-btn">
                 <i class="fas fa-box"></i> Tüm Siparişlerim
             </a>
             <a asp-controller="Favorite" asp-action="GetFavorites" class="account-btn">
@@ -34,7 +34,7 @@
 
         <div class="col-md-9 offset-md-3">
             <div class="row">
-                <!-- Üyelik Bilgileri Kartı -->
+               
                 <div class="col-md-6">
                     <div class="card p-4">
                         <h4>Üyelik Bilgileri</h4>
@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                <!-- Şifre Değiştir Kartı -->
+       
                 <div class="col-md-6">
                     <div class="card p-4">
                         <h4>Şifre Değiştir</h4>
@@ -109,10 +109,10 @@
 
 <script>
     setTimeout(function() {
-        // Tüm custom-alert sınıflı alertleri seçiyoruz
+        
         document.querySelectorAll(".custom-alert").forEach(alert => {
             alert.style.opacity = "0";
             setTimeout(() => alert.remove(), 500);
         });
-    }, 3000); // 3 saniye sonra kapanacak
+    }, 3000); 
 </script>

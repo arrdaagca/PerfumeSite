@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-    /* Başlık */
+   
     .password-reset-container h2 {
         font-family: 'Playfair Display', serif;
         font-size: 2.5rem;
@@ -20,7 +20,7 @@
         color: gold;
     }
 
-/* Giriş alanları */
+
 .password-input-group {
     margin-bottom: 20px;
     text-align: left;
@@ -41,7 +41,7 @@
         font-size: 1rem;
     }
 
-/* Şifre sıfırlama butonu */
+
 .password-reset-button {
     background: gold;
     color: black;
@@ -59,7 +59,7 @@
         color: white;
     }
 
-/* Footer */
+
 .password-reset-footer {
     text-align: center;
     margin-top: 20px;

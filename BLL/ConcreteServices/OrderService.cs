@@ -29,6 +29,7 @@ namespace BLL.ConcreteServices
         public void AddOrder(OrderDto orderDto)
         {
             _genericRepository.Add(_mapper.Map<Order>(orderDto));
+           
         }
 
         public void DeleteOrder(int id)

@@ -4,6 +4,7 @@ using BLL.AllDtos;
 using DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PerfumeSite.BasketViewModels;
 using PerfumeSite.CommentViewModels;
 using PerfumeSite.OrderViewModels;
 using PerfumeSite.ProductViewModels;
@@ -27,7 +28,6 @@ namespace PerfumeSite.Controllers
 
 
 
-
         [HttpGet]
         public IActionResult GetOrders()
         {
@@ -36,27 +36,23 @@ namespace PerfumeSite.Controllers
             var allOrders = _orderService.GetOrdersByUserId(userId);
 
 
-            var orderProductTuples = allOrders.Select(order =>
+           
+
+
+            var orderProductBasketTuples = allOrders.Select(order =>
             {
                 var orderViewModel = _mapper.Map<OrderViewModel>(order);
 
                 var product = _productService.GetById(order.ProductId);
                 var productViewModel = _mapper.Map<ProductViewModel>(product);
 
+               
+
                 return Tuple.Create(orderViewModel, productViewModel);
             }).ToList();
-
-            return View(orderProductTuples);
-
-
+            
+            return View(orderProductBasketTuples);
         }
-
-
-
-
-
-
-
 
 
 
@@ -65,32 +61,64 @@ namespace PerfumeSite.Controllers
 
 
         [HttpPost]
-        public IActionResult ConfirmOrder(int AddressId, int CreditCardId, int UserId, List<int> ProductId,int Quantity)
+        public IActionResult ConfirmOrder(int AddressId, int CreditCardId, int UserId, List<int> ProductId, List<int> Quantity)
         {
             var userId = (int)HttpContext.Session.GetInt32("Id");
+            decimal kargoUcreti = 100;
 
-            foreach (var productId in ProductId)
+            for (int i = 0; i < ProductId.Count; i++)
             {
+                var product = _productService.GetById(ProductId[i]);
+                if (product.Stock < Quantity[i])
+                {
+                    TempData["StockError"] = $"'{product.Name}' ürününden stokta yeterli miktarda kalmamış.";
+                    return RedirectToAction("ConfirmBasket", "Basket");
+                }
+            }
+
+            decimal toplamTutar = 0;
+
+            for (int i = 0; i < ProductId.Count; i++)
+            {
+                var productId = ProductId[i];
+                var quantity = Quantity[i];
+
+                var product = _productService.GetById(productId);
+                var basket = _basketService.GetBasketByUserId(userId).FirstOrDefault(b => b.ProductId == productId);
+
+             
                 var orderViewModel = new OrderViewModel
                 {
                     AddressId = AddressId,
                     CreditCardId = CreditCardId,
-                    UserId = UserId,
+                    UserId = userId, 
                     ProductId = productId,
-                    Quantity = Quantity
+                    Quantity = quantity,
+                    TotalPrice = (basket.Price * quantity) + kargoUcreti
                 };
+
+                toplamTutar += orderViewModel.TotalPrice;
 
                 var order = _mapper.Map<OrderDto>(orderViewModel);
 
-                _orderService.AddOrder(_mapper.Map<OrderDto>(order));
-                _basketService.RemoveBasket(userId, productId);
+                product.Stock -= quantity;
+                _productService.UpdateProduct(_mapper.Map<ProductDto>(product));
 
+                _orderService.AddOrder(order);
+
+                _basketService.RemoveBasket(userId, productId);
             }
 
-            //deneme
+            TempData["TotalPrice"] = toplamTutar.ToString("F2"); 
+            TempData["KargoUcreti"] = kargoUcreti.ToString("F2"); 
 
-            return View();
+            return RedirectToAction("GetOrders","Order");
         }
+
+
+
+
+
 
 
 

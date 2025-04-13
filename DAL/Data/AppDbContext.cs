@@ -28,11 +28,23 @@ namespace DAL.Data
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ProductRating> ProductRating { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          
+
+
+                 modelBuilder.Entity<ProductRating>()
+            .HasOne(r => r.Product)
+            .WithMany(p => p.Ratings)
+            .HasForeignKey(r => r.ProductId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
+
+
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Brand) 
                 .WithMany(b => b.Products) 
@@ -103,6 +115,13 @@ namespace DAL.Data
                 .HasForeignKey(o => o.CreditCardId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Basket>()
+       .Property(b => b.Price)
+       .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<Order>()
+.Property(b => b.TotalPrice)
+.HasColumnType("decimal(18, 2)");
 
         }
 

@@ -28,6 +28,10 @@ namespace BLL.MappingForServices
             CreateMap<Favorite, FavoriteDto>().ReverseMap();
 
 
+            CreateMap<ProductRating, ProductRatingDto>().ReverseMap();
+
+
+
 
             CreateMap<Basket, BasketDto>().ReverseMap();
 

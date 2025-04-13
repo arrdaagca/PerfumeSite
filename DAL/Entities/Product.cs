@@ -24,6 +24,7 @@ namespace DAL.Entities
         public List<Order> Orders { get; set; } = new List<Order>();
 
 
+        public List<ProductRating> Ratings { get; set; } = new List<ProductRating>();
 
 
 

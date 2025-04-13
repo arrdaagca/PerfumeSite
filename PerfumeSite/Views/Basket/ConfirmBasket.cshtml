@@ -15,12 +15,21 @@
     Layout = "_Layout";
 }
 @{
-    var toplamFiyat = Model.Sum(item => item.Item3.Price * item.Item4.Quantity);
+    var toplamFiyat = Model.Sum(item => item.Item4.Price * item.Item4.Quantity);
     decimal kargoUcreti = 100;
     decimal sonFiyat = toplamFiyat + kargoUcreti;
+   
+
 
     var userId = Context.Session.GetInt32("Id");
 }
+@if (TempData["StockError"] != null)
+{
+    <div class="alert alert-danger mt-3">
+        @TempData["StockError"]
+    </div>
+}
+
 
 <h2>Sipariş Onay Sayfası</h2>
 
@@ -95,5 +104,16 @@
     </div>
 
     <input type="hidden" name="UserId" value="@userId" />
-    <button type="submit" class="btn-success">Sepeti Onayla</button>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    else        
+    {
+        <button type="submit" class="btn-success">Sepeti Onayla</button>
+    }
+
+   
 </form>

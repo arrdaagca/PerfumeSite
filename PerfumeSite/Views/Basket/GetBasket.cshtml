@@ -7,11 +7,8 @@
     Layout = "_Layout";
 }
 @{
-    decimal toplamFiyat = Model.Sum(item => item.Item2.Quantity * item.Item1.Price);
-    
-
-	var userId = Context.Session.GetInt32("Id");
-
+    decimal toplamFiyat = Model.Sum(item => item.Item2.Quantity * item.Item2.Price);
+    var userId = Context.Session.GetInt32("Id");
 }
 <link rel="stylesheet" href="~/Basket/style.css">
 
@@ -36,8 +33,8 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    var product = item.Item1; 
-                    var basket = item.Item2;   
+                    var product = item.Item1;
+                    var basket = item.Item2;
 
                     <tr>
                         <td>
@@ -46,22 +43,25 @@
                         <td>@product.Name</td>
                         <td>
                             @{
-                                var brand = ((List<AddBrandViewModel>)ViewBag.Brands)
-                                .FirstOrDefault(b => b.Id == product.BrandId);
-                            }
-                            @if (brand != null)
-                            {
-                                @brand.Name
+                                var brand = ViewBag.Brands as List<AddBrandViewModel>;
+                                if (brand != null)
+                                {
+                                    var selectedBrand = brand.FirstOrDefault(b => b.Id == product.BrandId);
+                                    if (selectedBrand != null)
+                                    {
+                                        @selectedBrand.Name
+                                    }
+                                }
+                                else
+                                {
+                                    <span>Marka bilgisi bulunamadı.</span>
+                                }
                             }
                         </td>
                         <td>@product.Description</td>
-                        <td>@product.Price.ToString("C")</td>
-                        <td>
-                            <input type="number" value="@basket.Quantity" min="1" class="quantity-input" />
-                        </td>
-                        <td>
-                            @( basket.Quantity * product.Price)                         
-                        </td>
+                        <td>@basket.Price.ToString("C")</td>
+                        <td>@basket.Quantity</td>
+                        <td>@(basket.Quantity * basket.Price)</td> 
                         <td>
                             <form method="post" asp-controller="Basket" asp-action="RemoveBasket">
                                 <input type="hidden" name="productId" value="@product.Id" />
@@ -74,11 +74,8 @@
             </tbody>
         </table>
 
-       
-
         <div class="basket-summary">
             <h3>Toplam Fiyat: @toplamFiyat.ToString("C")</h3>
-            
             <form asp-controller="Basket" asp-action="ConfirmBasket" method="get">
                 <button type="submit" class="confirm-button">Sepeti Onayla</button>
             </form>

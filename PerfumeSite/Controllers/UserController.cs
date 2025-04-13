@@ -153,40 +153,48 @@ namespace PerfumeSite.Controllers
 
         }
 
-
         [HttpGet]
-        public IActionResult ResetPassword()
+        public IActionResult ResetPassword(int? id)
         {
-
-
-            
-
-
-
-
-            return View();
+            if (id == null)
+            {
+                TempData["ErrorMessage"] = "Geçersiz istek!";
+                return RedirectToAction("Login");
+            }
+        
+            var user = _userService.GetById(id.Value);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı!";
+                return RedirectToAction("Login");
+            }
+        
+            var model = new UserViewModel { Id = user.Id };  
+            return View(model);  
         }
-
-
 
         [HttpPost]
         public IActionResult UpdatePasswordWithoutCheck(int id, UserViewModel userViewModel)
         {
             if (string.IsNullOrWhiteSpace(userViewModel.Password) || userViewModel.Password.Length < 8 ||
-          !System.Text.RegularExpressions.Regex.IsMatch(userViewModel.Password, @"(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])"))
+                !System.Text.RegularExpressions.Regex.IsMatch(userViewModel.Password, @"(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])"))
             {
                 TempData["ErrorMessage"] = "Şifre en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir.";
-                return RedirectToAction("ResetPassword");
+                return RedirectToAction("ResetPassword", new { id = id });  
             }
 
-            var user = _userService.GetById(userViewModel.Id);
-           
+            var user = _userService.GetById(id);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı!";
+                return RedirectToAction("Login");
+            }
+
             user.Password = userViewModel.Password;
             _userService.UpdatePasswordWithOutCheck(user);
 
             return RedirectToAction("Login");
         }
-
 
 
         [HttpGet]
@@ -278,7 +286,7 @@ namespace PerfumeSite.Controllers
 
             if (!ModelState.IsValid)
             {
-                // Hataları TempData'ya ekleyerek geri gönder
+                
                 foreach (var modelState in ModelState.Values)
                 {
                     foreach (var error in modelState.Errors)

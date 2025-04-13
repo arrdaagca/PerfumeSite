@@ -1,4 +1,4 @@
-﻿/* Genel Konteyner */
+﻿
 .category-update-container {
     max-width: 500px;
     margin: 40px auto;
@@ -9,21 +9,21 @@
     text-align: center;
 }
 
-/* Başlık */
+
 .category-update-title {
     font-size: 35px;
     color: gold;
     margin-bottom: 20px;
 }
 
-/* Form Stili */
+
 .category-update-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Form Alanları */
+
 .form-group {
     text-align: left;
 }
@@ -41,13 +41,13 @@
     font-size: 16px;
 }
 
-/* Buton Grubu */
+
 .button-group {
     display: flex;
     justify-content: space-between;
 }
 
-/* Güncelle Butonu */
+
 .btn-update {
     background-color: gray;
     color: gold;
@@ -64,7 +64,6 @@
         color: black;
     }
 
-/* Geri Dön Butonu */
 .btn-back {
     background-color: gray;
     color: gold;
